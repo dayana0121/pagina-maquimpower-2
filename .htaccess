@@ -1,0 +1,56 @@
+Options -Indexes
+RewriteEngine On
+RewriteBase /
+
+# 1. FORZAR HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. RUTAS DEL ECOMMERCE (Prioridad máxima)
+RewriteRule ^producto/([^/]+)/?$ detalle.php?slug=$1 [L,QSA]
+RewriteRule ^categoria/([^/]+)/?$ categoria.php?c=$1 [L,QSA]
+
+# 3. REGLA DE RESCATE (Para URLs viejas de Google que no tienen /producto/)
+# Si no es un archivo real Y contiene palabras clave, mándalo a detalle.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (karcher|fregadora|aspiradora|hidrolavadora|total|ingco|viper|pulidora|bds) [NC]
+RewriteRule ^(.*)$ detalle.php?slug=$1 [L,QSA]
+
+# 4. NO TOCAR ARCHIVOS REALES (Imágenes, CSS, JS)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 5. LIMPIAR .PHP
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ $1.php [L]
+
+# 6. SITEMAP Y ERRORES
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+ErrorDocument 404 /404.php
+
+# 7. BLOQUEO DE ARCHIVOS SENSIBLES
+<FilesMatch "(^\.|config\.php|db\.php|\.sql|\.log|\.env)">
+    Require all denied
+</FilesMatch>
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+# ACTIVAR COMPRESIÓN GZIP
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript
+</IfModule>
+
+# CACHÉ DE NAVEGADOR (Para que las imágenes no se descarguen cada vez)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+</IfModule>

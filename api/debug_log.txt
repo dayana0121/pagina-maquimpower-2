@@ -1,0 +1,24 @@
+2026-01-04 03:51:42 - --- NUEVA PETICIÓN RECIBIDA ---
+2026-01-04 03:51:42 - Headers recibidos:
+2026-01-04 03:51:42 - Array
+(
+    [Accept] => application/json,text/html,application/xhtml+xml,application/xml,text/*;q=0.9, image/*;q=0.8, */*;q=0.7
+    [Content-Type] => application/json
+    [authorization] => Bearer MaquimPower_Secret_Sync_Key_2025
+    [User-Agent] => axios/1.12.0
+    [Content-Length] => 663
+    [Accept-Encoding] => gzip, compress, deflate, br
+    [Host] => 72.62.170.155:8080
+    [Connection] => close
+)
+
+2026-01-04 03:51:42 - Token extraído: MaquimPower_Secret_Sync_Key_2025
+2026-01-04 03:51:42 - JSON RAW recibido:
+2026-01-04 03:51:42 - [{"id":"1","sku":"MAQ-001","nombre":"Hidrolavadora Industrial 5HP","descripcion":"Ideal para lavado de autos continuo.","precio":"3500.00","stock":3,"categoria":"Maquinaria","imagen_url":null,"updated_at":"2026-01-04T02:44:06.536Z"},{"id":"2","sku":"QUIM-050","nombre":"Shampoo Carwash 1 Galón","descripcion":"Espuma activa de alta densidad.","precio":"45.50","stock":100,"categoria":"Químicos","imagen_url":null,"updated_at":"2026-01-04T02:44:06.536Z"},{"id":"3","sku":"ACC-002","nombre":"Paño Microfibra Pro","descripcion":"No raya la pintura.","precio":"12.00","stock":500,"categoria":"Accesorios","imagen_url":null,"updated_at":"2026-01-04T02:44:06.536Z"}]
+2026-01-04 03:51:42 - Fin del proceso. Stats:
+2026-01-04 03:51:42 - Array
+(
+    [insertados] => 3
+    [errores] => 0
+)
+

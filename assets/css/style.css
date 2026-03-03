@@ -1,0 +1,1987 @@
+/* --- MAQUIMPOWER: HIGH-TECH INDUSTRIAL STYLE --- */
+:root {
+    --primary: #FF4500;       /* Naranja Neón */
+    --primary-glow: rgba(255, 69, 0, 0.4);
+    --dark: #0a0a0a;          /* Negro casi puro */
+    --dark-card: #141414;     /* Gris muy oscuro (si decidimos modo oscuro) */
+    --grey-text: #666;
+    --white: #ffffff;
+    --border: #f0f0f0;
+}
+
+/* ESTRUCTURA FLEXIBLE (Arregla el Footer roto) */
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1; /* Esto empuja el footer hacia abajo obligatoriamente */
+    padding-bottom: 80px;
+}
+
+/* --- ANIMACIONES GLOBALES --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0; /* Invisible al inicio */
+}
+/* Retrasos escalonados para la grilla */
+.reveal:nth-child(1) { animation-delay: 0.1s; }
+.reveal:nth-child(2) { animation-delay: 0.2s; }
+.reveal:nth-child(3) { animation-delay: 0.3s; }
+.reveal:nth-child(4) { animation-delay: 0.4s; }
+
+/* --- HEADER & TOP BAR --- */
+.top-bar {
+    background: #111; /* Negro puro en vez de naranja chillón */
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.top-bar span { opacity: 0.8; }
+
+.header-main {
+    background: #fff;
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04); /* Sombra suave flotante */
+    position: relative;
+    z-index: 100;
+}
+.brand-text {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    color: #000;
+    position: relative;
+    display: inline-block;
+}
+.brand-text::after {
+    content: '';
+    position: absolute;
+    bottom: 5px; right: -5px;
+    width: 10px; height: 10px;
+    background: var(--primary); /* Punto naranja */
+    border-radius: 50%;
+}
+
+/* --- TARJETAS DE PRODUCTO (LA MAGIA) --- */
+.prod-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid white; /* Borde invisible inicial */
+    padding: 15px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rebote suave */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.prod-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-color: var(--primary); /* El borde naranja aparece */
+}
+
+/* Imagen con Zoom */
+.img-wrap {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.img-wrap img {
+    max-height: 100%;
+    transition: transform 0.5s ease;
+}
+.prod-card:hover .img-wrap img {
+    transform: scale(1.1); /* Zoom al pasar el mouse */
+}
+
+.p-title { font-weight: 700; font-size: 1rem; color: #222; margin-bottom: 5px; }
+.p-sku { font-size: 0.75rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display:block;}
+.p-price { font-size: 1.3rem; font-weight: 800; color: var(--dark); display: block; margin-top: auto; }
+
+/* BOTÓN "GLOW" */
+.btn-add {
+    background: var(--dark);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-add::before {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.btn-add:hover {
+    background: var(--primary);
+    box-shadow: 0 5px 15px var(--primary-glow); /* Resplandor Naranja */
+}
+.btn-add:hover::before { left: 100%; } /* Efecto de brillo pasando */
+
+.search-modern {
+    display: flex;
+    align-items: center;
+    background: #f4f4f4;
+    border: 2px solid transparent;
+    border-radius: 50px; /* Forma de píldora moderna */
+    padding: 5px 20px;
+    transition: 0.3s all ease;
+    width: 100%;
+    position: relative;
+}
+
+/* Footer Fix */
+
+footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50px; }
+
+.search-modern input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-weight: 500;
+    color: #333;
+}
+.search-modern button {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+.header-actions {
+    display: flex !important; /* Forzar fila */
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    height: 100%;
+}
+
+.search-modern button:hover { transform: scale(1.2); }
+
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #000;
+    line-height: 1.2;
+}
+.action-item i {
+    font-size: 1.6rem;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.action-item:hover i {
+    color: var(--primary);
+    transform: translateY(-5px); 
+}
+
+.wa-circle {
+    background: black;
+    color: white;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* --- CORRECCIÓN HERO (Fondo de Seguridad) --- */
+.bg-fallback {
+    /* Color de fondo GRIS OSCURO por si la imagen falla */
+    background-color: #1a1a1a; 
+    /* Degradado Naranja sutil */
+    background-image: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Texto del Hero más legible */
+.hero-title {
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Sombra para leer mejor */
+}
+
+/* --- CORRECCIÓN IMÁGENES PRODUCTOS --- */
+.prod-img-box img {
+    max-height: 180px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+.nav-bottom {
+    border-top: 1px solid #f0f0f0;
+    margin-top: 15px;
+    padding-top: 10px;
+}
+.nav-link-custom {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #555;
+    padding: 10px 15px;
+    position: relative;
+    transition: 0.3s;
+}
+/* Animación de línea subrayada */
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 50%;
+    background: var(--primary);
+    transition: 0.3s ease;
+}
+.nav-link-custom:hover { color: #000; }
+.nav-link-custom:hover::after {
+    width: 100%;
+    left: 0;
+}
+/* --- FIX: ARREGLO DE MENÚ DESPLEGABLE --- */
+
+/* 1. Matar la flecha triangular de Bootstrap */
+.nav-bottom .dropdown-toggle::after {
+    border: none !important;        /* Quita el triángulo */
+    margin-left: 0 !important;      /* Quita el espacio extra */
+    vertical-align: baseline !important;
+}
+
+/* 2. Restaurar nuestra línea animada */
+.nav-bottom .dropdown-toggle::after {
+    content: '' !important;
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 50%;
+    background: var(--primary);
+    transition: 0.3s ease;
+    opacity: 1; /* Asegurar visibilidad */
+}
+
+/* 3. Animación al pasar el mouse (Hover) */
+.nav-bottom .dropdown-toggle:hover::after,
+.nav-bottom .dropdown:hover .dropdown-toggle::after {
+    width: 100%;
+    left: 0;
+}
+
+/* 4. Ajuste para que el botón no salte */
+.nav-bottom .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Misma altura que los demás */
+}
+/* --- MOBILE APP EXPERIENCE --- */
+
+/* --- MOBILE APP EXPERIENCE (V2.0 Calibrada) --- */
+
+@media (max-width: 768px) {
+    body { padding-bottom: 80px; } /* Espacio para que no tape contenido */
+    .top-bar { display: none; } /* Ocultar barra negra */
+    .header-main { padding: 10px 0; } /* Header más compacto */
+}
+
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px; /* Altura fija */
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-around; /* Distribución exacta */
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.08);
+    padding-bottom: env(safe-area-inset-bottom); /* Para iPhone X+ */
+}
+
+.mobile-link {
+    text-decoration: none;
+    color: #999;
+    font-size: 0.65rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 100%;
+    position: relative;
+    transition: 0.2s;
+}
+
+.mobile-link i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    color: #555;
+}
+
+/* Estado Activo */
+.mobile-link.active i, .mobile-link:hover i {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+.mobile-link.active span { color: var(--primary); }
+
+/* Ajuste del Badge Rojo (El Círculo) */
+.cart-badge-mobile {
+    position: absolute !important;
+    top: 5px !important;
+    left: 50% !important;
+    margin-left: 5px !important; /* Moverlo un poco a la derecha del icono */
+    transform: none !important;
+    font-size: 0.6rem !important;
+    padding: 0.25em 0.5em !important;
+    min-width: 18px;
+    border: 2px solid white;
+}
+
+/* Botón Chat (Normalizado) */
+.mobile-link.highlight i {
+    /* Quitamos el círculo verde gigante para que sea uniforme */
+    color: #25D366; 
+    font-size: 1.6rem; /* Un poco más grande para destacar, pero sutil */
+    background: transparent;
+    width: auto; height: auto;
+}
+/* --- PODER 1: RIPPLE EFFECT (Toque Premium) --- */
+.btn-add, .mobile-link, .btn-hero {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0); /* Aceleración de hardware */
+}
+
+.btn-add:active, .mobile-link:active {
+    transform: scale(0.96); /* Efecto de "presionar" físico */
+    transition: transform 0.1s;
+}
+
+/* Efecto de carga suave en imágenes (Anti-Parpadeo) */
+img {
+    animation: fadeImg 0.6s ease-in-out;
+}
+@keyframes fadeImg {
+    from { opacity: 0; filter: blur(5px); }
+    to { opacity: 1; filter: blur(0); }
+}
+/* --- LIVE SEARCH RESULTS --- */
+.live-search-results {
+    position: absolute;
+    top: 100%; /* Justo debajo del input */
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 10000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+/* Scrollbar fino para la lista */
+.live-search-results::-webkit-scrollbar {
+    width: 5px;
+}
+.live-search-results::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+/* --- FIX: Z-INDEX WAR (Buscador vs Categorías) --- */
+
+/* 1. Elevamos el Header por encima de la barra pegajosa */
+.header-main {
+    position: relative;
+    z-index: 1050; /* Más alto que el sticky (que suele ser 1020) */
+    background: white; /* Asegurar fondo sólido */
+}
+
+/* 2. Aseguramos que la lista flote por encima de todo */
+.live-search-results {
+    z-index: 1060 !important; /* Super prioridad */
+    background-color: #ffffff !important; /* Blanco sólido, nada de transparencias */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important; /* Sombra fuerte para separar */
+    border: 1px solid #e0e0e0;
+}
+
+/* 3. Ajuste extra para la barra de categorías móvil */
+/* Le bajamos un poco los humos para que no tape al buscador */
+.sticky-top {
+    z-index: 1000 !important; 
+}
+/* --- INFINITE BRAND CAROUSEL --- */
+
+/* --- INFINITE BRAND CAROUSEL (FIXED) --- */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 30px 0;
+    background: white;
+    /* Difuminado a los lados */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content; /* Ancho infinito */
+    animation: scrollBrands 40s linear infinite;
+    white-space: nowrap; /* OBLIGATORIO: No bajar de línea */
+}
+
+.brand-group {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Espacio generoso */
+    padding-right: 80px;
+    flex-shrink: 0; /* OBLIGATORIO: No encogerse nunca */
+}
+
+.brand-group img {
+    height: 60px; /* Tamaño grande y legible */
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.brand-group img:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.1);
+}
+
+@keyframes scrollBrands {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .brand-group img { height: 40px; }
+    .brand-group { gap: 40px; padding-right: 40px; }
+}
+/* --- ESTILO HYPER-MODERN (MAQUIMPOWER 2.0) --- */
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #FF4500 0%, #FF8C00 100%);
+    --surface-color: #ffffff;
+    --input-bg: #f8f9fa;
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+    --shadow-hover: 0 15px 40px rgba(255, 69, 0, 0.15);
+    --border-radius: 12px;
+}
+
+/* 1. ANIMACIÓN DE ENTRADA (CASCADA) */
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-card {
+    animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0; /* Invisible al inicio */
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+
+/* 2. TARJETAS FLOTANTES */
+.checkout-card {
+    background: var(--surface-color);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: var(--border-radius);
+    padding: 35px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra lateral decorativa naranja */
+.checkout-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: 0.3s;
+}
+.checkout-card:hover::before { opacity: 1; }
+.checkout-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+
+/* 3. INPUTS MODERNOS (MATERIAL STYLE) */
+.form-floating-custom {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 15px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    background: var(--input-bg);
+    font-size: 1rem;
+    transition: 0.3s;
+    outline: none;
+    font-weight: 500;
+}
+
+.form-control-modern:focus {
+    background: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1);
+}
+
+.form-label-modern {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    pointer-events: none;
+    background: transparent;
+    padding: 0 5px;
+}
+
+/* Efecto al escribir o tener datos */
+.form-control-modern:focus ~ .form-label-modern,
+.form-control-modern:not(:placeholder-shown) ~ .form-label-modern {
+    top: 0;
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: white;
+    font-weight: 700;
+}
+
+/* 4. BOTÓN DE PAGO (GLOW) */
+.btn-pay-glow {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 18px;
+    width: 100%;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+    box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3);
+}
+
+.btn-pay-glow:hover:not(:disabled) {
+    box-shadow: 0 15px 30px rgba(255, 69, 0, 0.5);
+    transform: scale(1.02);
+}
+
+.btn-pay-glow:disabled {
+    background: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Efecto de brillo pasando */
+.btn-pay-glow::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.5s;
+}
+.btn-pay-glow:hover::after { left: 100%; }
+/* Estilos para descripción importada */
+.product-description-content b, .product-description-content strong {
+    color: #000;
+    font-weight: 800;
+}
+.product-description-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+.product-description-content li {
+    margin-bottom: 5px;
+}
+
+/* 1. ANIMACIÓN DE ENTRADA (CASCADA) */
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-card {
+    animation: slideInUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+
+/* 2. TARJETAS TÉCNICAS (Más cuadradas y sólidas) */
+.checkout-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0; /* Borde sutil */
+    border-radius: 8px;       /* Borde técnico, no redondo */
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Barra lateral de acento (Identidad MaquimPower) */
+.checkout-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--primary); /* Naranja Puro */
+    opacity: 0;
+    transition: 0.3s;
+}
+.checkout-card:hover::before { opacity: 1; }
+.checkout-card:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+    border-color: #ccc;
+}
+
+/* 3. INPUTS "HEAVY DUTY" (Campos de texto) */
+.form-floating-custom {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 14px 15px;
+    border: 2px solid #eee; /* Borde sólido */
+    border-radius: 6px;     /* Casi cuadrado */
+    background: #f9f9f9;
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 500;
+    transition: 0.2s;
+    outline: none;
+}
+
+.form-control-modern:focus {
+    background: #fff;
+    border-color: var(--primary); /* Borde Naranja al escribir */
+    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor técnico */
+}
+
+/* Etiquetas Flotantes */
+.form-label-modern {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    pointer-events: none;
+    background: transparent;
+    padding: 0 4px;
+    font-weight: 600;
+    text-transform: uppercase; /* Letras mayúsculas tipo plano */
+    letter-spacing: 0.5px;
+}
+
+/* Efecto al escribir */
+.form-control-modern:focus ~ .form-label-modern,
+.form-control-modern:not(:placeholder-shown) ~ .form-label-modern {
+    top: 0;
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: white;
+}
+
+/* 4. BARRA DE PROGRESO (STEPPER) */
+.stepper { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; }
+/* Línea de fondo */
+.stepper::before { 
+    content: ''; position: absolute; top: 18px; left: 0; width: 100%; height: 3px; 
+    background: #eee; z-index: 0; 
+}
+.step { position: relative; z-index: 1; text-align: center; width: 33%; }
+
+.step-circle { 
+    width: 40px; height: 40px; 
+    background: #fff; border: 3px solid #ddd; /* Borde grueso */
+    border-radius: 50%; margin: 0 auto 10px; 
+    display: flex; align-items: center; justify-content: center; 
+    color: #999; font-weight: 800; transition: 0.3s;
+}
+
+.step.active .step-circle { 
+    background: var(--primary); 
+    border-color: var(--primary); 
+    color: white; 
+    box-shadow: 0 0 0 5px rgba(255,69,0,0.15); 
+}
+.step.active span { color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; }
+
+/* 5. BOTÓN DE PAGO (POWER BUTTON) */
+.btn-pay-glow {
+    background: #111; /* Negro Maquinaria */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Bordes técnicos */
+    padding: 18px;
+    width: 100%;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    border-bottom: 4px solid #000; /* Efecto 3D */
+}
+
+.btn-pay-glow:hover:not(:disabled) {
+    background: var(--primary); /* Se pone naranja al hover */
+    border-bottom-color: #cc3700;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3);
+}
+
+.btn-pay-glow:disabled {
+    background: #ccc;
+    border-bottom-color: #bbb;
+    cursor: not-allowed;
+    color: #888;
+}
+/* --- MEGA MENÚ ESTRUCTURAL (FIX FINAL) --- */
+
+/* Contenedor de la barra de navegación */
+.header-nav-wrapper {
+    background: #fff;
+    border-bottom: 2px solid #eee;
+    position: relative;
+    z-index: 900;
+}
+
+/* Lista de enlaces centrada */
+.nav-centered {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+/* Items del menú */
+.nav-item-mega {
+    position: static !important; /* CRÍTICO: Permite que el menú ocupe 100% ancho */
+}
+
+/* Enlaces individuales */
+.nav-link-corp {
+    display: block;
+    padding: 15px 20px;
+    font-weight: 800;
+    color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.nav-link-corp:hover {
+    color: var(--primary);
+    background-color: #fafafa;
+    border-bottom-color: var(--primary);
+}
+
+/* EL PANEL DESPLEGABLE (MEGA MENU) */
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #eee;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 1000;
+    
+    /* Animación de entrada */
+    display: none; /* Oculto por defecto */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Mostrar al pasar el mouse */
+.nav-item-mega:hover .mega-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Columnas internas */
+.mega-column h6 {
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    font-size: 0.8rem;
+}
+
+.mega-column a {
+    display: block;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+.mega-column a:hover { color: #000; transform: translateX(5px); }
+
+/* Arreglo para la imagen rota */
+.menu-promo-img {
+    width: 100%;       /* Ocupa todo el ancho del contenedor */
+    height: 100%;      /* Ocupa toda la altura disponible */
+    object-fit: cover; /* Ajusta la imagen manteniendo proporción y recortando si es necesario */
+    display: block;    /* Evita espacios en línea */
+}
+
+/* FIX VISIBILIDAD */
+.header-nav-wrapper, .header-main {
+    overflow: visible !important;
+}
+
+.mega-menu {
+    display: none; /* JS lo activará */
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+/* --- ALERTAS MAQUIMPOWER (SweetAlert Custom) --- */
+
+/* La ventana más pequeña y elegante */
+div:where(.swal2-container) div:where(.swal2-popup) {
+    width: 20em !important; /* Más angosta */
+    padding: 1.5em !important;
+    border-radius: 16px !important;
+    border-left: 6px solid var(--primary); /* Borde naranja de marca */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Título más compacto */
+div:where(.swal2-container) h2:where(.swal2-title) {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: #111;
+    text-transform: uppercase;
+}
+
+/* Texto más legible */
+div:where(.swal2-container) .swal2-html-container {
+    font-size: 0.9rem !important;
+    color: #555;
+}
+
+/* Botón OK personalizado */
+div:where(.swal2-container) button.swal2-confirm {
+    background: #111 !important;
+    color: white !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    padding: 10px 25px !important;
+    box-shadow: none !important;
+    transition: 0.3s;
+}
+div:where(.swal2-container) button.swal2-confirm:hover {
+    background: var(--primary) !important;
+    transform: translateY(-2px);
+}
+
+/* Iconos ajustados */
+div:where(.swal2-icon) {
+    width: 3.5em !important;
+    height: 3.5em !important;
+    margin: 1em auto 0.5em auto !important;
+    border-width: 3px !important;
+}
+/* Fix para Slick Slider */
+.slick-slide {
+    height: auto; /* Que se adapte al contenido */
+    padding: 0 10px; /* Espacio entre tarjetas */
+}
+.product-carousel, .video-carousel {
+    display: block; /* Asegurar que no esté oculto */
+    opacity: 0; /* Oculto al inicio para no ver el salto */
+    transition: opacity 0.5s;
+}
+.product-carousel.slick-initialized, 
+.video-carousel.slick-initialized {
+    opacity: 1; /* Aparece suavemente cuando carga */
+}
+/* --- CORRECCIÓN DE ESTILO (ADIÓS AZUL) --- */
+
+/* 1. Precios: Negro Sólido (Más serio) */
+.p-price {
+    color: #111 !important; /* Negro */
+    font-weight: 900 !important;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+}
+
+/* 2. Títulos: Más altura y color oscuro */
+.p-title {
+    color: #333 !important;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    height: 2.6em; /* Fija la altura a 2 líneas para alinear todo */
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+/* 3. Espaciado en el Carrusel (Para que no se peguen) */
+.slick-slide {
+    margin: 0 10px; /* Separación horizontal */
+}
+/* El contenedor del slider necesita compensar ese margen */
+.slick-list {
+    margin: 0 -10px;
+}
+
+/* 4. Información Extra (Llenar la tarjeta) */
+.p-specs {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+    margin-top: 8px;
+    display: block;
+}
+
+/* 5. Botón flotante más elegante */
+.btn-circle-action {
+    width: 35px; height: 35px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(255, 69, 0, 0.3);
+}
+.btn-circle-action:hover {
+    transform: scale(1.1) rotate(90deg);
+    background: black;
+}
+/* --- OVERRIDES GLOBALES (ANTI-BLUE / DARK MODE FEEL) --- */
+
+:root {
+    --primary: #FF4500;
+    --primary-dark: #cc3700;
+    --dark: #0a0a0a;
+    --grey-light: #f4f4f4;
+}
+
+/* Matar el azul de Bootstrap */
+a { color: var(--dark); transition: 0.3s; }
+a:hover { color: var(--primary); }
+
+.text-primary { color: var(--primary) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.btn-primary { 
+    background-color: var(--primary); 
+    border-color: var(--primary); 
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.btn-primary:hover { background-color: var(--primary-dark); border-color: var(--primary-dark); }
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* COMPONENTES MAQUIMPOWER */
+.btn-pay-glow {
+    background: var(--dark);
+    color: white;
+    border: none;
+    border-bottom: 4px solid black;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: 0.3s;
+    letter-spacing: 1px;
+}
+.btn-pay-glow:hover {
+    background: var(--primary);
+    border-bottom-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3);
+    color: white;
+}
+
+/* TARJETAS */
+.prod-card {
+    border: 1px solid #eee;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: white;
+}
+.prod-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* BADGES DE DESCUENTO */
+.badge-save {
+    background: var(--dark);
+    color: var(--primary);
+    font-weight: 900;
+    border: 1px solid var(--primary);
+    padding: 5px 10px;
+}
+/* --- FIX CARRITO MÓVIL --- */
+@media (max-width: 768px) {
+    .cart-item-card {
+        padding: 15px 10px; /* Menos padding lateral */
+        margin-bottom: 10px;
+    }
+    .cart-item-card .col-3 {
+        width: 80px; /* Ancho fijo para imagen */
+    }
+    .cart-item-card .col-9 {
+        width: calc(100% - 80px); /* El resto */
+        padding-left: 10px;
+    }
+    .cart-item-card h6 {
+        font-size: 0.85rem; /* Texto un poco más pequeño */
+    }
+}
+
+/* --- WHATSAPP FLOTANTE (SOLO MÓVIL) --- */
+@media (min-width: 768px) {
+    .whatsapp-float { display: none !important; }
+}
+/* --- CHECKBOXES CORPORATIVOS (Formularios) --- */
+.mp-check-group {
+    display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
+}
+.mp-check-input {
+    width: 20px; height: 20px;
+    accent-color: var(--primary); /* El check será naranja */
+    cursor: pointer; margin-top: 2px;
+}
+.mp-check-label {
+    font-size: 0.85rem; color: #555; line-height: 1.4; cursor: pointer;
+}
+.mp-check-label a {
+    color: var(--dark); text-decoration: underline; font-weight: 700;
+}
+.mp-check-label a:hover { color: var(--primary); }
+
+/* --- BANNER DE COOKIES (HUD INDUSTRIAL) --- */
+.cookie-banner-overlay {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    z-index: 10000; padding: 20px;
+    display: flex; justify-content: center;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); /* Sombra cinemática */
+    pointer-events: none; /* Dejar pasar clics fuera del banner */
+}
+
+.cookie-card {
+    pointer-events: auto; /* Reactivar clics */
+    background: #1a1a1a; /* Fondo Oscuro */
+    color: #fff;
+    width: 100%; max-width: 900px;
+    border-radius: 12px;
+    border-left: 5px solid var(--primary); /* Acento de Marca */
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    display: flex; flex-wrap: wrap; gap: 20px; align-items: center;
+    animation: slideUp 0.5s ease-out;
+}
+
+.cookie-content { flex: 1; min-width: 300px; }
+.cookie-title { color: var(--primary); font-weight: 900; text-transform: uppercase; margin-bottom: 5px; display: block; letter-spacing: 1px;}
+.cookie-text { font-size: 0.85rem; color: #ccc; margin: 0; line-height: 1.5; }
+.cookie-text a { color: #fff; text-decoration: underline; }
+
+.cookie-actions { display: flex; gap: 10px; }
+
+/* Botones del Banner */
+.btn-cookie {
+    padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.8rem;
+    text-transform: uppercase; cursor: pointer; transition: 0.3s;
+    border: 1px solid #444; background: #333; color: white;
+}
+.btn-cookie:hover { background: #444; }
+
+.btn-cookie-primary {
+    background: var(--primary); border-color: var(--primary); color: white;
+}
+.btn-cookie-primary:hover { background: #e03e00; box-shadow: 0 0 15px rgba(255, 69, 0, 0.4); }
+
+/* Panel de Configuración (Oculto) */
+.cookie-settings-panel {
+    width: 100%; border-top: 1px solid #333; padding-top: 15px; margin-top: 10px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;
+}
+.cookie-switch { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #bbb; cursor: pointer; }
+.cookie-switch input { accent-color: var(--primary); width: 16px; height: 16px; }
+/* --- FIX: BANNER COOKIES MÓVIL --- */
+
+@media (max-width: 768px) {
+    /* 1. Subirlo para que no tape el menú de la App */
+    .cookie-banner-overlay {
+        bottom: 70px !important; /* Altura de la barra móvil */
+        padding: 15px;
+        align-items: flex-end; /* Pegado abajo pero con margen */
+    }
+
+    /* 2. Tarjeta Vertical */
+    .cookie-card {
+        flex-direction: column; /* Elementos uno bajo otro */
+        gap: 15px;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    /* 3. Texto centrado y legible */
+    .cookie-content {
+        text-align: center;
+    }
+    .cookie-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    /* 4. Botones Apilados (Full Width) */
+    .cookie-actions {
+        display: flex;
+        flex-direction: column-reverse; /* "Aceptar" arriba, "Rechazar" abajo */
+        width: 100%;
+        gap: 10px;
+    }
+
+    .btn-cookie {
+        width: 100%; /* Botón ancho completo */
+        padding: 14px; /* Más fácil de tocar */
+        font-size: 0.9rem;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Destacar más el botón de Aceptar */
+    .btn-cookie-primary {
+        font-weight: 900;
+        font-size: 1rem;
+    }
+}
+/* Ocultar en pantallas medianas y grandes (Tablets y PC) */
+@media (min-width: 768px) {
+    .whatsapp-float {
+        display: none !important;
+    }
+}
+/* Ocultar WhatsApp Flotante en PC */
+@media (min-width: 768px) {
+    .whatsapp-float {
+        display: none !important;
+    }
+}
+
+/* Avatar Circular */
+.user-avatar-circle {
+    width: 38px; height: 38px;
+    background-color: var(--dark);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.1rem;
+    border: 2px solid #eee;
+}
+
+/* FIX DEFINITIVO DROPDOWN HEADER */
+.header-main .dropdown-menu {
+    z-index: 2000 !important;
+}
+
+.header-main .dropdown-toggle::after {
+    display: none !important;
+}
+.tiktok-card {
+    position: relative;
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 9 / 16;
+    background: #111;
+}
+
+.tiktok-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tiktok-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: .3s;
+}
+
+.tiktok-card:hover .tiktok-overlay {
+    opacity: 1;
+}
+
+.tiktok-overlay i {
+    font-size: 3rem;
+    color: white;
+}
+
+.tiktok-overlay span {
+    margin-top: 10px;
+    font-weight: bold;
+}
+/* Al final del archivo, agregar: */
+
+/* ===== BOTONES DE CARRUSEL ===== */
+.prev-prod, .next-prod {
+    position: relative;
+    z-index: 10;
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+}
+
+.prev-prod:hover, .next-prod:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+    transform: scale(1.1);
+}
+
+/* Asegurar que Slick funcione bien */
+.slick-slide {
+    margin: 0 5px;
+}
+
+.slick-list {
+    margin: 0 -5px;
+}
+/* Agregar al final: */
+
+/* ===== SECCIÓN TIKTOK ===== */
+.tiktok-video-wrapper {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tiktok-video-wrapper:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 69, 0, 0.3) !important;
+    border-color: var(--primary) !important;
+}
+
+.tiktok-overlay {
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.tiktok-video-wrapper:hover .tiktok-overlay {
+    background: rgba(0,0,0,0.5) !important;
+}
+
+.tiktok-video-wrapper:hover i {
+    transform: scale(1.2);
+    filter: drop-shadow(0 4px 8px rgba(255, 69, 0, 0.5));
+}
+
+/* Carrusel de TikTok */
+.tiktok-carousel .slick-slide {
+    margin: 0 10px;
+}
+
+.tiktok-carousel .slick-list {
+    margin: 0 -10px;
+}
+
+/* Responsive TikTok */
+@media (max-width: 768px) {
+    .tiktok-video-wrapper {
+        border-radius: 16px !important;
+    }
+}
+/* =========================================================
+   MAQUIMPOWER – TIKTOK SECTION (CENTERED & PRO)
+   ========================================================= */
+
+/* CONTENEDOR GENERAL */
+.tiktok-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+/* EMBED DE TIKTOK */
+.tiktok-container blockquote.tiktok-embed {
+    width: 100% !important;
+    max-width: 360px !important; /* controla el ancho real del video */
+    margin: 0 auto !important;
+
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 14px;
+    box-shadow: 0 14px 35px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* HOVER PREMIUM */
+.tiktok-container blockquote.tiktok-embed:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(255, 69, 0, 0.28);
+    border-color: var(--primary);
+}
+
+/* CENTRADO FORZADO DEL IFRMAE INTERNO */
+.tiktok-container iframe {
+    margin: 0 auto !important;
+    display: block;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .tiktok-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .tiktok-container blockquote.tiktok-embed {
+        max-width: 100% !important;
+    }
+}
+.video-embed-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.video-embed-container iframe,
+.video-embed-container blockquote {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* ===============================
+   VIDEO EMBED – FIX DEFINITIVO
+================================ */
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 220px;
+}
+
+/* YOUTUBE / IFRAME */
+.video-wrapper iframe {
+    width: 100% !important;
+    height: 500px !important;
+    max-width: 100% !important;
+    border: 0;
+}
+
+/* TIKTOK – NEUTRALIZAR EMBED */
+.video-wrapper blockquote {
+    all: unset;
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* TIKTOK iframe inyectado */
+.video-wrapper blockquote iframe {
+    width: 100% !important;
+    height: 600px !important;
+    max-width: 100% !important;
+}
+
+/* MÓVIL */
+@media (max-width: 768px) {
+    .video-wrapper iframe {
+        height: 360px !important;
+    }
+}
+/* ===============================
+   VIDEO EMBED – FIX DEFINITIVO
+================================ */
+
+.product-video-section {
+    background: #fff;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.video-wrapper {
+    width: 100%;
+    overflow: visible;
+}
+
+/* IFRAME GENERAL */
+.video-wrapper iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 520px !important;
+    border: 0;
+}
+
+/* TIKTOK FIX */
+.video-wrapper blockquote {
+    all: unset;
+    display: block;
+    width: 100% !important;
+}
+
+.video-wrapper blockquote iframe {
+    width: 100% !important;
+    height: 600px !important;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .video-wrapper iframe {
+        height: 360px !important;
+    }
+}
+.tiktok-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: start;
+    padding: 10px;
+}
+
+.tiktok-container blockquote {
+    width: 100% !important;
+    max-width: 600px;
+}
+/* --- FIX 1: WHATSAPP EN PC (Sobrescribir ocultamiento) --- */
+@media (min-width: 768px) {
+    .whatsapp-float {
+        display: flex !important; /* Forzamos que se vea */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        background: #25D366;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+        color: white;
+    }
+}
+
+/* --- FIX 2: LOGO MÁS GRANDE --- */
+.header-logo-img {
+    height: 140px; /* Aumentado de 100px a 140px */
+    width: auto;
+    transition: 0.3s;
+}
+@media (max-width: 768px) {
+    .header-logo-img {
+        height: 90px; /* Ajuste para móvil */
+    }
+}
+
+/* --- FIX 3: MENÚ MÓVIL ACORDEÓN --- */
+.accordion-button-custom {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #212529;
+}
+.accordion-button-custom:after {
+    content: "\F282"; /* Icono Bootstrap chevron-down */
+    font-family: "bootstrap-icons";
+    transition: transform 0.3s;
+}
+.accordion-button-custom[aria-expanded="true"]:after {
+    transform: rotate(180deg);
+}
+.submenu-mobile {
+    background-color: #f8f9fa;
+    padding-left: 1.5rem;
+}
+.submenu-mobile a {
+    font-size: 0.9rem;
+    color: #555;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.search-modern {
+    background: #f8f9fa;
+    border-radius: 50px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+}
+.search-modern input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+}
+.search-modern button {
+    border: none;
+    background: transparent;
+    color: var(--primary);
+}
+/* Animación de entrada para el Mega Menú */
+.nav-item-mega { position: static; }
+
+.mega-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    background: #ffffff;
+    z-index: 1000;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    border-top: 3px solid var(--primary); /* El toque naranja */
+}
+
+.nav-item-mega:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Estilo de los enlaces en el menú */
+.mega-column h6 {
+    color: var(--dark);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.mega-column a {
+    display: block;
+    padding: 6px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.mega-column a:hover {
+    color: var(--primary);
+    padding-left: 8px;
+}
+
+.menu-promo-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.menu-promo-card:hover {
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.1);
+}
+/* Efecto de Brillo MaquimPower */
+.nav-link-corp {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link-corp:hover {
+    color: #FF4500 !important; /* Naranja Maquim */
+    text-shadow: 0 0 8px rgba(255, 69, 0, 0.4);
+}
+
+.nav-link-corp::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 50%;
+    background: #FF4500;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-item-mega:hover .nav-link-corp::after {
+    width: 70%;
+}
+.footer-link { text-decoration: none; color: #888; transition: 0.3s; display: block; font-size: 0.85rem; }
+.footer-link:hover { color: var(--primary); transform: translateX(5px); }
+.footer-link-small { text-decoration: none; color: #666; font-size: 0.8rem; transition: 0.2s; }
+.footer-link-small:hover { color: white; }
+.social-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; border-color: #444; }
+.social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
+/* --- BOTÓN WHATSAPP PC --- */
+.btn-whatsapp-pc {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+    width: 56px;
+    height: 56px;
+
+    background-color: #25D366;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+
+    border: 2px solid white;
+}
+
+.btn-whatsapp-pc:hover {
+    background-color: #128C7E;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.btn-whatsapp-pc i {
+    font-size: 26px;
+    line-height: 1;
+}
+
+/* Contenedor del resumen para evitar que las animaciones se escapen */
+.summary-card {
+    position: relative;
+    overflow: hidden; /* Esto corta cualquier brillo que se salga de la tarjeta */
+    z-index: 10;
+}
+
+/* Ajuste del botón para que su animación no bloquee otros elementos */
+.btn-pay-glow {
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Corta el brillo dentro del botón */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+/* Si tu animación usa un resplandor externo, asegúrate de que no tenga eventos de ratón */
+.btn-pay-glow::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    box-shadow: 0 0 20px var(--primary-glow);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none; /* ESTO ES CLAVE: evita que el brillo tape otros botones */
+}
+
+.btn-pay-glow:hover::after {
+    opacity: 1;
+}
+
+/* Asegura que la columna de productos esté por encima en el orden de clics */
+.col-lg-8 {
+    position: relative;
+    z-index: 5;
+}
+/* Animación de brillo moviéndose */
+@keyframes skeleton-loading {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    border-radius: 10px;
+    display: block;
+}
+
+#product-loader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: white;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* Avatar Circular */
+.avatar-circle {
+    width: 42px;
+    height: 42px;
+    background-color: #212529; /* Fondo oscuro */
+    color: #ff4500;            /* Naranja principal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    border-radius: 12px;       /* Estilo "Squircle" moderno */
+    border: 2px solid #ff4500;
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .avatar-circle {
+    transform: scale(1.05);
+    background-color: #ff4500;
+    color: white;
+}
+
+/* Textos de cabecera */
+.welcome-text {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6c757d;
+    letter-spacing: 0.5px;
+}
+
+.user-name-text {
+    font-size: 13px;
+    font-weight: 800;
+    color: #212529;
+    text-transform: uppercase;
+}
+
+/* Badge de Administrador */
+.admin-badge {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Efectos del Dropdown */
+.dropdown-item {
+    border-radius: 8px;
+    margin: 2px 0;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    padding-left: 1.25rem;
+}
+.btn-reclamaciones {
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 20px; /* Un poco más de espacio arriba */
+}
+
+.btn-reclamaciones i {
+    /* Tamaño aumentado a 3.5rem para que sea protagonista */
+    font-size: 3.5rem; 
+    color: #fff;
+    line-height: 1;
+    transition: all 0.3s ease;
+    /* Sombra suave para darle profundidad */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+
+.btn-reclamaciones:hover {
+    transform: translateY(-5px) scale(1.05); /* Sube un poco y crece */
+}
+
+.btn-reclamaciones:hover i {
+    color: #FF4500; /* Naranja MaquimPower al pasar el mouse */
+    filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.5)); /* Brillo naranja */
+}
+/* =========================================
+   OPTIMIZACIÓN MÓVIL: FICHA DE PRODUCTO
+   ========================================= */
+@media (max-width: 991px) {
+    
+    /* 1. GANAR ESPACIO SUPERIOR */
+    .detail-bg {
+        padding-top: 10px !important; /* Reducir aire arriba */
+    }
+    
+    /* 2. OCULTAR BREADCRUMB EN MÓVIL (Ahorra 40px valiosos) */
+    .breadcrumb {
+        display: none !important;
+    }
+
+    /* 3. REDUCIR TAMAÑO DE IMAGEN */
+    /* Pasamos de 450px fijos a un máximo de 280px */
+    .prod-gallery-card .d-flex {
+        height: 280px !important; 
+        padding: 10px !important; /* Menos relleno blanco */
+        margin-bottom: 0 !important;
+    }
+    
+    .prod-gallery-card img#mainImage {
+        max-height: 260px !important;
+    }
+
+    /* 4. COMPACTAR LA TARJETA DE IMAGEN */
+    .prod-gallery-card {
+        margin-bottom: 10px !important;
+        box-shadow: none !important; 
+        background: transparent !important; 
+        border: none !important;
+    }
+
+    /* 5. ACERCAR EL TÍTULO A LA IMAGEN */
+    .col-lg-5.animate-up {
+        margin-top: -10px !important; /* Subir bloque de info */
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+ 
+    /* 6. TÍTULO Y PRECIO MÁS COMPACTOS */
+    .display-6 {
+        font-size: 1.4rem !important; /* Título más pequeño */
+        font-weight: 800;
+        margin-bottom: 5px !important;
+    }
+    
+    .text-primary.ls-1 {
+        font-size: 0.7rem !important; /* Categoría pequeña */
+        margin-bottom: 2px !important;
+    }
+
+    /* 7. PRECIO Y SKU EN UNA LÍNEA (ESTRATEGIA VISUAL) */
+    /* Opcional: Esto pone el SKU pequeño al lado del precio si quieres */
+    .price-tag-large {
+        font-size: 1.8rem !important;
+    }
+    
+    /* 8. MINIATURAS MÁS PEQUEÑAS */
+    .thumb-img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
