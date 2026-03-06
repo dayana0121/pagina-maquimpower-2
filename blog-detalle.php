@@ -8,7 +8,7 @@ $stmt->execute([$slug]);
 $post = $stmt->fetch();
 
 if (!$post) {
-    echo "<div class='container py-5 text-center'><h1>Artículo no encontrado</h1><a href='/blog.php' class='btn btn-dark'>Volver</a></div>";
+    echo "<div class='container py-5 text-center'><h1>Artículo no encontrado</h1><a href='/pagina/blog.php' class='btn btn-dark'>Volver</a></div>";
     require_once 'includes/footer.php'; exit;
 }
 
@@ -41,7 +41,7 @@ if (!empty($post['video_url'])) {
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/blog.php" class="text-muted text-decoration-none">Blog</a></li>
+                    <li class="breadcrumb-item"><a href="/pagina/blog.php" class="text-muted text-decoration-none">Blog</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Artículo</li>
                 </ol>
             </nav>

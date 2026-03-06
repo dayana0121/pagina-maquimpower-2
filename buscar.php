@@ -59,7 +59,7 @@ $listaCategorias = $pdo->query("SELECT DISTINCT categoria FROM productos WHERE c
                     <i class="bi bi-search display-1 text-muted opacity-25"></i>
                     <h3 class="mt-3 fw-bold text-dark fs-5">Sin resultados</h3>
                     <p class="text-muted small">Intenta con otra palabra clave.</p>
-                    <a href="/" class="btn btn-primary rounded-pill px-4 fw-bold btn-sm">Ir al Inicio</a>
+                    <a href="/pagina/" class="btn btn-primary rounded-pill px-4 fw-bold btn-sm">Ir al Inicio</a>
                 </div>
             <?php else: ?>
 

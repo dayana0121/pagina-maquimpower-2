@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE)
 
 // 2. SEGURIDAD
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /login.php?redirect=checkout");
+    header("Location: /pagina/login.php?redirect=checkout");
     exit;
 }
 
@@ -329,7 +329,7 @@ require_once 'includes/header.php';
                     <div class="tab-pane fade show active" id="pills-card">
                         <div id="payment-form-container"
                             class="bg-light p-4 rounded-4 text-center border border-dashed">
-                            <img src="/assets/img/niubiz-logo.png" alt="Niubiz" style="max-height: 40px;"
+                            <img src="/pagina/assets/img/niubiz-logo.png" alt="Niubiz" style="max-height: 40px;"
                                 class="mb-3 opacity-75">
                             <h6 class="fw-bold">Pasarela Segura Niubiz</h6>
                             <p class="small text-muted mb-3">Aceptamos todas las tarjetas de crédito y débito.</p>
@@ -459,7 +459,7 @@ require_once 'includes/header.php';
     // 1. UBIGEO API
     async function cargarDepartamentos() {
         try {
-            const res = await fetch('/api/ubigeo.php?accion=departamentos');
+            const res = await fetch('/pagina/api/ubigeo.php?accion=departamentos');
             const deps = await res.json();
             let html = '<option value="">Seleccione...</option>';
             deps.forEach(d => html += `<option value="${d}">${d}</option>`);
@@ -607,7 +607,7 @@ require_once 'includes/header.php';
 
         let carrito = JSON.parse(localStorage.getItem('maquim_cart'));
 
-        fetch('/api/procesar_compra.php', {
+        fetch('/pagina/api/procesar_compra.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

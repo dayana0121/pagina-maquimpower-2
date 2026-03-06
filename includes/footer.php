@@ -52,27 +52,27 @@
                     style="font-size: 0.9rem; letter-spacing: 1px;">PRODUCTOS</h5>
                 <ul class="list-unstyled">
                     <li class="mb-2">
-                        <a href="/categoria/limpieza-y-mantenimiento" class="footer-link d-flex align-items-center">
+                        <a href="/pagina/categoria/limpieza-y-mantenimiento" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Limpieza y Mantenimiento
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/categoria/herramientas-profesionales" class="footer-link d-flex align-items-center">
+                        <a href="/pagina/categoria/herramientas-profesionales" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Herramientas Profesionales
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/categoria/equipos-de-espumado" class="footer-link d-flex align-items-center">
+                        <a href="/pagina/categoria/equipos-de-espumado" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Equipos de Espumado
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/categoria/vaporizadores-y-turbinas" class="footer-link d-flex align-items-center">
+                        <a href="/pagina/categoria/vaporizadores-y-turbinas" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Vaporizadores y Turbinas
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/categoria/maquinarias" class="footer-link d-flex align-items-center">
+                        <a href="/pagina/categoria/maquinarias" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Carwash & Detailing
                         </a>
                     </li>
@@ -128,7 +128,7 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="assets/js/main.js?v=1.0.2"></script>

@@ -376,7 +376,7 @@ function renderProductCard($p, $isSlider = false) {
                 <!-- BREADCRUMBS -->
                 <nav aria-label="breadcrumb" class="mb-3 animate-slide-up delay-1">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="/" class="text-decoration-none"><i class="bi bi-house-door-fill"></i> INICIO</a></li>
+                        <li class="breadcrumb-item"><a href="/pagina/" class="text-decoration-none"><i class="bi bi-house-door-fill"></i> INICIO</a></li>
                         <?php foreach ($breadcrumbs as $b): ?>
                             <li class="breadcrumb-item <?php echo ($b['id'] == $categoriaActual['id']) ? 'active' : ''; ?>">
                                 <?php if ($b['id'] != $categoriaActual['id']): ?>
@@ -422,7 +422,7 @@ function renderProductCard($p, $isSlider = false) {
             </div>
             <h3 class="fw-bold text-dark">Sin resultados</h3>
             <p class="text-muted mb-4">No encontramos productos en esta sección.</p>
-            <a href="/" class="btn btn-dark rounded-pill px-5 py-2 fw-bold shadow-lg hover-lift">
+            <a href="/pagina/" class="btn btn-dark rounded-pill px-5 py-2 fw-bold shadow-lg hover-lift">
                 Regresar al Inicio
             </a>
         </div>
@@ -483,7 +483,7 @@ function renderProductCard($p, $isSlider = false) {
 
 <!-- SCRIPTS (Slick + Animaciones) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <script>
 // 1. INICIALIZAR CARRUSEL

@@ -216,12 +216,12 @@ $listaCategorias = $stmtCats->fetchAll(PDO::FETCH_COLUMN);
                 </a>
             </li>
             <li class="nav-item mt-5">
-                <a href="/" class="nav-link text-white-50">
+                <a href="/pagina/" class="nav-link text-white-50">
                     <i class="bi bi-box-arrow-left me-2"></i> Volver a la Tienda
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/controllers/auth.php?action=logout" class="nav-link text-danger">
+                <a href="/pagina/controllers/auth.php?action=logout" class="nav-link text-danger">
                     <i class="bi bi-power me-2"></i> Cerrar Sesión
                 </a>
             </li>

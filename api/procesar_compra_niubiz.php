@@ -16,6 +16,6 @@ if ($transactionToken) {
     // TODO: Implementar la llamada de autorización final (Paso 4 del flujo Niubiz)
 } else {
     // Pago fallido o cancelado
-    header("Location: /checkout.php?error=pago_cancelado");
+    header("Location: /pagina/checkout.php?error=pago_cancelado");
 }
 ?>

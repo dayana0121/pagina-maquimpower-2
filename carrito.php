@@ -69,7 +69,7 @@
                 <h6 class="text-primary fw-bold ls-2 mb-1 text-uppercase"><i class="bi bi-bag-check-fill me-2"></i> Revisión de Pedido</h6>
                 <h1 class="display-5 fw-black m-0 text-dark text-uppercase">Mi Carrito</h1>
             </div>
-            <a href="/" class="btn btn-outline-dark rounded-pill fw-bold px-4 d-none d-md-inline-block border-2">
+            <a href="/pagina/" class="btn btn-outline-dark rounded-pill fw-bold px-4 d-none d-md-inline-block border-2">
                 <i class="bi bi-arrow-left me-2"></i> SEGUIR COMPRANDO
             </a>
         </div>
@@ -81,7 +81,7 @@
                 <div id="cart-empty" class="text-center py-5 d-none bg-white rounded-4 border border-dashed shadow-sm">
                     <div class="mb-3"><span class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;"><i class="bi bi-cart-x fs-1 text-muted opacity-50"></i></span></div>
                     <h3 class="fw-bold text-dark">Tu carrito está vacío</h3>
-                    <a href="/categoria.php?c=ofertas" class="btn btn-primary rounded-pill px-5 fw-bold mt-3 shadow-sm">VER CATÁLOGO</a>
+                    <a href="/pagina/categoria.php?c=ofertas" class="btn btn-primary rounded-pill px-5 fw-bold mt-3 shadow-sm">VER CATÁLOGO</a>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
                         <span class="text-uppercase fw-bold text-white-50">Total</span>
                         <span id="cart-total" class="fw-black text-primary fs-2">S/ 0.00</span>
                     </div>
-                    <a href="/checkout.php" class="btn btn-light w-100 fw-bold py-3 rounded-pill shadow-none" id="btn-checkout">PROCESAR COMPRA <i class="bi bi-arrow-right ms-2"></i></a>
+                    <a href="/pagina/checkout.php" class="btn btn-light w-100 fw-bold py-3 rounded-pill shadow-none" id="btn-checkout">PROCESAR COMPRA <i class="bi bi-arrow-right ms-2"></i></a>
                 </div>
             </div>
         </div>
