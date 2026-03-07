@@ -212,6 +212,116 @@ try {
     <link rel="stylesheet" href="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/style.css?v=<?= time() ?>">
+
+    <!-- ESTILOS INLINE (UI / USER MENU) -->
+<style>
+    /* --- ARREGLO VISUAL DEL INPUT Y FONDO --- */
+    /* Forzamos que la cajita del buscador sea blanca */
+    .search-modern-mobile {
+        background-color: #ffffff !important; 
+        border: 1px solid #d1d1d1 !important;
+        color: #000 !important;
+    }
+    
+    /* Forzamos que el texto que escribes sea negro */
+    #mobileSearchInput {
+        color: #000000 !important;
+        background: transparent !important;
+    }
+    
+    /* Color del texto de ayuda (placeholder) */
+    #mobileSearchInput::placeholder {
+        color: #6c757d !important;
+        opacity: 1;
+    }
+
+    /* --- CONTENEDOR DE RESULTADOS FLOTANTE --- */
+    .live-search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff !important; /* Fondo blanco puro */
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        z-index: 99999 !important;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    /* Estilo de cada fila de producto */
+    .search-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        border-bottom: 1px solid #f0f0f0;
+        text-decoration: none;
+        background-color: #ffffff !important;
+        transition: background 0.2s;
+    }
+
+    .search-item:hover, .search-item:active {
+        background-color: #f2f2f2 !important; /* Gris suave al tocar */
+    }
+
+    /* Imagen pequeña */
+    .search-item img {
+        width: 45px; 
+        height: 45px; 
+        object-fit: contain; 
+        margin-right: 12px;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background: #fff;
+    }
+
+    /* Textos */
+    .search-item .info h6 {
+        color: #000000 !important;
+        font-weight: 800;
+        font-size: 0.8rem;
+        margin: 0;
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+    .search-item .info span {
+        color: #666 !important;
+        font-size: 0.7rem;
+    }
+
+    /* Enlace "Ver todos" */
+    .search-view-all {
+        display: block;
+        text-align: center;
+        padding: 12px;
+        color: #ff4500 !important; /* Tu color primario */
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: #fff;
+    }
+
+    /* Scrollbar */
+    .live-search-results::-webkit-scrollbar { width: 4px; }
+    .live-search-results::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+    
+    /* Estilos generales que ya tenías */
+    .user-avatar-circle { width: 35px; height: 35px; background-color: var(--dark); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; border: 2px solid #eee; }
+    .user-dropdown-wrapper { position: relative; z-index: 1050; }
+    .user-dropdown-wrapper .dropdown-menu { display: none; position: absolute !important; z-index: 99999 !important; right: 0 !important; left: auto !important; box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important; background-color: #ffffff !important; }
+    .user-dropdown-wrapper .dropdown-menu.show { display: block !important; }
+    .col-lg-4 { overflow: visible !important; }
+    .nav-item-mega { position: static; }
+    .mega-menu { position: absolute; top: 100%; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 9999; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-top: 3px solid var(--primary); }
+    .nav-item-mega:hover .mega-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .fw-black { font-weight: 900; }
+    .avatar-sm { width: 35px; height: 35px; font-size: 0.9rem; }
+    .pill-link { background: #fff; color: #666; padding: 8px 16px; border-radius: 12px; font-size: 0.8rem; text-decoration: none; border: 1px solid #e0e0e0; font-weight: 500; }
+    .accordion-button:not(.collapsed) { color: var(--primary) !important; background: transparent !important; }
+</style>
     
 </head>
 
@@ -435,6 +545,75 @@ try {
         </ul>
     </div>
 </div>
+
+<style>
+/* --- ESTILOS DE IMPACTO --- */
+.nav-item-mega { position: static; }
+
+.nav-link-corp {
+    color: #333;
+    padding: 1rem 1.2rem;
+    font-size: 0.85rem;
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-item-mega:hover .nav-link-corp {
+    color: var(--primary) !important;
+}
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-top: 3px solid var(--primary);
+}
+
+.nav-item-mega:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.hover-orange:hover {
+    color: var(--primary) !important;
+    padding-left: 5px;
+}
+
+.hover-zoom {
+    transition: transform 0.5s ease;
+}
+.menu-promo-card:hover .hover-zoom {
+    transform: scale(1.1);
+}
+
+.pulse-red {
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+.fw-black { font-weight: 900; }
+</style>
 
     <!-- 4. MENÚ MÓVIL OFFCANVAS -->
     <div class="offcanvas offcanvas-start border-0 shadow-lg" tabindex="-1" id="mobileMenu" style="width: 85%;">
