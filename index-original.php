@@ -90,8 +90,413 @@ function renderHomeCard($p)
 }
 ?>
 
+<!-- =========================================
+     ESTILOS ESPECÍFICOS (RESTAURADOS)
+========================================== -->
+<style>
+    /* 1. HERO SECTION DARK (Estilo Original Restaurado) */
+    .hero-section-dark {
+        background-color: #0e0e0e;
+        /* Negro Profundo */
+        background-image: radial-gradient(#333 1px, transparent 1px);
+        /* Puntos */
+        background-size: 30px 30px;
+        /* Separación de puntos */
+        min-height: 580px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* Tipografía Hero */
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        font-weight: 900;
+        color: #fff;
+    }
+
+    .text-stroke-orange {
+        color: transparent;
+        -webkit-text-stroke: 2px #FF4500;
+        /* Naranja MaquimPower */
+        font-family: 'Arial Black', sans-serif;
+        /* Grueso */
+    }
+
+    /* Logo Hero */
+    .hero-logo-big {
+        max-height: 320px;
+        width: auto;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Efecto rebote suave */
+
+    }
+
+    /* Pill Naranja */
+    .pill-orange {
+        background-color: #FF4500;
+        color: #fff;
+        border-radius: 50px;
+        padding: 5px 20px;
+        /* Más ancho */
+        font-weight: 800;
+        display: inline-block;
+        box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
+        width: 150px;
+        /* Tamaño fijo como en la foto */
+        height: 15px;
+        /* Para simular la barra naranja de la foto */
+        margin-bottom: 20px;
+    }
+
+    /* 2. TARJETAS FLOTANTES (SERVICES) */
+    .service-card-float {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 15px 40px rgba(105, 105, 105, 0.1);
+        /* Sombra suave */
+        display: flex;
+        align-items: center;
+        height: 100%;
+        transition: transform 0.3s;
+        border: 1px solid #f0f0f0;
+    }
+
+    .service-card-float:hover {
+        transform: translateY(-5px);
+    }
+
+    .icon-square {
+        width: 55px;
+        height: 55px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-right: 15px;
+    }
+
+    /* 3. PRODUCTOS & SLIDERS */
+    .gradient-primary {
+        background: linear-gradient(135deg, #FF4500 0%, #ff6b33 100%);
+    }
+
+    .gradient-danger {
+        background: linear-gradient(135deg, #dc3545 0%, #ff4d5e 100%);
+    }
+
+    .prod-card {
+        transition: all 0.4s;
+        box-shadow: 0 4px 6px rgba(82, 80, 80, 0.02);
+    }
+
+    .prod-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        border-color: rgba(255, 69, 0, 0.3) !important;
+    }
+
+    .btn-add-mini {
+        width: 35px;
+        height: 35px;
+        background: #464444;
+        color: white;
+        transition: all 0.3s;
+    }
+
+    .prod-card:hover .btn-add-mini {
+        background: var(--primary);
+        transform: rotate(90deg) scale(1.1);
+    }
+
+    /* Slick Arrows */
+    .slick-prev,
+    .slick-next {
+        width: 45px;
+        height: 45px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        display: none;
+    }
+
+    .slick-prev:hover,
+    .slick-next:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    /* Skeleton */
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+
+    .skeleton {
+        background: #f6f7f8;
+        background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+        background-repeat: no-repeat;
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite linear;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 991px) {
+        .hero-title {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .hero-section-dark {
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .hero-logo-big {
+            max-height: 120px;
+            margin-top: 20px;
+        }
+
+        .service-card-float {
+            margin-bottom: 10px;
+        }
+
+        .col-lg-6 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .hero-slider {
+        position: relative;
+        width: 100%;
+        /* Altura controlada por media queries */
+        overflow: hidden;
+    }
+
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transform: scale(1.05);
+        transition: opacity 1s ease, transform 1s ease;
+        z-index: 1;
+    }
+
+    .hero-slide.active {
+        opacity: 1;
+        transform: scale(1);
+        z-index: 2;
+    }
+
+    /* Los banners */
+    .hero-banner {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Asegura que el hero original siga bien */
+    .hero-slide .hero-section-dark {
+        height: 100%;
+    }
+
+    /* (Bloque duplicado eliminado) */
+
+    /* ===== BANNERS ===== */
+    .hero-banner-slide {
+        position: relative;
+        width: 100%;
+        height: 580px;
+    }
+
+    .hero-banner {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* PC: llena el hero */
+    .hero-banner.desktop {
+        object-fit: cover;
+    }
+
+    /* Mobile: NO se recorta */
+    .hero-banner.mobile {
+        object-fit: contain;
+        background: #000;
+        /* relleno elegante si sobra espacio */
+    }
 
 
+    /* ===== RESPONSIVE SWITCH ===== */
+    .hero-banner.mobile {
+        display: none;
+    }
+
+    .hero-banner.desktop {
+        display: block;
+    }
+
+    .hero-bg.mobile {
+        display: none;
+    }
+
+    /* Global Banner Slide Style */
+    .hero-banner-slide {
+        position: relative;
+        width: 100%;
+        /* Eliminamos altura fija aquí, heredará del slider */
+        height: 100%;
+    }
+
+    .hero-banner {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        /* Usamos contain para asegurar que se vea TODO el texto del banner */
+        /* OJO: cover recorta. Si el cliente quiere que NO se corte, contain es seguro, 
+       pero puede dejar bordes.
+       Mejor: Ajustamos la altura del slider para que 'cover' no recorte tanto.
+       Y usamos background-position: center;
+    */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* Breakpoints para ajustar altura y evitar recorte lateral excesivo */
+    /* Desktop Grande (Default) */
+    .hero-slider {
+        height: 580px;
+    }
+
+    /* Laptop Grande */
+    @media (max-width: 1440px) {
+        .hero-slider {
+            height: 500px;
+        }
+
+        .hero-section-dark {
+            min-height: 500px;
+        }
+
+        .hero-banner-slide {
+            min-height: 500px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+        }
+
+        /* Ajustar texto también */
+    }
+
+    /* Laptop Estándar / Tablet Landscape */
+    @media (max-width: 1200px) {
+        .hero-slider {
+            height: 420px;
+        }
+
+        .hero-section-dark {
+            min-height: 420px;
+        }
+
+        .hero-banner-slide {
+            min-height: 420px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        /* Tablet Portrait */
+        .hero-slider {
+            height: 380px;
+        }
+
+        .hero-section-dark {
+            min-height: 380px;
+        }
+
+        .hero-banner-slide {
+            min-height: 380px;
+        }
+
+        /* El slide 1 (texto) necesita ajustes de padding */
+        .hero-section-dark .container {
+            padding-top: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Mobile - Cambio de imagen */
+        .hero-banner.desktop {
+            display: none;
+        }
+
+        .hero-banner.mobile {
+            display: block;
+        }
+
+        .hero-slider {
+            height: 500px;
+        }
+
+        /* Más alto en móvil para la imagen vertical */
+        .hero-section-dark {
+            min-height: 500px;
+        }
+
+        .hero-banner-slide {
+            height: 100%;
+            min-height: 500px;
+        }
+
+        /* Ajuste altura móvil */
+
+        .hero-bg.desktop {
+            display: none;
+        }
+
+        .hero-bg.mobile {
+            display: block;
+            background-size: cover;
+            background-color: #000;
+        }
+    }
+</style>
 
 <!-- NAV MÓVIL -->
 <div class="d-md-none bg-white border-bottom py-2 sticky-top shadow-sm" style="top: 0; z-index: 800;">
@@ -158,7 +563,7 @@ function renderHomeCard($p)
 
     <!-- SLIDE 2 -->
     <div class="hero-slide hero-banner-slide">
-        <img src="/pagina/assets/img/Banner 1 Hidrolavadoras.jpg" class="hero-banner desktop" alt="Banner Hidrolavadoras">
+        <img src="/pagina/assets/img/Banner 1 Hidrolavadoras.webp" class="hero-banner desktop" alt="Banner Hidrolavadoras">
         <img src="/pagina/assets/img/Banner 1 Hidrolavadoras (Mobile).webp" class="hero-banner mobile"
             alt="Banner Hidrolavadoras Móvil">
     </div>
@@ -346,8 +751,91 @@ function renderHomeCard($p)
     </script>
 <?php endif; ?>
 
+<!-- ESTILOS ANTI-DEFORMACIÓN -->
+<style>
+    .tiktok-wrapper {
+        border-radius: 15px;
+        overflow: hidden;
+        background-color: #000;
+        position: relative;
+        width: 100%;
 
+        /* MAGIA RESPONSIVE: Mantiene formato vertical SIEMPRE */
+        aspect-ratio: 9 / 16;
 
+        /* LÍMITE MÓVIL: Evita que sea gigante en pantallas anchas */
+        max-width: 350px;
+
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tiktok-wrapper:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        border-color: #FE2C55 !important;
+        /* Borde TikTok al hover */
+    }
+
+    .tiktok-facade,
+    .tiktok-placeholder {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tiktok-placeholder {
+        background: linear-gradient(180deg, #111 0%, #222 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brand-icon {
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.1);
+        margin-bottom: 20px;
+    }
+
+    /* BOTÓN PLAY ANIMADO */
+    .play-button {
+        width: 65px;
+        height: 65px;
+        background: rgba(254, 44, 85, 0.9);
+        /* Rojo TikTok */
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        padding-left: 5px;
+        /* Ajuste visual del ícono play */
+        box-shadow: 0 0 0 0 rgba(254, 44, 85, 0.7);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: pulse-red 2s infinite;
+    }
+
+    .tiktok-wrapper:hover .play-button {
+        background: white;
+        color: #FE2C55;
+        transform: scale(1.15);
+        animation: none;
+    }
+
+    @keyframes pulse-red {
+        0% {
+            box-shadow: 0 0 0 0 rgba(254, 44, 85, 0.7);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px rgba(254, 44, 85, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(254, 44, 85, 0);
+        }
+    }
+</style>
 
 <!-- SCRIPT (BUCLE + AUTOPLAY) -->
 <script>
@@ -393,7 +881,21 @@ function renderHomeCard($p)
     </div>
 </div>
 
+<style>
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
 
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .animate-marquee {
+        animation: marquee 30s linear infinite;
+    }
+</style>
 
 <!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
