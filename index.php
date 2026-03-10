@@ -19,7 +19,6 @@ function renderHomeCard($p)
     $img = !empty($p['imagen_url']) ? $p['imagen_url'] : '/assets/img/no-photo.png';
     $img = str_replace('/var/www/html', '', $img);
     $link = "/producto/" . $p['slug'];
-
     $tieneOferta = ($p['precio_oferta'] > 0);
     $precioShow = $tieneOferta ? $p['precio_oferta'] : $p['precio'];
     $descuento = $tieneOferta ? round((($p['precio'] - $p['precio_oferta']) / $p['precio']) * 100) : 0;
@@ -86,8 +85,7 @@ function renderHomeCard($p)
         </a>
     </div>
     <?php
-    return ob_get_clean();
-}
+    return ob_get_clean();}
 ?>
 
 
@@ -221,7 +219,7 @@ function renderHomeCard($p)
 <div class="container py-5 mt-5">
     <div class="d-flex align-items-end justify-content-between mb-4 border-bottom pb-2">
         <div>
-            <span class="text-primary fw-bold small text-uppercase ls-2"><i class="bi bi-star-fill me-1"></i>
+            <span class="tendencia text-primary small text-uppercase ls-2"><i class="bi bi-star-fill me-1"></i>
                 TENDENCIA</span>
             <h2 class="fw-black text-uppercase m-0 display-6">DESTACADOS</h2>
         </div>
@@ -234,7 +232,7 @@ function renderHomeCard($p)
     </div>
 
     <!-- Carrusel 1 -->
-    <div class="slider-destacados">
+    <div class="slider-destacados slick-slider">
         <?php foreach ($productos as $p): ?>
             <?= renderHomeCard($p) ?>
         <?php endforeach; ?>
@@ -249,20 +247,16 @@ function renderHomeCard($p)
                 SALE</span>
             <h2 class="fw-black text-uppercase m-0 display-6">OFERTAS DEL MES</h2>
         </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-outline-dark rounded-circle slider-prev-2 shadow-sm border-0 bg-light"><i
-                    class="bi bi-chevron-left"></i></button>
-            <button class="btn btn-outline-dark rounded-circle slider-next-2 shadow-sm border-0 bg-light"><i
-                    class="bi bi-chevron-right"></i></button>
-        </div>
     </div>
 
     <!-- Carrusel 2 -->
-    <div class="slider-ofertas">
+     <div class="prod-slider-container">
+                <div class="slider-ofertas">
         <?php foreach ($productosOferta as $p): ?>
             <?= renderHomeCard($p) ?>
         <?php endforeach; ?>
     </div>
+     </div>
 </div>
 
 
