@@ -796,3 +796,626 @@ position: absolute;
 }
 
 
+/*FOOTER*/
+/* Footer Fix */
+
+footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50px; }
+
+.search-modern input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-weight: 500;
+    color: #333;
+}
+.search-modern button {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+.header-actions {
+    display: flex !important; /* Forzar fila */
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    height: 100%;
+}
+
+.search-modern button:hover { transform: scale(1.2); }
+
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #000;
+    line-height: 1.2;
+}
+.action-item i {
+    font-size: 1.6rem;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.action-item:hover i {
+    color: var(--primary);
+    transform: translateY(-5px); 
+}
+
+.wa-circle {
+    background: black;
+    color: white;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.footer-link { text-decoration: none; color: #888; transition: 0.3s; display: block; font-size: 0.85rem; }
+.footer-link:hover { color: var(--primary); transform: translateX(5px); }
+.footer-link-small { text-decoration: none; color: #666; font-size: 0.8rem; transition: 0.2s; }
+.footer-link-small:hover { color: white; }
+.social-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; border-color: #444; }
+.social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
+
+.social-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; border-color: #444; }
+.social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
+/* --- BOTÓN WHATSAPP PC --- */
+.btn-whatsapp-pc {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+    width: 56px;
+    height: 56px;
+
+    background-color: #25D366;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+
+    border: 2px solid white;
+}
+
+.btn-whatsapp-pc:hover {
+    background-color: #128C7E;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.btn-whatsapp-pc i {
+    font-size: 26px;
+    line-height: 1;
+}
+/* =========================================
+   ESTILOS DEL FOOTER
+========================================= */
+.footer-link { text-decoration: none; color: #888; transition: 0.3s; display: block; font-size: 0.85rem; }
+.footer-link:hover { color: var(--primary); transform: translateX(5px); }
+.footer-link-small { text-decoration: none; color: #666; font-size: 0.8rem; transition: 0.2s; }
+.footer-link-small:hover { color: white; }
+.social-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; border-color: #444; }
+.social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); color: white !important; }
+
+/* --- BOTÓN WHATSAPP PC --- */
+.btn-whatsapp-pc {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background-color: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+.btn-whatsapp-pc:hover {
+    background-color: #128C7E;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+.btn-whatsapp-pc i { font-size: 26px; line-height: 1; }
+
+.btn-reclamaciones {
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+.btn-reclamaciones i {
+    font-size: 3.5rem; 
+    color: #fff;
+    line-height: 1;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
+}
+.btn-reclamaciones:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+.btn-reclamaciones:hover i {
+    color: #FF4500;
+    filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.5));
+}
+
+
+/*---------ICPNS CON COLOR ANARANJADO NEÓN---------------*/
+.bi-geo-alt-fill, .bi-envelope-fill, .bi-mortarboard-fill, .bi-journal-text, .bi-chat-left-dots-fill{
+    color: var(--primary) !important;
+}
+
+
+/*CATEGORIAS*/
+    /* 1. GRADIENTES & COLORES */
+    .gradient-primary { background: linear-gradient(135deg, #FF4500 0%, #ff6b33 100%); }
+    .gradient-danger { background: linear-gradient(135deg, #dc3545 0%, #ff4d5e 100%); }
+    
+    /* 2. TARJETA ELEGANTE */
+    .prod-card {
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+    .prod-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        border-color: rgba(255, 69, 0, 0.3) !important;
+    }
+    
+    /* 3. ZOOM IMAGEN */
+    .prod-card:hover .img-wrap img {
+        transform: scale(1.12);
+    }
+
+    /* 4. BOTÓN FLOTANTE */
+    .btn-add-mini {
+        width: 32px; height: 32px;
+        background: #111; color: white;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+    }
+    .prod-card:hover .btn-add-mini {
+        background: var(--primary);
+        transform: rotate(90deg) scale(1.1);
+    }
+
+    /* 5. SLICK SLIDER CUSTOM ARROWS */
+    .slick-prev, .slick-next {
+        width: 40px; height: 40px;
+        background: white; border: none;
+        border-radius: 50%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 10; transition: all 0.3s;
+        display: flex !important; align-items: center; justify-content: center;
+    }
+    .slick-prev:hover, .slick-next:hover { background: var(--primary); color: white; }
+    .slick-prev:before, .slick-next:before { display: none; } /* Quitar defaults */
+    .slick-prev { left: -15px; }
+    .slick-next { right: -15px; }
+    .slick-track { padding: 15px 0; } /* Espacio para hover */
+
+    /* 6. ANIMACIONES DE ENTRADA (CASCADA) */
+    .reveal-item {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* HEADER BANNER */
+    .cat-header-overlay { background: linear-gradient(135deg, rgba(10,10,10,0.98) 0%, rgba(30,30,30,0.9) 100%); }
+    /* --- HEADER CINEMÁTICO --- */
+.cat-header-overlay {
+    background: radial-gradient(circle at top right, rgba(255, 69, 0, 0.15), transparent 60%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-pattern {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.5;
+    animation: moveBackground 60s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+.cat-title {
+    font-size: clamp(2rem, 5vw, 4rem); /* Responsive */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #fff, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    display: inline-block;
+}
+
+.cat-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 6px;
+    background: var(--primary);
+    margin-top: 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 15px var(--primary); /* Neón */
+}
+
+/* BREADCRUMBS FUTURISTAS */
+.breadcrumb-item a {
+    color: rgba(255,255,255,0.6) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.breadcrumb-item a:hover { color: var(--primary) !important; text-shadow: 0 0 10px var(--primary); }
+.breadcrumb-item.active { color: #fff !important; font-weight: 800; text-decoration: underline wavy var(--primary); }
+.breadcrumb-item + .breadcrumb-item::before { color: rgba(255,255,255,0.3); content: "›"; }
+
+/* ANIMACIÓN DE ENTRADA */
+.animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(30px); }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+/* --- ANIMACIONES INDUSTRIALES --- */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0) rotate(15deg); }
+    50% { transform: translateY(-20px) rotate(0deg); }
+}
+
+.hero-anim-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+/* El Engranaje de Fondo */
+.icon-gear-bg {
+    font-size: 15rem;
+    color: #fff;
+    opacity: 0.03; /* Muy sutil */
+    position: absolute;
+    right: -20px;
+    animation: spin 60s linear infinite; /* Gira muy lento */
+}
+
+/* El Elemento Flotante (Destacado) */
+.icon-float-front {
+    font-size: 6rem;
+    background: linear-gradient(45deg, var(--primary), #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 20px rgba(255, 69, 0, 0.4)); /* Resplandor Naranja */
+    position: relative;
+    z-index: 2;
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
+    /* --- LAYOUT GENERAL --- */
+    .detail-bg {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        padding-top: 30px;
+        padding-bottom: 80px;
+    }
+
+    /* --- TARJETAS Y GALERÍA --- */
+    .prod-gallery-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+        border: 1px solid #eee;
+    }
+
+    .thumb-img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        border: 2px solid #fff;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .thumb-img:hover,
+    .thumb-img.active {
+        border-color: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    .price-tag-large {
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: #111;
+        line-height: 1;
+    }
+
+    .video-clean-wrapper {
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    blockquote.tiktok-embed {
+        margin: 0 !important;
+        min-width: 300px !important;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* --- ACORDEÓN --- */
+    .accordion-item {
+        border: none;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+    }
+
+    .accordion-button {
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        background-color: #fff !important;
+        color: #333 !important;
+        box-shadow: none !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: var(--primary) !important;
+    }
+
+    .accordion-button::after {
+        display: none;
+    }
+
+    .custom-chevron {
+        transition: transform 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    .rotated {
+        transform: rotate(180deg);
+    }
+
+    /* --- ANIMACIÓN ACORDEÓN SUAVE --- */
+    .accordion-collapse {
+        transition: height 0.35s ease-out;
+        /* Forzar suavidad */
+    }
+
+    /* Rotación de la flecha */
+    .custom-chevron {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .rotated {
+        transform: rotate(180deg);
+    }
+
+    /* Evita que el botón cambie de tamaño al cambiar de icono */
+    .btn i {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* --- BOTONES --- */
+    .btn-pay-glow {
+        background: var(--dark);
+        color: #fff;
+        border: 1px solid transparent;
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        padding: 12px;
+    }
+
+    .btn-pay-glow:hover:not(.disabled) {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 5px 20px rgba(255, 69, 0, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .btn-whatsapp-pro {
+        background: linear-gradient(45deg, #25D366, #128C7E);
+        color: white !important;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 20px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-whatsapp-pro:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        filter: brightness(1.1);
+    }
+
+    .btn-whatsapp-pro:active {
+        transform: scale(0.98);
+    }
+
+    .btn-share-icon {
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+    }
+
+    /* --- ALERTAS PERSONALIZADAS UNIFICADAS (MP) --- */
+    div:where(.swal2-container).mp-toast-container .swal2-popup {
+        background: #000 !important;
+        border: 1px solid #333 !important;
+        border-left: 4px solid var(--primary) !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
+        border-radius: 8px !important;
+        padding: 0.8rem 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        width: auto !important;
+        min-width: 250px;
+    }
+
+    div:where(.swal2-container).mp-toast-container .swal2-title {
+        color: #fff !important;
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        padding: 0 10px !important;
+        text-align: left !important;
+        text-transform: uppercase;
+    }
+
+    div:where(.swal2-container).mp-toast-container .swal2-timer-progress-bar {
+        background: var(--primary) !important;
+        height: 3px !important;
+    }
+
+    div:where(.swal2-container).mp-toast-container .swal2-icon {
+        transform: scale(0.6) !important;
+        margin: 0 !important;
+        border-color: var(--primary) !important;
+    }
+
+    div:where(.swal2-container).mp-toast-container .swal2-icon.swal2-success [class^=swal2-success-line] {
+        background-color: var(--primary) !important;
+    }
+
+    /* BOTÓN PDF TÉCNICO */
+    .btn-pdf-download {
+        border: 2px solid #e0e0e0;
+        color: #555;
+        background: #fff;
+        font-weight: 800;
+        border-radius: 50px;
+        padding: 10px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-pdf-download:hover {
+        border-color: var(--primary);
+        /* Naranja */
+        color: var(--primary);
+        background: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-pdf-download i {
+        color: #dc3545;
+        /* Rojo clásico de PDF */
+        font-size: 1.1rem;
+        transition: transform 0.3s;
+    }
+
+    .btn-pdf-download:hover i {
+        transform: scale(1.1);
+    }
+
+    /* ANIMACIÓN DE ENTRADA SUAVE */
+    .animate-up {
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .delay-1 {
+        animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+        animation-delay: 0.2s;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* FLECHAS GALERÍA */
+    .gallery-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.8);
+        color: #333;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 5;
+        transition: all 0.3s;
+    }
+
+    .gallery-nav:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .gallery-nav.prev {
+        left: 15px;
+    }
+
+    .gallery-nav.next {
+        right: 15px;
+    }
