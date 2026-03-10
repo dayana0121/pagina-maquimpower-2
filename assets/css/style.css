@@ -5,6 +5,38 @@
     --grey-light: #f4f4f4;
 }
 
+/* ESTRUCTURA FLEXIBLE (Arregla el Footer roto) */
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1; /* Esto empuja el footer hacia abajo obligatoriamente */
+    padding-bottom: 80px;
+}
+
+/* --- ANIMACIONES GLOBALES --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0; /* Invisible al inicio */
+}
+/* Retrasos escalonados para la grilla */
+.reveal:nth-child(1) { animation-delay: 0.1s; }
+.reveal:nth-child(2) { animation-delay: 0.2s; }
+.reveal:nth-child(3) { animation-delay: 0.3s; }
+.reveal:nth-child(4) { animation-delay: 0.4s; }
+
 /* --- HEADER & TOP BAR --- */
 .top-bar {
     background: #111; /* Negro puro en vez de naranja chillón */
@@ -15,6 +47,78 @@
     letter-spacing: 1px;
 }
 .top-bar span { opacity: 0.8; }
+/* --- FIX: Z-INDEX WAR (Buscador vs Categorías) --- */
+
+/* 1. Elevamos el Header por encima de la barra pegajosa */
+.header-main {
+    position: relative;
+    z-index: 1050; /* Más alto que el sticky (que suele ser 1020) */
+    background: white; /* Asegurar fondo sólido */
+}
+
+/* FIX VISIBILIDAD */
+.header-nav-wrapper, .header-main {
+    overflow: visible !important;
+}
+
+/* FIX DEFINITIVO DROPDOWN HEADER */
+.header-main .dropdown-menu {
+    z-index: 2000 !important;
+}
+
+.header-main .dropdown-toggle::after {
+    display: none !important;
+}
+
+/* --- FIX: ARREGLO DE MENÚ DESPLEGABLE --- */
+
+/* 1. Matar la flecha triangular de Bootstrap */
+.nav-bottom .dropdown-toggle::after {
+    border: none !important;        /* Quita el triángulo */
+    margin-left: 0 !important;      /* Quita el espacio extra */
+    vertical-align: baseline !important;
+}
+
+/* 2. Restaurar nuestra línea animada */
+.nav-bottom .dropdown-toggle::after {
+    content: '' !important;
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 50%;
+    background: var(--primary);
+    transition: 0.3s ease;
+    opacity: 1; /* Asegurar visibilidad */
+}
+
+/* 3. Animación al pasar el mouse (Hover) */
+.nav-bottom .dropdown-toggle:hover::after,
+.nav-bottom .dropdown:hover .dropdown-toggle::after {
+    width: 100%;
+    left: 0;
+}
+
+/* 4. Ajuste para que el botón no salte */
+.nav-bottom .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Misma altura que los demás */
+}
+
+/* --- FIX 2: LOGO MÁS GRANDE --- */
+.header-logo-img {
+    height: 140px; /* Aumentado de 100px a 140px */
+    width: auto;
+    transition: 0.3s;
+}
+@media (max-width: 768px) {
+    .header-logo-img {
+        height: 90px; /* Ajuste para móvil */
+    }
+}
+
 
 /*BUSCADOR*/
 .col-lg-4 { overflow: visible !important; }
@@ -27,25 +131,48 @@
         color: #000 !important;
     }
 
+/* --- BUSCADOR ESTILO PREMIUM (GRANDE) --- */
 .search-modern {
     background: #f8f9fa;
-    border-radius: 50px;
-    padding: 8px 20px;
+    border-radius: 50px;      /* Bordes muy redondeados */
+    padding: 10px 20px;    
     display: flex;
     align-items: center;
-    border: 1px solid #eee;
+    border: 1px solid #e0e0e0; /* Borde sutil */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
+    width: 100%;              /* Que ocupe todo el espacio de su columna */
+    max-width: 500px;         /* Ajusta este número según qué tan largo lo quieras */
+    margin: 0 auto;           /* Lo centra en su contenedor */
+    transition: all 0.3s ease;
 }
+
+/* Efecto cuando haces clic para escribir */
+.search-modern:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 4px 20px rgba(255, 69, 0, 0.15);
+    background-color: #fdfdfdf7;
+}
+
 .search-modern input {
     border: none;
     background: transparent;
     width: 100%;
     outline: none;
+    padding: 10px;
     font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
+
 .search-modern button {
     border: none;
     background: transparent;
     color: var(--primary);
+    padding-left: 10px;
+}
+
+.search-modern button i {
+    font-size: 1.2rem;        /* Icono de lupa un poco más grande */
 }
 
 .search-modern button:hover { transform: scale(1.2); }
@@ -127,7 +254,7 @@
 
 
 .nav-item-mega { 
-    position: static; 
+    position: static !important; 
 }
 
 .nav-link-corp {
@@ -191,18 +318,20 @@
 
 /* --- RESTO DE TUS ESTILOS --- */
 .mega-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(10px);
-    z-index: 9999;
+position: absolute;
+    display: block;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    border-top: 3px solid var(--primary);
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    background: #ffffff;
+    z-index: 1000;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    border-top: 3px solid var(--primary); /* El toque naranja */ 
 }
 
 .nav-item-mega:hover .mega-menu {
@@ -211,16 +340,24 @@
     transform: translateY(0);
 }
 
-/* 1. Estado BASE del link (Antes de pasar el mouse) */
-.hover-orange {
-    display: block;               /* Importante para que el padding funcione bien */
+/*stado BASE del link (Antes de pasar el mouse) */
+.hover-orange1 {
+    display: block;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva de movimiento elegante */
-    padding-left: 0;              /* Empieza en su posición original */
+    padding-left: 0;         
     position: relative;
 }
 
+/*nietos*/
+.nietos-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding-bottom: 10x;
+}
+
 /* 1. Color del triangulito por defecto */
-.hover-orange i {
+.hover-orange1 i {
     color: var(--primary) !important; /* Color gris inicial */
     transition: all 0.3s ease; /* Para que el cambio de color sea suave */
 }
@@ -232,7 +369,7 @@
 
 /* Animación de la flecha (ícono) dentro de "VER TODO" */
 .mega-menu a.text-primary:hover{
-    margin-left: 8px;               /* La flechita se desplaza a la derecha */
+    margin-left: 20px;               /* La flechita se desplaza a la derecha */
     transition: margin-left 0.3s ease;
 }
 
@@ -243,20 +380,20 @@
 }
 
 /* 2. Cuando pasas el mouse sobre el enlace... */
-.hover-orange:hover i {
+.hover-orange1:hover i {
     color: var(--primary) !important; /* El triángulo se vuelve naranja */
     transform: scale(1.2);           /* Opcional: crece un poquito para dar feedback */
     opacity: 1 !important;           /* Asegura que brille al máximo */
 }
 
 /* 2. Estado cuando el mouse está ENCIMA (Hover) */
-.hover-orange:hover {
+.hover-orange1:hover {
     color: var(--primary) !important;
     padding-left: 10px !important; /* Se desplaza 10px a la derecha suavemente */
 }
 
 /* 3. Opcional: Si quieres que el ícono (caret) también cambie */
-.hover-orange:hover .bi-caret-right-fill {
+.hover-orange1:hover .bi-caret-right-fill {
     opacity: 1 var(--primary) !important;         /* El ícono se enciende más */
     margin-right: 8px;             /* El ícono también empuja un poco */
 }
@@ -323,3 +460,73 @@
     .top-bar { display: none; } /* Ocultar barra negra */
     .header-main { padding: 10px 0; } /* Header más compacto */
 }
+
+/* CSS Limpio para Móvil */
+.fw-black { font-weight: 900; }
+
+.avatar-sm { width: 35px; height: 35px; font-size: 0.9rem; }
+
+.pill-link {
+    background: #fff;
+    color: #666;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border: 1px solid #e0e0e0;
+    font-weight: 500;
+}
+
+.pill-link:active {
+    background: var(--primary);
+    color: white !important;
+    border-color: var(--primary);
+}
+
+.accordion-button::after {
+    filter: grayscale(1);
+    transform: scale(0.8);
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--primary) !important;
+    background: transparent !important;
+}
+
+.user-card-mobile {
+    background: linear-gradient(135deg, #0a0a0a 0%, #222 100%);
+}
+.tiktok-card {
+    background: #000000;
+    background: linear-gradient(135deg, #000000 0%, #25F4EE 300%);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.tiktok-card:active {
+    transform: scale(0.98);
+}
+
+.tiktok-icon-wrapper {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Ajuste de los iconos corporativos */
+.list-group-item i {
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.list-group-item:hover i {
+    transform: scale(1.2);
+}
+
+.fw-black { font-weight: 900; }

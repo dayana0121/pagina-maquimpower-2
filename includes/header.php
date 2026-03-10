@@ -390,13 +390,13 @@ try {
                                   <div class="nietos-wrapper">
                                     <?php if(!empty($h2['sub'])): ?>
                                         <?php foreach($h2['sub'] as $h3): ?>
-                                            <a href="/pagina/categoria/<?= $h3['slug'] ?>" class="d-block py-1 text-muted text-decoration-none hover-orange small">
+                                            <a href="/pagina/categoria/<?= $h3['slug'] ?>" class="d-block py-1 text-muted text-decoration-none hover-orange1 small">
                                                 <i class="bi bi-caret-right-fill text-primary opacity-25 me-1"></i>
                                                 <?= $h3['nombre'] ?>
                                             </a>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
-                                </div>
+                                  </div>
                                     <a href="/pagina/categoria/<?= $h2['slug'] ?>" class="fw-bold text-primary mt-3 d-inline-block small text-decoration-none">
                                         VER TODO <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -543,78 +543,10 @@ try {
         </div>
     </div>
 </div>
-<style>
-/* CSS Limpio para Móvil */
-.fw-black { font-weight: 900; }
 
-.avatar-sm { width: 35px; height: 35px; font-size: 0.9rem; }
 
-.pill-link {
-    background: #fff;
-    color: #666;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    text-decoration: none;
-    border: 1px solid #e0e0e0;
-    font-weight: 500;
-}
-
-.pill-link:active {
-    background: var(--primary);
-    color: white !important;
-    border-color: var(--primary);
-}
-
-.accordion-button::after {
-    filter: grayscale(1);
-    transform: scale(0.8);
-}
-
-.accordion-button:not(.collapsed) {
-    color: var(--primary) !important;
-    background: transparent !important;
-}
-
-.user-card-mobile {
-    background: linear-gradient(135deg, #0a0a0a 0%, #222 100%);
-}
-.tiktok-card {
-    background: #000000;
-    background: linear-gradient(135deg, #000000 0%, #25F4EE 300%);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-
-.tiktok-card:active {
-    transform: scale(0.98);
-}
-
-.tiktok-icon-wrapper {
-    width: 45px;
-    height: 45px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Ajuste de los iconos corporativos */
-.list-group-item i {
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-}
-
-.list-group-item:hover i {
-    transform: scale(1.2);
-}
-
-.fw-black { font-weight: 900; }
-</style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
