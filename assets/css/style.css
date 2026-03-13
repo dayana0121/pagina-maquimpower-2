@@ -9,8 +9,9 @@
 .text-primary {
     color: var(--primary) !important;
 }
-.bg-primary {
+.bg-primary, .btn-primary {
     background-color: var(--primary) !important;
+    border: var(--primary) !important;
 }
 
 /* ESTRUCTURA FLEXIBLE (Arregla el Footer roto) */
@@ -26,6 +27,7 @@ body {
 
 .main-content {
     flex: 1; /* Esto empuja el footer hacia abajo obligatoriamente */
+    padding-bottom: 80px;
 }
 
 /* --- ANIMACIONES GLOBALES --- */
@@ -633,11 +635,22 @@ position: absolute;
     border:none;
     background:white;
     color:var(--primary);
-    border:1px solid var(--primary);
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
     cursor:pointer;
     z-index:10;
     transition:.3s;
+}
+
+/*  CELILAR*/
+
+@media (max-width: 768px) {
+    .tiktok-prev{
+    right: 120px;
+    }
+
+.tiktok-next{
+    left: 380px;
+}
 }
 
 .tiktok-prev{
@@ -760,7 +773,6 @@ position: relative;
 .slider-prev-2, .slider-next-2, .slider-prev-1, .slider-next-1{
     background:white;
     color:var(--primary);
-    border:1px solid var(--primary) !important;
 }
 
 .slider-prev-2:hover, .slider-next-2:hover, .slider-prev-1:hover, .slider-next-1:hover{
@@ -1681,7 +1693,78 @@ footer {
             transform: translateY(0);
         }
     }
+    /*MOBILE*/
+/* Estilos específicos para Celular */
+@media (max-width: 768px) {
+    /* 1. Imagen Principal: Fondo blanco puro y bordes suaves */
+    .prod-gallery-card {
+        margin-left: 20px;
+        text-align: center;
+        background: #fff !important;
+        border-radius: 20px !important;
+        overflow: hidden;
+        margin-bottom: 15px !important;
+        width: 380px;
+    }
+    
+.prod-gallery-card .bg-white {
+        height: 250px !important; /* Altura para que la imagen luzca */
+        width: 50% !important;
+        margin: 0 auto !important; /* Esto centra el bloque "menos ancho" */
+        padding: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
 
+    /* Asegúrate de que la imagen dentro no se salga */
+    #mainImage {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* 2. Miniaturas: Más redondeadas y centradas */
+    .thumb-img {
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 12px !important;
+        border: 2px solid #eee;
+    }
+    .thumb-img.active {
+        border-color: #ff4500 !important; /* Color naranja de tu marca */
+    }
+
+    /* 3. Título y Precio: Tipografía más limpia */
+    h1.display-6 {
+        font-size: 1.4rem !important;
+        font-weight: 800 !important;
+        margin-top: -10px;
+    }
+
+    /* 4. Caja de Precio: Estilo "Card" flotante como la imagen */
+    .price-tag-container {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .price-tag-large {
+        font-size: 2rem !important;
+        font-weight: 700;
+    }
+
+    /* 5. Botones de Navegación del Carrusel (Flechas) */
+    .gallery-nav {
+        background: rgba(255,255,255,0.8) !important;
+        color: #333 !important;
+        width: 40px !important;
+        height: 40px !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+}
     /* FLECHAS GALERÍA */
     .gallery-nav {
         position: absolute;
@@ -1694,7 +1777,7 @@ footer {
         background: rgba(255, 255, 255, 0.8);
         color: #333;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        z-index: 5;
+        z-index: 10;
         transition: all 0.3s;
     }
 

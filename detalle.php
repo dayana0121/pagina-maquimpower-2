@@ -114,8 +114,8 @@ require_once 'includes/header.php';
 <div class="detail-bg">
     <div class="container">
         <!-- BREADCRUMB -->
-        <nav aria-label="breadcrumb" class="mb-4">
-            <ol class="breadcrumb small text-uppercase fw-bold m-0">
+        <nav aria-label="breadcrumb d-none d-lg-block" class="mb-4">
+            <ol class="breadcrumb small text-uppercase fw-bold m-0 d-none d-lg-block ">
                 <li class="breadcrumb-item"><a href="/pagina/" class="text-muted text-decoration-none">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="/pagina/categoria.php?c=todo"
                         class="text-muted text-decoration-none">Catálogo</a></li>
