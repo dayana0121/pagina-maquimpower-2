@@ -189,19 +189,33 @@ $(document).ready(function () {
         nextArrow: $('.slider-next-2')
     });
 
-
-
     // TIKTOK
     if ($('.tiktok-carousel').length) {
+
         $('.tiktok-carousel').slick({
             dots: true,
             infinite: true,
+            speed: 600,
             slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 4500,
+            arrows: false,
             responsive: [
-                { breakpoint: 1024, settings: { slidesToShow: 3 } },
+                { breakpoint: 1200, settings: { slidesToShow: 3 } },
                 { breakpoint: 768, settings: { slidesToShow: 1 } }
             ]
         });
+
+        // BOTONES PERSONALIZADOS
+        $('.tiktok-prev').click(function(){
+            $('.tiktok-carousel').slick('slickPrev');
+        });
+
+        $('.tiktok-next').click(function(){
+            $('.tiktok-carousel').slick('slickNext');
+        });
+
     }
 
 });

@@ -224,9 +224,9 @@ function renderHomeCard($p)
             <h2 class="fw-black text-uppercase m-0 display-6">DESTACADOS</h2>
         </div>
         <div class="d-flex gap-2">
-            <button class="btn btn-outline-dark rounded-circle slider-prev-1 shadow-sm border-0 bg-light"><i
+            <button class="btn btn-outline-dark rounded-circle slider-prev-1 shadow-sm border-0"><i
                     class="bi bi-chevron-left"></i></button>
-            <button class="btn btn-outline-dark rounded-circle slider-next-1 shadow-sm border-0 bg-light"><i
+            <button class="btn btn-outline-dark rounded-circle slider-next-1 shadow-sm border-0"><i
                     class="bi bi-chevron-right"></i></button>
         </div>
     </div>
@@ -288,18 +288,26 @@ function renderHomeCard($p)
             </div>
         </div>
 
+        <div class="tiktok-slider-container">
+
+    <!-- BOTON IZQUIERDA -->
+    <button class="tiktok-btn tiktok-prev">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+
         <!-- CARRUSEL DE VIDEOS -->
         <div class="tiktok-carousel">
             <?php
             $tiktoks = [
                 ['id' => '7527428893381348664', 'title' => 'Tutorial Puzzi'],
                 ['id' => '7484263372117036294', 'title' => 'Espumadoras Pro'],
-                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras']
+                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
+                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
+                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
             ];
             foreach ($tiktoks as $vid): ?>
-                <div class="col-12 col-md-4 d-flex justify-content-center"> <!-- Centrado en móvil -->
+                <div class="tiktok-slide">> <!-- Centrado en móvil -->
                     <div class="tiktok-wrapper shadow-sm border">
-
                         <!-- FACHADA -->
                         <div class="tiktok-facade" data-id="<?= $vid['id'] ?>" onclick="cargarVideoIframe(this)">
                             <div class="tiktok-placeholder">
@@ -316,7 +324,12 @@ function renderHomeCard($p)
                     </div>
                 </div>
             <?php endforeach; ?>
-        </div>
+            </div>
+
+    <!-- BOTON DERECHA -->
+    <button class="tiktok-btn tiktok-next">
+        <i class="bi bi-chevron-right"></i>
+    </button>
     </div>
 </section>
 <?php if (isset($_GET['registro']) && $_GET['registro'] == 'exito'): ?>

@@ -462,6 +462,15 @@ position: absolute;
 /* --- MOBILE APP EXPERIENCE --- */
 /* --- MOBILE APP EXPERIENCE (V2.0 Calibrada) --- */
 
+/*HEADER EN MOBILE*/
+.offcanvas {
+    z-index: 2000 !important;
+}
+
+.offcanvas-backdrop {
+    z-index: 1999 !important;
+}
+
 @media (max-width: 768px) {
     body { padding-bottom: 80px; } /* Espacio para que no tape contenido */
     .top-bar { display: none; } /* Ocultar barra negra */
@@ -564,7 +573,7 @@ position: absolute;
 /* SLICK */
 .slick-prev,.slick-next{width:45px;height:45px;background:#fff;border-radius:50%;box-shadow:0 5px 15px rgba(0,0,0,.1);display:flex!important;align-items:center;justify-content:center}
 .slick-prev:before,.slick-next:before{display:none}
-.slick-prev:hover,.slick-next:hover{background:var(--primary);color:#fff}
+.slick-prev:hover,.slick-next:hover{background:var(--dark);color:#fff}
 
 
 /* SKELETON */
@@ -589,8 +598,63 @@ position: absolute;
 .hero-slider{height:500px}
 }
 
+
 /* TIKTOK */
-.tiktok-wrapper{height: 300px; border-radius:15px;overflow:hidden;background:#000;position:relative;width:100%;aspect-ratio:9/16;max-width:350px;transition:.3s}
+/* Carrusel de TikTok */
+.tiktok-carousel .slick-slide {
+    margin: 0 25px; /*Separacion entre videos*/
+}
+
+.slick-slide{
+    margin: 0 25px;
+}
+
+.slick-list{
+    margin: 0 25px;
+}
+
+.tiktok-carousel .slick-list {
+    margin: 0 25px; /*Separacion entre videos*/
+}
+
+.tiktok-slider-container{
+    position:relative;
+}
+
+/* BOTONES */
+
+.tiktok-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:none;
+    background:white;
+    color:var(--primary);
+    border:1px solid var(--primary);
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    cursor:pointer;
+    z-index:10;
+    transition:.3s;
+}
+
+.tiktok-prev{
+    left:-25px;
+}
+
+.tiktok-next{
+    right:-25px;
+}
+
+.tiktok-btn:hover{
+    background:var(--primary);
+    color:white;
+}
+
+
+.tiktok-wrapper{height: 500px; border-radius:15px;overflow:hidden;background:#000;position:relative;width:100%;aspect-ratio:9/16;max-width:350px;transition:.3s}
 .tiktok-wrapper:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,.3);border-color:#FE2C55!important}
 .tiktok-facade,.tiktok-placeholder{width:100%;height:100%}
 .tiktok-placeholder{background:linear-gradient(180deg,#111 0%,#222 100%);display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -692,6 +756,18 @@ position: relative;
     color:#ff5a1f;
 }
 
+/*BOTONES DE SLIDER*/
+.slider-prev-2, .slider-next-2, .slider-prev-1, .slider-next-1{
+    background:white;
+    color:var(--primary);
+    border:1px solid var(--primary) !important;
+}
+
+.slider-prev-2:hover, .slider-next-2:hover, .slider-prev-1:hover, .slider-next-1:hover{
+    background:var(--primary) !important;
+    color:white !important;
+    border:1px solid var(--primary) !important;
+}
 
 /* ====== TARJETA PRODUCTO ====== */
 .prod-card{
