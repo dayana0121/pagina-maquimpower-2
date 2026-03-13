@@ -127,37 +127,82 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 </footer>
+
+
+<!-- LIBRERÍAS JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- SLICK CAROUSEL -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- ALERTAS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- JS DEL SITIO -->
 <script src="assets/js/main.js?v=1.0.2"></script>
 
 <script>
-    $(document).ready(function () {
-        // Carrusel de Productos
-        if ($('.product-carousel').length) {
-            $('.product-carousel').slick({
-                dots: true, infinite: true, speed: 300,
-                slidesToShow: 4, slidesToScroll: 1, autoplay: true,
-                responsive: [
-                    { breakpoint: 1024, settings: { slidesToShow: 3 } },
-                    { breakpoint: 768, settings: { slidesToShow: 2, arrows: false } },
-                    { breakpoint: 480, settings: { slidesToShow: 1, arrows: false } }
-                ]
-            });
-        }
+$(document).ready(function () {
 
-        // Carrusel TikTok (con la función que creamos)
-        if ($('.tiktok-carousel').length) {
-            $('.tiktok-carousel').slick({
-                dots: true, infinite: true, slidesToShow: 4,
-                responsive: [
-                    { breakpoint: 1024, settings: { slidesToShow: 3 } },
-                    { breakpoint: 768, settings: { slidesToShow: 1 } }
-                ]
-            });
-        }
+    const commonSettings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        arrows: false,
+        responsive: [
+            { breakpoint: 1200, settings: { slidesToShow: 3 } },
+            { breakpoint: 992, settings: { slidesToShow: 2 } },
+            { breakpoint: 576, settings: { slidesToShow: 1, centerMode: true, centerPadding: '40px' } }
+        ]
+    };
+
+    // DESTACADOS
+    const slidersDestacados = $('.slider-destacados');
+
+    slidersDestacados.each(function(){
+        $(this).slick(commonSettings);
     });
+
+    // BOTONES DESTACADOS
+    $('.slider-prev-1').click(function(){
+        slidersDestacados.each(function(){
+            $(this).slick('slickPrev');
+        });
+    });
+
+    $('.slider-next-1').click(function(){
+        slidersDestacados.each(function(){
+            $(this).slick('slickNext');
+        });
+    });
+
+    // OFERTAS
+    $('.slider-ofertas').slick({
+        ...commonSettings,
+        arrows: true,
+        prevArrow: $('.slider-prev-2'),
+        nextArrow: $('.slider-next-2')
+    });
+
+
+
+    // TIKTOK
+    if ($('.tiktok-carousel').length) {
+        $('.tiktok-carousel').slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3 } },
+                { breakpoint: 768, settings: { slidesToShow: 1 } }
+            ]
+        });
+    }
+
+});
 </script>

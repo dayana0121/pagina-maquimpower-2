@@ -81,15 +81,4 @@ $destacado = !empty($posts) ? array_shift($posts) : null;
     <?php endif; ?>
 </div>
 
-<style>
-    /* Efecto Zoom Suave */
-    .transition-zoom { transition: transform 0.5s ease; }
-    .blog-hero:hover .transition-zoom, 
-    .blog-card:hover .transition-zoom { transform: scale(1.05); }
-    
-    /* Elevación */
-    .blog-card { transition: transform 0.3s, box-shadow 0.3s; }
-    .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; }
-</style>
-
 <?php require_once 'includes/footer.php'; ?>

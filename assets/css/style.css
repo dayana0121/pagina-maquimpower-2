@@ -3,6 +3,14 @@
     --primary-dark: #cc3700;
     --dark: #0a0a0a;
     --grey-light: #f4f4f4;
+    --grey-ligth-2: #333;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+.bg-primary {
+    background-color: var(--primary) !important;
 }
 
 /* ESTRUCTURA FLEXIBLE (Arregla el Footer roto) */
@@ -18,7 +26,6 @@ body {
 
 .main-content {
     flex: 1; /* Esto empuja el footer hacia abajo obligatoriamente */
-    padding-bottom: 80px;
 }
 
 /* --- ANIMACIONES GLOBALES --- */
@@ -559,6 +566,7 @@ position: absolute;
 .slick-prev:before,.slick-next:before{display:none}
 .slick-prev:hover,.slick-next:hover{background:var(--primary);color:#fff}
 
+
 /* SKELETON */
 @keyframes shimmer{0%{background-position:-1000px 0}100%{background-position:1000px 0}}
 .skeleton{background:#f6f7f8;background-image:linear-gradient(to right,#f6f7f8 0%,#edeef1 20%,#f6f7f8 40%,#f6f7f8 100%);background-repeat:no-repeat;background-size:1000px 100%;animation:shimmer 2s infinite linear}
@@ -582,7 +590,7 @@ position: absolute;
 }
 
 /* TIKTOK */
-.tiktok-wrapper{border-radius:15px;overflow:hidden;background:#000;position:relative;width:100%;aspect-ratio:9/16;max-width:350px;transition:.3s}
+.tiktok-wrapper{height: 300px; border-radius:15px;overflow:hidden;background:#000;position:relative;width:100%;aspect-ratio:9/16;max-width:350px;transition:.3s}
 .tiktok-wrapper:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,.3);border-color:#FE2C55!important}
 .tiktok-facade,.tiktok-placeholder{width:100%;height:100%}
 .tiktok-placeholder{background:linear-gradient(180deg,#111 0%,#222 100%);display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -599,27 +607,76 @@ position: absolute;
 
 /* Fix para Slick Slider */
 .slick-slider {
-    position: relative;
+position: relative;
+
     display: block;
     box-sizing: border-box;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
 }
-.slick-list {
-    margin: 0 -10px;
+.slick-list
+{
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
 }
 
-.slick-track{
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
     position: relative;
     top: 0;
     left: 0;
+
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
 
-/* El contenedor del slider necesita compensar ese margen */
-.prod-slider-container {
-    margin-left: 12px;
-    margin-right: 12px;
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
 }
 
 /*TENDENCIA*/
@@ -730,14 +787,18 @@ position: absolute;
 }
 
 /* ====== SLICK SLIDER ====== */
+/*DESTACADOS*/
+.container.py-5.mt-5 .d-flex, .container.py-5 .justify-content-between{
+    margin-top: -50px;
+}
+
 .slider-destacados .slick-slide{
-    padding:10px;
+    padding:- 25px;
 }
 
 .slider-ofertas .slick-slide{
     padding:10px;
 }
-
 
 /* ====== ANIMACIÓN ====== */
 .reveal-item{
@@ -752,38 +813,24 @@ position: absolute;
 }
 /* ====== SLIDER DESTACADOS ====== */
 .slider-destacados {
-    margin-top: 20px;
+    margin-top: -20px;
     background-color: #fafafa;   /*COLOR DE FONDE DE TODO*/
     overflow: hidden;
     display: flex;
     flex-wrap:nowrap
 }
 
-
-
-/* Ajuste del track para que no se rompa */
-.slick-track {
-    display: flex !important;
-    align-items: stretch; /* todas las tarjetas misma altura */
-}
-
-
 /*OFERTAS*/
 .prod-slider-container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 1000px; /* o el ancho que quieras */
+    max-width: 100%;
 }
 
 .slider-ofertas {
     margin-top: 20px;
-    background-color: #fafafa;   /*COLOR DE FONDE DE TODO*/
+    background-color: #fafafa;
     overflow: hidden;
-    display: flex;
-    flex-wrap:nowrap;
-    width: 948px;
-    transform: translate3d(0px, 0px, 0px);
-    justify-content: center; 
 }
 
 .slider-ofertas .slick-track{
@@ -799,8 +846,13 @@ position: absolute;
 /*FOOTER*/
 /* Footer Fix */
 
-footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50px; }
-
+footer {
+    margin-top: auto;
+    background: var(--dark);
+    color: #ccc;
+    margin-bottom: -100px;
+    padding: 0px 0; /* arriba y abajo */
+}
 .search-modern input {
     border: none;
     background: transparent;
@@ -959,8 +1011,8 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
 }
 
 
-/*---------ICPNS CON COLOR ANARANJADO NEÓN---------------*/
-.bi-geo-alt-fill, .bi-envelope-fill, .bi-mortarboard-fill, .bi-journal-text, .bi-chat-left-dots-fill{
+/*---------ICONS CON COLOR ANARANJADO NEÓN---------------*/
+.bi-geo-alt-fill, .bi-envelope-fill, .bi-mortarboard-fill, .bi-journal-text, .bi-chat-left-dots-fill, .bi-tag-fill{
     color: var(--primary) !important;
 }
 
@@ -1070,7 +1122,7 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
 }
 
 /* BREADCRUMBS FUTURISTAS */
-.breadcrumb-item a {
+.position-relative .breadcrumb-item a {
     color: rgba(255,255,255,0.6) !important;
     font-weight: 600;
     text-transform: uppercase;
@@ -1078,9 +1130,22 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
     letter-spacing: 1px;
     transition: 0.3s;
 }
-.breadcrumb-item a:hover { color: var(--primary) !important; text-shadow: 0 0 10px var(--primary); }
-.breadcrumb-item.active { color: #fff !important; font-weight: 800; text-decoration: underline wavy var(--primary); }
-.breadcrumb-item + .breadcrumb-item::before { color: rgba(255,255,255,0.3); content: "›"; }
+
+.position-relative .breadcrumb-item a:hover {
+    color: var(--primary) !important;
+    text-shadow: 0 0 10px var(--primary);
+}
+
+.position-relative .breadcrumb-item.active {
+    color: #fff !important;
+    font-weight: 800;
+    text-decoration: underline wavy var(--primary);
+}
+
+.position-relative .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255,255,255,0.3);
+    content: "›";
+}
 
 /* ANIMACIÓN DE ENTRADA */
 .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(30px); }
@@ -1130,6 +1195,149 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
     animation: floatIcon 4s ease-in-out infinite;
 }
 
+
+/***MAS CATEGORIAS**/
+/* --- CONTENEDOR DE SECCIÓN --- */
+.category-section {
+    margin-bottom: 4rem;
+    position: relative;
+    background-color: #fafafa;
+    padding: 2rem 0;
+}
+
+/* --- SLIDER (Slick) --- */
+.category-section .slick-track {
+    display: flex !important;
+    align-items: stretch !important;
+}
+
+.category-section .slick-slide {
+    padding: 10px !important;
+}
+
+/* Flechas personalizadas */
+.category-section .slick-prev, 
+.category-section .slick-next {
+    width: 45px !important;
+    height: 45px !important;
+    background: #fff !important;
+    border-radius: 50% !important;
+    z-index: 10 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    transition: all 0.3s ease !important;
+    border: 1px solid #eee !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.category-section .slick-prev { left: -22px !important; }
+.category-section .slick-next { right: -22px !important; }
+
+.category-section .slick-prev:hover, 
+.category-section .slick-next:hover {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border-color: var(--primary) !important;
+}
+
+.category-section .slick-prev:before, 
+.category-section .slick-next:before {
+    display: none !important; /* quita las flechas default */
+}
+
+/* --- TARJETA DE PRODUCTO --- */
+.category-section .prod-card {
+    border-radius: 18px !important;
+    background: #fff !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    transition: all 0.4s ease !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+    border: 1px solid #eee !important;
+}
+
+.category-section .prod-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    border-color: rgba(255,69,0,0.3) !important;
+}
+
+/* Imagen con zoom */
+.category-section .img-wrap {
+    height: 180px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.category-section .img-wrap img {
+    max-height: 160px !important;
+    object-fit: contain !important;
+    transition: transform 0.4s ease !important;
+}
+.category-section .prod-card:hover .img-wrap img {
+    transform: scale(1.08) !important;
+}
+
+/* Botón flotante */
+.category-section .btn-add-mini {
+    width: 36px !important;
+    height: 36px !important;
+    background: #444 !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+.category-section .prod-card:hover .btn-add-mini {
+    background: var(--primary) !important;
+    transform: rotate(90deg) scale(1.1) !important;
+}
+
+.category-section .badge-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+}
+.category-section .badge-nuevo {
+    background: #28a745 !important; /* verde */
+}
+.category-section .badge-agotado {
+    background: #dc3545 !important; /* rojo */
+}
+
+.category-section .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff !important;
+    z-index: 5;
+}
+.category-section .gradient-primary { background: #28a745 !important; } /* NUEVO */
+.category-section .gradient-danger { background: #dc3545 !important; } /* OFERTA */
+.category-section .bg-dark { background: #6c757d !important; } /* AGOTADO */
+
+
+
+
+
+
+/**********DETALLES DE PRODUCTO***********/
     /* --- LAYOUT GENERAL --- */
     .detail-bg {
         background-color: #f8f9fa;
@@ -1184,7 +1392,15 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
+    /*LETRAS*/
+    .detail-bg .breadcrumb .active{
+        color: var(--primary) !important;
+    }
+
     /* --- ACORDEÓN --- */
+    .accordion{
+        margin-bottom: -50px;
+    }
     .accordion-item {
         border: none;
         border-bottom: 1px solid #eee;
@@ -1419,3 +1635,301 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
     .gallery-nav.next {
         right: 15px;
     }
+
+/*CONTACTO*/
+/* Tarjeta del formulario */
+.contacto .checkout-card {
+    background: #fff;
+    border-radius: 8px; /* medio cuadrado */
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border: 2px solid #eee;
+    transition: transform 0.2s ease;
+}
+.contacto .checkout-card:hover {
+    transform: translateY(-4px);
+    transition: all 0.4s ease;
+    border-left: var(--primary) 4px solid !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Contenedor del input con label flotante */
+.contacto .form-floating-custom {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Input */
+.contacto .form-control-modern {
+    font-family: 'Inter', system-ui, sans-serif;
+    width: 100%;
+    padding: 14px 15px;
+    color: var(--grey-ligth-2);
+    border: 2px solid #eee; /* línea base */
+    border-radius: 6px; /* medio cuadrado */
+    font-size: 0.95rem;
+    background: #f9f9f9;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+/* Label dentro del input */
+.contacto .form-label-modern {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.form-control-modern:focus {
+    background: #fff;
+    border-color: var(--primary); /* Borde Naranja al escribir */
+    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor técnico */
+}
+
+/* Efecto al escribir */
+.form-control-modern:focus ~ .form-label-modern,
+.form-control-modern:not(:placeholder-shown) ~ .form-label-modern {
+    top: 0;
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: white;
+}
+
+/* Botón */
+.contacto .btn-pay-glow {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: block;
+    margin: 0 auto; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.contacto .btn-pay-glow:hover {
+    transition: all 0.3s ease;
+}
+.contacto .btn-pay-glow:hover i {
+    transition: all 0.3s ease;
+}
+
+
+/*BOTON EN EL CELULAR*/
+/* Centrar el botón en pantallas pequeñas */
+@media (max-width: 768px) {
+    .contacto .btn-pay-glow {
+        display: block;        /* que ocupe su propia línea */
+        margin: 0 auto;        /* lo centra horizontalmente */
+        width: 100%;           /* opcional: que ocupe todo el ancho */
+        max-width: 300px;      /* opcional: límite para que no sea gigante */
+        text-align: center;    /* asegura que el texto quede centrado */
+    }
+}
+
+
+/*DISEÑO DEL MENSAJE Q SALE CUANDO YA SE ENVIANEL MENSAJE*/
+/* Título */
+.popup-title {
+    font-family: 'Inter', sans-serif; /* o la fuente que quieras */
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--grey-ligth-2); /* naranja corporativo */
+    letter-spacing: 0.6px;
+}
+
+/* Texto */
+.popup-text {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 7px !important;
+    color: #555 !important; /* gris elegante */
+    line-height: 1.5 !important;
+}
+/* Caja del popup */
+.popup-contacto {
+    width: 350px;
+    height: 350px;
+    border-radius: 12px;
+    border-left: 6px solid var(--primary); /* rayita naranja al costado */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 10px;
+}
+
+/* Botón de confirmación de mensaje enviado*/
+.btn-confirm-contacto {
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 50px;
+    padding: 10px 25px;
+    background: var(--dark);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+.btn-confirm-contacto:hover {
+    background: var(--primary);
+    color: var(--grey-light);
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 15px rgba(255,69,0,0.6);
+}
+
+
+/*********************ACADEMIA***************/
+/*BADGES*/
+.container .badge.bg-primary{
+    color: var(--grey-light) !important;
+    background-color: var(--primary) !important;
+}
+
+/*BONTON DE VER CERTIFICADOS*/
+.position-relative .container .mt-4 .btn-primary:hover{
+    background-color: var(--primary-dark) !important;
+}
+
+/*BOTONES*/
+.container .mt-4 .btn-primary{
+    color: var(--grey-light) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    text-transform: uppercase;
+}
+.container .mt-4 .btn-primary:hover i{
+    background-color: var(--primary-dark) !important;
+}
+
+/*CARD BODY*/
+.card-body .btn{
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+.card-body .btn:hover{
+    background-color: var(--primary) !important;
+    color: var(--grey-light) !important;    
+    border-color: var(--primary-dark);
+}
+
+.card-body .btn:hover i{
+    color: var(--grey-light) !important;
+}
+
+/*HOVER CARD*/
+.hover-shadow, .bi-file-earmark-pdf-fill{
+    transition: all 0.3s ease !important;
+}
+.hover-shadow:hover{box-shadow:0 5px 15px rgba(0,0,0,0.1); background:white !important; transform:translateY(-2px);}.hover-up:hover{transform:translateY(-3px);}
+
+/***********************BLOG**********************/
+    /* Efecto Zoom Suave */
+    .transition-zoom { transition: transform 0.5s ease; }
+    .blog-hero:hover .transition-zoom, 
+    .blog-card:hover .transition-zoom { transform: scale(1.05); }
+    
+    /* Elevación */
+    .blog-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; }
+
+    .card .col-lg-5 .btn{
+        color: var(--grey-light);
+        border-color: var(--grey-light);
+    }
+
+/******************NOSOTROS******************/
+/* HERO ANIMADO */
+    .hero-nosotros {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-nosotros::after {
+        content: "";
+        position: absolute;
+        top: -50%; left: -50%; width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(255,69,0,0.08) 0%, transparent 60%);
+        animation: rotateBg 20s linear infinite;
+    }
+    @keyframes rotateBg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* TARJETAS DE VALORES */
+    .card-valor {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #f0f0f0;
+        background: #fff;
+    }
+    .card-valor:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(255,69,0,0.15) !important;
+        border-color: var(--primary);
+    }
+    .icon-box {
+        width: 65px; height: 65px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; /* CÍRCULO PERFECTO */
+        background: var(--primary);
+        color: white;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+    }
+
+    /* BORDE NEÓN PARA VISIÓN */
+    .border-neon {
+        border-top: 4px solid #FF4500 !important;
+        box-shadow: 0 -10px 20px rgba(255, 69, 0, 0.15) !important; /* Resplandor */
+    }
+
+    /* ESTILO SECCIÓN FINAL (ICONOS REDONDOS) */
+    .feature-icon-circle {
+        width: 60px; 
+        height: 60px;
+        min-width: 60px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 1.5rem;
+    }
+
+    /*ESTILOS DE COLORES N¿ANARANJADO NEON*/
+    .nosotros .align-items-center .position-relative .position-absolute, .container .shadow-lg .g-0 .flex-column, .nosotros .py-5 .text-center .bg-primary{
+        background-color: var(--primary) !important;
+    }
+
+     .container .shadow-lg .g-0 .flex-column h4{
+        color: var(--grey-light) !important;            /* naranja corporativo */
+    letter-spacing: 2px !important;              /* separación entre letras */
+    text-shadow: 0 0 12px rgba(255,69,0,0.7) !important; /* glow naranja */
+     }
+
+    .container .shadow-lg .g-0 .flex-column h4::after{
+    content: '';
+    display: block;
+    width: 80%;
+    height: 4px;
+    background: #fff; /* blanco para que destaque sobre el naranja */
+    margin: 10px auto 0;
+    border-radius: 2px;
+      }
+
+ .container .shadow-lg .align-items-stretch .bg-primary{
+    background: var(--primary) !important;
+ }
+
+ .nosotros .container{
+    margin-top: -90px;
+ }

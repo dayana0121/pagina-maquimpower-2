@@ -282,12 +282,14 @@ function renderProductCard($p, $isSlider = false) {
                     $count = count($seccion['productos']);
                     if ($count > 4): 
                     ?>
+                    <div class="category-section">">
                         <!-- CARRUSEL (Más de 4 productos) -->
                         <div class="prod-slider-container">
                              <?php foreach($seccion['productos'] as $prod): ?>
                                 <?= renderProductCard($prod, true) ?>
                             <?php endforeach; ?>
                         </div>
+                    </div>
 
                     <?php else: ?>
                         <!-- GRILLA (4 o menos) -->

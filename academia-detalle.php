@@ -112,6 +112,4 @@ $logo = !empty($perfil['logo_empresa_url']) ? $perfil['logo_empresa_url'] : '';
     </div>
 </div>
 
-<style>.hover-shadow:hover{box-shadow:0 5px 15px rgba(0,0,0,0.1); background:white !important; transform:translateY(-2px);}.hover-up:hover{transform:translateY(-3px);}</style>
-
 <?php require_once 'includes/footer.php'; ?>

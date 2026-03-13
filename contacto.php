@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="container py-5">
+<div class="container contacto py-5">
     <div class="row g-5">
         
         <!-- INFORMACIÓN (Izquierda) -->
@@ -52,7 +52,7 @@
                         </div>
                         <div class="ms-3">
                             <h6 class="fw-bold mb-1">Correo Corporativo</h6>
-                            <p class="text-muted mb-0">ventas@maquimpower.com</p>
+                            <p class="text-muted mb-0 hover-orange">ventas@maquimpower.com</p>
                         </div>
                     </div>
                 </div>
@@ -118,8 +118,10 @@ function enviarContacto() {
         confirmButtonText: 'ENTENDIDO',
         background: '#fff',
         customClass: {
-            title: 'fw-black',
-            popup: 'rounded-4 border-start border-5 border-primary'
+            title: 'popup-title',
+            text: 'popup-text',
+            popup: 'popup-contacto',
+        confirmButton: 'btn-confirm-contacto'
         }
     });
     document.getElementById('contactForm').reset();

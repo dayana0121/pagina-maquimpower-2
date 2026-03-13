@@ -237,6 +237,13 @@ function renderHomeCard($p)
             <?= renderHomeCard($p) ?>
         <?php endforeach; ?>
     </div>
+
+    <!-- Carrusel 1.1 -->
+    <div id="carrusel" class="slider-destacados slick-slider d-none d-lg-block">
+        <?php foreach ($productos as $p): ?>
+            <?= renderHomeCard($p) ?>
+        <?php endforeach; ?>
+    </div>
 </div>
 
 <!-- SECTION 4: OFERTAS -->
@@ -247,12 +254,18 @@ function renderHomeCard($p)
                 SALE</span>
             <h2 class="fw-black text-uppercase m-0 display-6">OFERTAS DEL MES</h2>
         </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-dark rounded-circle slider-prev-2 shadow-sm border-0 bg-light"><i
+                    class="bi bi-chevron-left"></i></button>
+            <button class="btn btn-outline-dark rounded-circle slider-next-2 shadow-sm border-0 bg-light"><i
+                    class="bi bi-chevron-right"></i></button>
+        </div>
     </div>
 
     <!-- Carrusel 2 -->
-     <div class="prod-slider-container">
-                <div class="slider-ofertas">
-        <?php foreach ($productosOferta as $p): ?>
+    <div class="prod-slider-container">
+        <div class="slider-ofertas">
+            <?php foreach ($productosOferta as $p): ?>
             <?= renderHomeCard($p) ?>
         <?php endforeach; ?>
     </div>
@@ -275,8 +288,8 @@ function renderHomeCard($p)
             </div>
         </div>
 
-        <!-- GRILLA DE VIDEOS -->
-        <div class="row g-4 justify-content-center">
+        <!-- CARRUSEL DE VIDEOS -->
+        <div class="tiktok-carousel">
             <?php
             $tiktoks = [
                 ['id' => '7527428893381348664', 'title' => 'Tutorial Puzzi'],
@@ -369,7 +382,7 @@ function renderHomeCard($p)
 </script>
 
 <!-- MARCAS INFINITE -->
-<div class="py-5 bg-white overflow-hidden border-top">
+<div class="py-5 bg-white overflow-hidden border-top mb-5">
     <div class="container text-center mb-4">
         <span class="text-muted text-uppercase fw-bold ls-2 small opacity-50">Marcas que representamos</span>
     </div>
@@ -386,12 +399,6 @@ function renderHomeCard($p)
         </div>
     </div>
 </div>
-
-
-
-<!-- SCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <!-- SCRIPT DE CARGA DIFERIDA (BUCLE + AUTOPLAY) -->
 <script>
@@ -425,18 +432,6 @@ function renderHomeCard($p)
     }
 </script>
 <script>
-    $(document).ready(function () {
-        const commonSettings = {
-            dots: false, infinite: true, speed: 500, slidesToShow: 4, slidesToScroll: 1, autoplay: true, autoplaySpeed: 4000,
-            responsive: [
-                { breakpoint: 1200, settings: { slidesToShow: 3 } },
-                { breakpoint: 992, settings: { slidesToShow: 2 } },
-                { breakpoint: 576, settings: { slidesToShow: 1, centerMode: true, centerPadding: '40px' } }
-            ]
-        };
-        $('.slider-destacados').slick({ ...commonSettings, prevArrow: $('.slider-prev-1'), nextArrow: $('.slider-next-1') });
-        $('.slider-ofertas').slick({ ...commonSettings, prevArrow: $('.slider-prev-2'), nextArrow: $('.slider-next-2') });
-    });
 
     // ANIMACIÓN CASCADA
     document.addEventListener('DOMContentLoaded', function () {

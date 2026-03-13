@@ -3,63 +3,6 @@ $pageTitle = "Quiénes Somos | MaquimPower";
 require_once 'includes/header.php';
 ?>
 
-<style>
-    /* HERO ANIMADO */
-    .hero-nosotros {
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-        position: relative;
-        overflow: hidden;
-    }
-    .hero-nosotros::after {
-        content: "";
-        position: absolute;
-        top: -50%; left: -50%; width: 200%; height: 200%;
-        background: radial-gradient(circle, rgba(255,69,0,0.08) 0%, transparent 60%);
-        animation: rotateBg 20s linear infinite;
-    }
-    @keyframes rotateBg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-    /* TARJETAS DE VALORES */
-    .card-valor {
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid #f0f0f0;
-        background: #fff;
-    }
-    .card-valor:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(255,69,0,0.15) !important;
-        border-color: var(--primary);
-    }
-    .icon-box {
-        width: 65px; height: 65px;
-        display: flex; align-items: center; justify-content: center;
-        border-radius: 50%; /* CÍRCULO PERFECTO */
-        background: var(--primary);
-        color: white;
-        margin-bottom: 20px;
-        font-size: 1.8rem;
-        box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
-    }
-
-    /* BORDE NEÓN PARA VISIÓN */
-    .border-neon {
-        border-top: 4px solid #FF4500 !important;
-        box-shadow: 0 -10px 20px rgba(255, 69, 0, 0.15) !important; /* Resplandor */
-    }
-
-    /* ESTILO SECCIÓN FINAL (ICONOS REDONDOS) */
-    .feature-icon-circle {
-        width: 60px; 
-        height: 60px;
-        min-width: 60px;
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-        border-radius: 50%;
-        font-size: 1.5rem;
-    }
-</style>
-
 <div class="main-content">
     
     <!-- HERO -->
@@ -70,7 +13,7 @@ require_once 'includes/header.php';
         </div>
     </section>
 
-    <div class="container">
+    <div class="container nosotros">
         
         <!-- INTRODUCCIÓN (TEXTO ACTUALIZADO) -->
         <div class="row align-items-center g-5 mb-5">
