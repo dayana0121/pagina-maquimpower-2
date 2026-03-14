@@ -306,7 +306,7 @@ function renderHomeCard($p)
                 ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
             ];
             foreach ($tiktoks as $vid): ?>
-                <div class="tiktok-slide">> <!-- Centrado en móvil -->
+                <div class="tiktok-slide"> <!-- SLIDERl -->
                     <div class="tiktok-wrapper shadow-sm border">
                         <!-- FACHADA -->
                         <div class="tiktok-facade" data-id="<?= $vid['id'] ?>" onclick="cargarVideoIframe(this)">

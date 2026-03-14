@@ -514,6 +514,7 @@ position: absolute;
 .user-card-mobile {
     background: linear-gradient(135deg, #0a0a0a 0%, #222 100%);
 }
+/*BARRA LATERAL DE MENU*/
 .tiktok-card {
     background: #000000;
     background: linear-gradient(135deg, #000000 0%, #25F4EE 300%);
@@ -566,11 +567,82 @@ position: absolute;
 .gradient-primary{background:linear-gradient(135deg,#FF4500 0%,#ff6b33 100%)}
 .gradient-danger{background:linear-gradient(135deg,#dc3545 0%,#ff4d5e 100%)}
 
-.prod-card{transition:.4s;box-shadow:0 4px 6px rgba(82,80,80,.02)}
-.prod-card:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,.08);border-color:rgba(255,69,0,.3)!important}
+/* === BASE DE SLICK === */
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
 
-.btn-add-mini{width:35px;height:35px;background:#464444;color:#fff;transition:.3s}
-.prod-card:hover .btn-add-mini{background:var(--primary);transform:rotate(90deg) scale(1.1)}
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus { outline: none; }
+.slick-list.dragging { cursor: pointer; cursor: hand; }
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.slick-track:before, .slick-track:after {
+    display: table;
+    content: '';
+}
+.slick-track:after { clear: both; }
+
+.slick-loading .slick-track { visibility: hidden; }
+/* Ajuste responsive para que las tarjetas no se rompan */
+.slick-slide {
+    min-height: 1px; /* evita colapso */
+    display: flex !important; /* fuerza flex para tus cards */
+    justify-content: center;  /* centra las tarjetas */
+}
+
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide { float: right; }
+.slick-slide img { display: block; }
+.slick-slide.slick-loading img { display: none; }
+.slick-slide.dragging img { pointer-events: none; }
+.slick-initialized .slick-slide { display: block; }
+.slick-loading .slick-slide { visibility: hidden; }
+.slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden { display: none; }
+
 
 /* SLICK */
 .slick-prev,.slick-next{width:45px;height:45px;background:#fff;border-radius:50%;box-shadow:0 5px 15px rgba(0,0,0,.1);display:flex!important;align-items:center;justify-content:center}
@@ -591,28 +663,241 @@ position: absolute;
 .hero-banner.desktop{display:block}
 
 /* RESPONSIVE */
-@media(max-width:1440px){.hero-slider{height:500px}.hero-title{font-size:3rem}}
-@media(max-width:1200px){.hero-slider{height:420px}.hero-title{font-size:2.5rem}}
-@media(max-width:992px){.hero-slider{height:380px}}
-@media(max-width:768px){
-.hero-banner.desktop{display:none}
-.hero-banner.mobile{display:block}
-.hero-slider{height:500px}
-}
+/* Mobile Adjustments */
+    @media (max-width: 991px) {
+        .hero-title {
+            font-size: 2.5rem;
+            text-align: center;
+        }
 
+        .hero-section-dark {
+            padding-bottom: 60px;
+            text-align: center;
+        }
+
+        .hero-logo-big {
+            max-height: 120px;
+            margin-top: 20px;
+        }
+
+        .service-card-float {
+            margin-bottom: 10px;
+        }
+
+        .col-lg-6 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .hero-slider {
+        position: relative;
+        width: 100%;
+        /* Altura controlada por media queries */
+        overflow: hidden;
+    }
+
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transform: scale(1.05);
+        transition: opacity 1s ease, transform 1s ease;
+        z-index: 1;
+    }
+
+    .hero-slide.active {
+        opacity: 1;
+        transform: scale(1);
+        z-index: 2;
+    }
+
+    /* Los banners */
+    .hero-banner {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Asegura que el hero original siga bien */
+    .hero-slide .hero-section-dark {
+        height: 100%;
+    }
+
+    /* (Bloque duplicado eliminado) */
+
+    /* ===== BANNERS ===== */
+    .hero-banner-slide {
+        position: relative;
+        width: 100%;
+        height: 580px;
+    }
+
+    .hero-banner {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* PC: llena el hero */
+    .hero-banner.desktop {
+        object-fit: cover;
+    }
+
+    /* Mobile: NO se recorta */
+    .hero-banner.mobile {
+        object-fit: contain;
+        background: #000;
+        /* relleno elegante si sobra espacio */
+    }
+
+
+    /* ===== RESPONSIVE SWITCH ===== */
+    .hero-banner.mobile {
+        display: none;
+    }
+
+    .hero-banner.desktop {
+        display: block;
+    }
+
+    .hero-bg.mobile {
+        display: none;
+    }
+
+    /* Global Banner Slide Style */
+    .hero-banner-slide {
+        position: relative;
+        width: 100%;
+        /* Eliminamos altura fija aquí, heredará del slider */
+        height: 100%;
+    }
+
+    .hero-banner {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* Breakpoints para ajustar altura y evitar recorte lateral excesivo */
+    /* Desktop Grande (Default) */
+    .hero-slider {
+        height: 580px;
+    }
+
+    /* Laptop Grande */
+    @media (max-width: 1440px) {
+        .hero-slider {
+            height: 500px;
+        }
+
+        .hero-section-dark {
+            min-height: 500px;
+        }
+
+        .hero-banner-slide {
+            min-height: 500px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+        }
+    }
+
+    /* Laptop Estándar / Tablet Landscape */
+    @media (max-width: 1200px) {
+        .hero-slider {
+            height: 420px;
+        }
+
+        .hero-section-dark {
+            min-height: 420px;
+        }
+
+        .hero-banner-slide {
+            min-height: 420px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        /* Tablet Portrait */
+        .hero-slider {
+            height: 380px;
+        }
+
+        .hero-section-dark {
+            min-height: 380px;
+        }
+
+        .hero-banner-slide {
+            min-height: 380px;
+        }
+
+        /* El slide 1 (texto) necesita ajustes de padding */
+        .hero-section-dark .container {
+            padding-top: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Mobile - Cambio de imagen */
+        .hero-banner.desktop {
+            display: none;
+        }
+
+        .hero-banner.mobile {
+            display: block;
+        }
+
+        .hero-slider {
+            height: 500px;
+        }
+
+        /* Más alto en móvil para la imagen vertical */
+        .hero-section-dark {
+            min-height: 500px;
+        }
+
+        .hero-banner-slide {
+            height: 100%;
+            min-height: 500px;
+        }
+
+        /* Ajuste altura móvil */
+
+        .hero-bg.desktop {
+            display: none;
+        }
+
+        .hero-bg.mobile {
+            display: block;
+            background-size: cover;
+            background-color: #000;
+        }
+    }
 
 /* TIKTOK */
 /* Carrusel de TikTok */
 .tiktok-carousel .slick-slide {
     margin: 0 25px; /*Separacion entre videos*/
-}
-
-.slick-slide{
-    margin: 0 25px;
-}
-
-.slick-list{
-    margin: 0 25px;
 }
 
 .tiktok-carousel .slick-list {
@@ -624,7 +909,6 @@ position: absolute;
 }
 
 /* BOTONES */
-
 .tiktok-btn{
     position:absolute;
     top:50%;
@@ -642,23 +926,17 @@ position: absolute;
 }
 
 /*  CELILAR*/
-
 @media (max-width: 768px) {
-    .tiktok-prev{
-    right: 120px;
-    }
-
-.tiktok-next{
-    left: 380px;
-}
+    .tiktok-prev { left: 5px; }
+    .tiktok-next { right: 5px; }
 }
 
 .tiktok-prev{
-    left:-25px;
+    left:10px;
 }
 
 .tiktok-next{
-    right:-25px;
+    right:-10px;
 }
 
 .tiktok-btn:hover{
@@ -682,81 +960,6 @@ position: absolute;
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .animate-marquee{animation:marquee 30s linear infinite}
 
-/* Fix para Slick Slider */
-.slick-slider {
-position: relative;
-
-    display: block;
-    box-sizing: border-box;
-
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    -ms-touch-action: pan-y;
-        touch-action: pan-y;
-    -webkit-tap-highlight-color: transparent;
-}
-.slick-list
-{
-    position: relative;
-
-    display: block;
-    overflow: hidden;
-
-    margin: 0;
-    padding: 0;
-}
-.slick-list:focus
-{
-    outline: none;
-}
-.slick-list.dragging
-{
-    cursor: pointer;
-    cursor: hand;
-}
-
-.slick-slider .slick-track,
-.slick-slider .slick-list
-{
-    -webkit-transform: translate3d(0, 0, 0);
-       -moz-transform: translate3d(0, 0, 0);
-        -ms-transform: translate3d(0, 0, 0);
-         -o-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-}
-
-.slick-track
-{
-    position: relative;
-    top: 0;
-    left: 0;
-
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-.slick-track:before,
-.slick-track:after
-{
-    display: table;
-
-    content: '';
-}
-.slick-track:after
-{
-    clear: both;
-}
-.slick-loading .slick-track
-{
-    visibility: hidden;
-}
-
-/*TENDENCIA*/
 /* ====== TENDENCIA ====== */
 .tendencia{
     color:#ff5a1f !important;
@@ -782,7 +985,7 @@ position: relative;
 }
 
 /* ====== TARJETA PRODUCTO ====== */
-.prod-card{
+.reveal-item .prod-card{
     border-radius:18px;
     transition: all 0.4s;
     box-shadow: 0 4px 6px rgba(82, 80, 80, 0.02);
@@ -790,11 +993,11 @@ position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 300px;
+    width: 280px;
     margin: 2px;
 }
 
-.prod-card:hover{
+.reveal-item .prod-card:hover{
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     border-color: rgba(255, 69, 0, 0.3) !important;
@@ -808,7 +1011,7 @@ position: relative;
         transition: all 0.3s;
     }
 
-    .prod-card:hover .btn-add-mini {
+    .reveal-item .prod-card:hover .btn-add-mini {
         background: var(--primary);
         transform: rotate(90deg) scale(1.1);
     }
@@ -834,6 +1037,38 @@ position: relative;
 
 
 /* ====== BADGES ====== */
+/* Badges dentro de las tarjetas de producto */
+.reveal-item .prod-card .badge.gradient-primary {
+    background: linear-gradient(135deg, #FF4500 0%, #ff6b33 100%) !important;
+    color: #fff !important;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 4px 8px;
+    letter-spacing: 0.5px;
+}
+
+.reveal-item .prod-card .badge.gradient-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #ff4d5e 100%) !important;
+    color: #fff !important;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 4px 8px;
+    letter-spacing: 0.5px;
+}
+
+.reveal-item .prod-card .badge.bg-dark {
+    background: #333 !important;
+    color: #fff !important;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 4px 8px;
+    letter-spacing: 0.5px;
+}
+
+
 .badge.gradient-primary{
     background:#ff5a1f;
 }
@@ -876,16 +1111,32 @@ position: relative;
 
 /* ====== SLICK SLIDER ====== */
 /*DESTACADOS*/
-.container.py-5.mt-5 .d-flex, .container.py-5 .justify-content-between{
-    margin-top: -50px;
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-slider .slick-track, .slick-slider .slick-list {
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-slider .slick-list {
+    margin: 0 38px;
+    position: relative;
+    display: block;
+    overflow: hidden;
 }
 
 .slider-destacados .slick-slide{
-    padding:- 25px;
+    padding:0 10px;
 }
 
 .slider-ofertas .slick-slide{
-    padding:10px;
+    padding: 10px;
 }
 
 /* ====== ANIMACIÓN ====== */
