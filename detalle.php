@@ -75,7 +75,7 @@ if (!$p) {
 // --- SI LLEGAMOS AQUÍ, ES PORQUE $p EXISTE ---
 
 $agotado = ($p['stock_actual'] <= 0);
-$img_raw = !empty($p['imagen_url']) ? $p['imagen_url'] : '/assets/img/no-photo.png';
+$img_raw = "https://maquimpower.com/assets/img/gal_1769633279_0.webp";
 $imgPrincipal = str_replace('/var/www/html', '', $img_raw);
 
 // IMPORTANTE: Primero definimos todo, LUEGO el header
@@ -114,8 +114,8 @@ require_once 'includes/header.php';
 <div class="detail-bg">
     <div class="container">
         <!-- BREADCRUMB -->
-        <nav aria-label="breadcrumb d-none d-lg-block" class="mb-4">
-            <ol class="breadcrumb small text-uppercase fw-bold m-0 d-none d-lg-block ">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb small text-uppercase fw-bold m-0">
                 <li class="breadcrumb-item"><a href="/pagina/" class="text-muted text-decoration-none">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="/pagina/categoria.php?c=todo"
                         class="text-muted text-decoration-none">Catálogo</a></li>
@@ -199,20 +199,43 @@ require_once 'includes/header.php';
 
                     <!-- PRECIO -->
                     <div class="mb-4 bg-white p-3 rounded-4 shadow-sm border">
-                        <?php if ($p['precio_oferta'] > 0): ?>
-                            <div class="d-flex align-items-center gap-2 mb-1">
-                                <span class="text-decoration-line-through text-muted fs-6">S/
-                                    <?php echo number_format($p['precio'], 2); ?></span>
-                                <span
-                                    class="badge bg-danger rounded-pill small">-<?php echo round((($p['precio'] - $p['precio_oferta']) / $p['precio']) * 100); ?>%</span>
+                        <?php 
+                        // 1. Aseguramos que los valores sean números reales
+                        $p_lista = floatval($p['precio_lista']); // El precio inflado (ej: 4736.84)
+                        $p_real = floatval($p['precio']);       // El precio real (ej: 4500.00)
+
+                        // 2. Calculamos el porcentaje solo si el precio lista es mayor
+                        $porc_display = 0;
+                        if ($p_lista > $p_real && $p_lista > 0) {
+                            // Esta fórmula recupera exactamente el porcentaje de inflación usado
+                            $porc_display = round((1 - ($p_real / $p_lista)) * 100);
+                        }
+                        ?>
+
+                        <?php if ($porc_display > 0): ?>
+                            <div class="d-flex align-items-center gap-2 mb-0">
+                                <!-- Precio tachado -->
+                                <span class="text-decoration-line-through text-muted fs-6">
+                                    S/ <?php echo number_format($p_lista, 2); ?>
+                                </span>
+                                <!-- Badge de porcentaje (Ahora debe marcar 5) -->
+                                <span class="badge-oferta bg-danger rounded-pill px-2 text-white fw-bold" style="font-size: 0.9rem;">
+                                    -<?php echo $porc_display; ?>%
+                                </span>
                             </div>
-                            <div class="price-tag-large text-danger">S/ <?php echo number_format($p['precio_oferta'], 2); ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="price-tag-large text-dark">S/ <?php echo number_format($p['precio'], 2); ?></div>
                         <?php endif; ?>
-                        <small class="text-muted d-block mt-1"><i class="bi bi-check-circle-fill text-success"></i>
-                            Precio incluye IGV + Garantía</small>
+                        
+                        <!-- PRECIO PRINCIPAL: NEGRO (text-dark), muy negrita (fw-bold) y grande -->
+                        <div class="price-tag-large text-dark fw-bold" style="font-size: 3.2rem; letter-spacing: -2px; line-height: 1.1;">
+                            S/ <?php echo number_format($p_real, 2); ?>
+                        </div>
+
+                        <div class="mt-2">
+                            <small class="text-muted d-block">
+                                <i class="bi bi-check-circle-fill text-success"></i>
+                                Precio incluye IGV + Garantía
+                            </small>
+                        </div>
                     </div>
 
                     <!-- BOTONES DE COMPRA -->

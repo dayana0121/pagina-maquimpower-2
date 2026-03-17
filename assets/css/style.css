@@ -620,7 +620,7 @@ position: absolute;
 /* Ajuste responsive para que las tarjetas no se rompan */
 .slick-slide {
     min-height: 1px; /* evita colapso */
-    display: flex !important; /* fuerza flex para tus cards */
+    display: flex !important;
     justify-content: center;  /* centra las tarjetas */
 }
 
@@ -1017,17 +1017,24 @@ position: absolute;
     }
 
 /* ====== IMAGEN PRODUCTO ====== */
-.img-wrap{
-    height:180px;
+.skeleton .img-fluid{
+    max-width: 100%;
+    height: auto;
+}
+
+.prod-card.h-100.position-relative.overflow-hidden .img-wrap{
+    height:180px !important;
+    width: 100% !important;
     display:flex;
     align-items:center;
     justify-content:center;
+    overflow: hidden;
 }
 
-.img-wrap img{
-    max-height:160px;
-    width:auto;
-    object-fit:contain;
+.prod-card.h-100.position-relative.overflow-hidden .img-wrap img{
+    height: 100% !important;
+    width: 80% !important;
+    object-fit: contain; /*ajuste sin deformarse*/
     transition:transform .4s ease;
 }
 
@@ -1111,7 +1118,7 @@ position: absolute;
 
 /* ====== SLICK SLIDER ====== */
 /*DESTACADOS*/
-.slick-slider {
+.slick-destacados {
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -1120,12 +1127,13 @@ position: absolute;
     -webkit-tap-highlight-color: transparent;
 }
 
-.slick-slider .slick-track, .slick-slider .slick-list {
+.slick-destacados .slick-track, .slick-destacados .slick-list {
     transform: translate3d(0, 0, 0);
 }
 
-.slick-slider .slick-list {
-    margin: 0 38px;
+.slick-destacados .slick-list {
+    margin: 0;   /* 🔥 quitar margen */
+    padding: 0 38px; 
     position: relative;
     display: block;
     overflow: hidden;
@@ -1137,6 +1145,19 @@ position: absolute;
 
 .slider-ofertas .slick-slide{
     padding: 10px;
+}
+
+.slider-destacados .slick-track {
+    display: flex;
+}
+
+.slick-track {
+    will-change: transform;
+}
+
+.slider-destacados .slick-slide {
+    display: flex;
+    justify-content: center;
 }
 
 /* ====== ANIMACIÓN ====== */
@@ -1155,8 +1176,6 @@ position: absolute;
     margin-top: -20px;
     background-color: #fafafa;   /*COLOR DE FONDE DE TODO*/
     overflow: hidden;
-    display: flex;
-    flex-wrap:nowrap
 }
 
 /*OFERTAS*/
@@ -1173,7 +1192,7 @@ position: absolute;
 }
 
 .slider-ofertas .slick-track{
-    display: block;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -1684,7 +1703,6 @@ footer {
         padding-top: 30px;
         padding-bottom: 80px;
     }
-
     /* --- TARJETAS Y GALERÍA --- */
     .prod-gallery-card {
         background: white;
@@ -1692,6 +1710,21 @@ footer {
         padding: 20px;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
         border: 1px solid #eee;
+    }
+
+    .prod-gallery-card .d-flex{
+        width: 100%;
+        height: 450px;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden
+    }
+
+    #mainImage{
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
     }
 
     .thumb-img {
@@ -1703,6 +1736,7 @@ footer {
         cursor: pointer;
         transition: all 0.2s;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        margin-top: 8px;
     }
 
     .thumb-img:hover,
@@ -1732,6 +1766,81 @@ footer {
     }
 
     /*LETRAS*/
+@media (max-width: 991px) {
+    
+    /* 1. GANAR ESPACIO SUPERIOR */
+    .detail-bg {
+        padding-top: 10px !important; /* Reducir aire arriba */
+    }
+
+
+    /* 2. OCULTAR BREADCRUMB EN MÓVIL (Ahorra 40px valiosos) */
+    .breadcrumb {
+        display: none !important;
+    }
+
+    /* 3. REDUCIR TAMAÑO DE IMAGEN */
+    .prod-gallery-card .d-flex {
+        width: 100% !important;
+        height: 400px !important; /* más alto para que se vea grande */
+        margin: 0px !important;
+    }
+
+.prod-gallery-card img#mainImage {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* o cover si quieres que llene recortando */
+}
+
+
+    /* 4. COMPACTAR LA TARJETA DE IMAGEN */
+    .prod-gallery-card {
+        margin-bottom: 10px !important;
+        box-shadow: none !important; 
+        background: transparent !important; 
+        border: none !important;
+        margin-left: 8px !important;
+    }
+
+    /* 5. ACERCAR EL TÍTULO A LA IMAGEN */
+    .col-lg-5.animate-up {
+        margin-top: -10px !important; /* Subir bloque de info */
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+ 
+    /* 6. TÍTULO Y PRECIO MÁS COMPACTOS */
+    .display-6 {
+        font-size: 1.4rem !important; /* Título más pequeño */
+        font-weight: 800;
+        margin-bottom: 5px !important;
+    }
+    
+    .text-primary.ls-1 {
+        font-size: 0.7rem !important; /* Categoría pequeña */
+        margin-top: 13px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* 7. PRECIO Y SKU EN UNA LÍNEA (ESTRATEGIA VISUAL) */
+    /* Opcional: Esto pone el SKU pequeño al lado del precio si quieres */
+    .price-tag-large {
+        font-size: 1.8rem !important;
+    }
+
+    
+    /* 8. MINIATURAS MÁS PEQUEÑAS */
+    .thumb-img {
+        margin-top: 8px;
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .mb-4.bg-white.p-3.rounded-4.shadow-sm.border {
+        margin-top: -10px !important;
+    }
+
+}
     .detail-bg .breadcrumb .active{
         color: var(--primary) !important;
     }
@@ -1960,7 +2069,7 @@ footer {
     
 .prod-gallery-card .bg-white {
         height: 250px !important; /* Altura para que la imagen luzca */
-        width: 50% !important;
+        width: 100% !important;
         margin: 0 auto !important; /* Esto centra el bloque "menos ancho" */
         padding: 10px !important;
         display: flex !important;
@@ -1970,8 +2079,8 @@ footer {
 
     /* Asegúrate de que la imagen dentro no se salga */
     #mainImage {
-        max-width: 100%;
-        height: auto;
+        max-width: 100% !important;
+        height: 100% !important;
         object-fit: contain;
     }
 

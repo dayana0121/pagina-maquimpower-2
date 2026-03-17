@@ -16,8 +16,7 @@ $productosOferta = $stmtOfertas->fetchAll();
 function renderHomeCard($p)
 {
     $agotado = ($p['stock_actual'] <= 0);
-    $img = !empty($p['imagen_url']) ? $p['imagen_url'] : '/assets/img/no-photo.png';
-    $img = str_replace('/var/www/html', '', $img);
+    $img = "https://maquimpower.com/assets/img/productos/aspiradora-de-polvo-y-agua-karcher-wdl1s-1000w-1773337996-0.webp";
     $link = "/producto/" . $p['slug'];
     $tieneOferta = ($p['precio_oferta'] > 0);
     $precioShow = $tieneOferta ? $p['precio_oferta'] : $p['precio'];
@@ -232,10 +231,14 @@ function renderHomeCard($p)
     </div>
 
     <!-- Carrusel 1 -->
-    <div class="slider-destacados slick-slider">
+    <div id="slider1" class="slider-destacados slick-slider">
         <?php foreach ($productos as $p): ?>
-            <?= renderHomeCard($p) ?>
-        <?php endforeach; ?>
+    <?= renderHomeCard($p) ?>
+<?php endforeach; ?>
+
+<?php foreach ($productos as $p): ?>
+    <?= renderHomeCard($p) ?>
+<?php endforeach; ?>variableW
     </div>
 
     <!-- Carrusel 1.1 -->
