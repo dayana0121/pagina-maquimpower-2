@@ -4,6 +4,7 @@
     --dark: #0a0a0a;
     --grey-light: #f4f4f4;
     --grey-ligth-2: #333;
+    --transition: all 0.3s ease;
 }
 
 .text-primary {
@@ -77,6 +78,78 @@ body {
 
 .header-main .dropdown-toggle::after {
     display: none !important;
+}
+
+/*ICON DE USUARIO*/
+.user-dropdown-wrapper { position: relative; z-index: 1050; }
+    .user-dropdown-wrapper .dropdown-menu { display: none; position: absolute !important; z-index: 99999 !important; right: 0 !important; left: auto !important; box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important; background-color: #ffffff !important; }
+    .user-dropdown-wrapper .dropdown-menu.show { display: block !important; }
+
+.nav-bottom .dropdown-toggle::after {
+    content: '' !important;
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    left: 50%;
+    background: var(--primary);
+    transition: 0.3s ease;
+    opacity: 1; /* Asegurar visibilidad */
+}
+
+/* 3. Animación al pasar el mouse (Hover) */
+.nav-bottom .dropdown-toggle:hover::after,
+.nav-bottom .dropdown:hover .dropdown-toggle::after {
+    width: 100%;
+    left: 0;
+}
+
+/* 4. Ajuste para que el botón no salte */
+.nav-bottom .dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Misma altura que los demás */
+}
+
+.header-main .dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown:hover .avatar-circle {
+    transform: scale(1.05);
+    background-color: #ff4500;
+    color: white;
+}
+
+/* Avatar Circular */
+.avatar-circle {
+    width: 42px;
+    height: 42px;
+    background-color: #212529; /* Fondo oscuro */
+    color: #ff4500;            /* Naranja principal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    border-radius: 12px;       /* Estilo "Squircle" moderno */
+    border: 2px solid #ff4500;
+    transition: all 0.3s ease;
+}
+
+/* Textos de cabecera */
+.welcome-text {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6c757d;
+    letter-spacing: 0.5px;
+}
+
+.user-name-text {
+    font-size: 13px;
+    font-weight: 800;
+    color: #212529;
+    text-transform: uppercase;
 }
 
 /* --- FIX: ARREGLO DE MENÚ DESPLEGABLE --- */
@@ -1905,8 +1978,8 @@ footer {
         vertical-align: middle;
     }
 
-    /* --- BOTONES --- */
-    .btn-pay-glow {
+/* --- BOTONES --- */
+    .card .col-8 .btn-pay-glow {
         background: var(--dark);
         color: #fff;
         border: 1px solid transparent;
@@ -1917,12 +1990,13 @@ footer {
         padding: 12px;
     }
 
-    .btn-pay-glow:hover:not(.disabled) {
+    .card .col-8 .btn-pay-glow:hover:not(.disabled) {
         background: var(--primary);
         color: #fff;
         box-shadow: 0 5px 20px rgba(255, 69, 0, 0.4);
         transform: translateY(-2px);
     }
+
 
     .btn-whatsapp-pro {
         background: linear-gradient(45deg, #25D366, #128C7E);
@@ -2155,6 +2229,16 @@ footer {
         right: 15px;
     }
 
+    /*BOTON DE AGOTADO*/
+    .btn-disabled {
+    color: var(--bs-btn-disabled-color);
+    pointer-events: none;
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+    opacity: var(--bs-btn-disabled-opacity);
+}
+
+
 /*CONTACTO*/
 /* Tarjeta del formulario */
 .contacto .checkout-card {
@@ -2178,39 +2262,42 @@ footer {
     margin-bottom: 1.5rem;
 }
 
-/* Input */
-.contacto .form-control-modern {
-    font-family: 'Inter', system-ui, sans-serif;
+/*FORMULARIO*/
+
+.form-control-modern {
     width: 100%;
     padding: 14px 15px;
-    color: var(--grey-ligth-2);
-    border: 2px solid #eee; /* línea base */
-    border-radius: 6px; /* medio cuadrado */
-    font-size: 0.95rem;
+    border: 2px solid #eee; /* Borde sólido */
+    border-radius: 6px;     /* Casi cuadrado */
     background: #f9f9f9;
-    font-weight: 500;
-    outline: none;
-    transition: border-color 0.2s ease;
-}
-
-/* Label dentro del input */
-.contacto .form-label-modern {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
     font-size: 0.95rem;
-    font-weight: 700;
-    color: #888;
-    text-transform: uppercase;
-    pointer-events: none;
-    transition: all 0.2s ease;
+    color: #333;
+    font-weight: 500;
+    transition: 0.2s;
+    outline: none;
 }
 
 .form-control-modern:focus {
     background: #fff;
     border-color: var(--primary); /* Borde Naranja al escribir */
     box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor técnico */
+}
+
+/* Etiquetas Flotantes */
+.form-label-modern {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    pointer-events: none;
+    background: transparent;
+    padding: 0 4px;
+    font-weight: 600;
+    text-transform: uppercase; /* Letras mayúsculas tipo plano */
+    letter-spacing: 0.5px;
 }
 
 /* Efecto al escribir */
@@ -2222,16 +2309,16 @@ footer {
     background: white;
 }
 
-/* Botón */
-.contacto .btn-pay-glow {
+/*BOTON*/
+.btn-pay-glow.shadow-sm {
+    margin-top: -5px;
     position: relative;
     z-index: 1;
-    overflow: hidden;
-    display: block;
-    margin: 0 auto; 
+    overflow: hidden; /* Corta el brillo dentro del botón */
+    display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 18px;
     background: var(--primary);
     color: white;
@@ -2240,14 +2327,108 @@ footer {
     font-weight: 800;
     text-transform: uppercase;
     transition: 0.3s;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
 }
 
-.contacto .btn-pay-glow:hover {
-    transition: all 0.3s ease;
+/* Si tu animación usa un resplandor externo, asegúrate de que no tenga eventos de ratón */
+.btn-pay-glow.shadow-sm::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    box-shadow: 0 0 15px var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none; /* ESTO ES CLAVE: evita que el brillo tape otros botones */
 }
-.contacto .btn-pay-glow:hover i {
-    transition: all 0.3s ease;
+
+.btn-pay-glow.shadow-sm:hover::after {
+    opacity: 1;
 }
+
+/*HOVER EN LETRAS*/
+.fw-black.text-dark.text-decoration-none.text-uppercase.ls-1:hover{
+    color: var(--primary) !important;
+}
+
+/*REGISTER*/
+    .auth-bg {
+        background: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+        background-size: cover;
+        min-height: 90vh; /* Un poco más alto por ser registro */
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .auth-bg::before {
+        content: '';
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.75); /* Un poco más oscuro */
+        backdrop-filter: blur(5px);
+    }
+    
+    .auth-card {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        border-top: 5px solid var(--primary);
+    }
+
+    .auth-header {
+        text-align: center;
+        padding: 30px 30px 10px 30px;
+    }
+
+    /*LEGALES*/
+
+    .mp-check-group {
+    display: flex; gap: 12px; align-items: flex-start; margin-bottom: 7px;
+}
+
+.mp-check-input {
+    width: 18px; height: 18px; margin-top: 2px; cursor: pointer;
+}
+
+.mp-check-label {
+    font-size: 0.85rem; color: #555; line-height: 1.4;
+}
+
+.mp-check-label a {
+    color: var(--dark); text-decoration: underline; font-weight: 700;
+}
+
+.mp-check-label a:hover { color: var(--primary); }
+
+/*PARA Q SE MUESTRE LA CONTRASEÑA*/
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+    z-index: 5; /* asegura que quede encima del label */
+}
+
+.toggle-password:hover {
+    color: var(--primary);
+}
+
 
 
 /*BOTON EN EL CELULAR*/
@@ -2307,6 +2488,81 @@ footer {
     border: 2px solid var(--primary);
     box-shadow: 0 0 15px rgba(255,69,0,0.6);
 }
+
+/* Input */
+.contacto .form-control-modern {
+    font-family: 'Inter', system-ui, sans-serif;
+    width: 100%;
+    padding: 14px 15px;
+    color: var(--grey-ligth-2);
+    border: 2px solid #eee; /* línea base */
+    border-radius: 6px; /* medio cuadrado */
+    font-size: 0.95rem;
+    background: #f9f9f9;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+/* Label dentro del input */
+.contacto .form-label-modern {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.form-control-modern:focus {
+    background: #fff;
+    border-color: var(--primary); /* Borde Naranja al escribir */
+    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor técnico */
+}
+
+/* Efecto al escribir */
+.form-control-modern:focus ~ .form-label-modern,
+.form-control-modern:not(:placeholder-shown) ~ .form-label-modern {
+    top: 0;
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: white;
+}
+
+/* Botón */
+.contacto .btn-pay-glow {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin: 0 auto; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: 0.3s;
+    box-shadow: 0 10px 15px rgba(255, 68, 0, 0.601);
+}
+
+.contacto .btn-pay-glow:hover {
+    transition: all 0.3s ease;
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 68, 0, 0.603);
+}
+.contacto .btn-pay-glow:hover i {
+    transition: all 0.3s ease;
+}
+
 
 
 /*********************ACADEMIA***************/
@@ -2452,3 +2708,491 @@ footer {
  .nosotros .container{
     margin-top: -90px;
  }
+
+ /*DISEÑO DEL CARRITO*/
+     /* FONDO INMERSIVO */
+    .cart-bg {
+        background: #f8f9fa;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* CANVAS PARTÍCULAS */
+    #particleCanvas {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none; z-index: 0;
+    }
+    
+    .card-bg .container { position: relative; }
+    
+    /* TARJETAS CRISTAL */
+    .cart-item-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        transition: 0.3s;
+        backdrop-filter: blur(5px);
+    }
+    .cart-item-card:hover {
+        border-color: var(--primary);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    /* RESUMEN DARK */
+    .summary-card {
+        background: #111; color: white;
+        border-radius: 12px; padding: 30px;
+        border-top: 5px solid var(--primary);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        position: sticky; top: 100px;
+    }
+    .qty-input { background: #f4f4f4; border: none; font-weight: 800; color: #333; }
+    
+    /* ESTILO ALERTAS MAQUIMPOWER */
+    .swal2-popup.mp-info-popup {
+        background: #1a1a1a !important;
+        border: 1px solid #333;
+        border-top: 4px solid #FF4500; /* Naranja */
+        color: #fff;
+    }
+    .swal2-title { color: #fff !important; text-transform: uppercase; font-size: 1.2rem; }
+    .swal2-html-container { color: #ccc !important; }
+    .swal2-confirm {
+        background: #FF4500 !important;
+        box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4) !important;
+        font-weight: 800 !important;
+        border-radius: 50px !important;
+        text-transform: uppercase;
+    }
+
+    /*BOTON DE PROCESAR COMPRA*/
+    .summary-card .btn .bi-arrow-right{
+        color: black !important;
+    }
+    .summary-card .btn{
+        background-color: white !important;
+    }
+    .summary-card .btn:hover{
+        background-color: var(--grey-light) !important;
+    }
+
+    @media (max-width: 768px) {
+    .cart-item-card {
+        padding: 15px 10px; /* Menos padding lateral */
+        margin-bottom: 10px;
+    }
+    .cart-item-card .col-3 {
+        width: 80px; /* Ancho fijo para imagen */
+    }
+    .cart-item-card .col-9 {
+        width: calc(100% - 80px); /* El resto */
+        padding-left: 10px;
+    }
+    .cart-item-card h6 {
+        font-size: 0.85rem; /* Texto un poco más pequeño */
+    }
+}
+
+/*LOGIN*/
+    /* Estilos exclusivos para Login/Registro */
+    .auth-bg-l{
+        background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+        background-size: cover;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-bottom: -79.8px;
+    }
+
+    /* Capa oscura sobre la imagen */
+    .auth-bg-l::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        /* Oscuridad al 70% */
+        backdrop-filter: blur(5px);
+    }
+
+    .auth-card-l {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        border-top: 5px solid var(--primary);
+    }
+
+    .auth-card-l .auth-header {
+        text-align: center;
+        padding: 30px 30px 10px 30px;
+    }
+
+    /*Campos de texto*/
+.form-floating-custom {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.auth-card .bg-light{
+    margin-bottom: -20px;
+}
+
+
+
+/*OTROS ESTILOS PARA EL MOVIL*/
+
+@media (max-width: 768px) {
+    /* 1. Subirlo para que no tape el menú de la App */
+    .cookie-banner-overlay {
+        bottom: 70px !important; /* Altura de la barra móvil */
+        padding: 15px;
+        align-items: flex-end; /* Pegado abajo pero con margen */
+    }
+
+    /* 2. Tarjeta Vertical */
+    .cookie-card {
+        flex-direction: column; /* Elementos uno bajo otro */
+        gap: 15px;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    /* 3. Texto centrado y legible */
+    .cookie-content {
+        text-align: center;
+    }
+    .cookie-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    /* 4. Botones Apilados (Full Width) */
+    .cookie-actions {
+        display: flex;
+        flex-direction: column-reverse; /* "Aceptar" arriba, "Rechazar" abajo */
+        width: 100%;
+        gap: 10px;
+    }
+
+    .btn-cookie {
+        width: 100%; /* Botón ancho completo */
+        padding: 14px; /* Más fácil de tocar */
+        font-size: 0.9rem;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Destacar más el botón de Aceptar */
+    .btn-cookie-primary {
+        font-weight: 900;
+        font-size: 1rem;
+    }
+}
+/* Ocultar en pantallas medianas y grandes (Tablets y PC) */
+@media (min-width: 768px) {
+    .whatsapp-float {
+        display: none !important;
+    }
+}
+/* Ocultar WhatsApp Flotante en PC */
+@media (min-width: 768px) {
+    .whatsapp-float {
+        display: none !important;
+    }
+}
+
+/*BUSCAR*/
+    .hero-search { height: 200px; }
+    @media (max-width: 768px) {
+        .hero-search { height: 150px; }
+        .img-wrap { height: 140px; } /* Imagen más pequeña en móvil */
+        .prod-card { border-radius: 8px; } /* Bordes menos redondos en móvil */
+    }
+    
+    .prod-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+    .prod-card:hover .img-wrap img { transform: scale(1.05); }
+    .prod-card:hover .p-title { color: var(--primary) !important; }
+
+    /*CHECKOUT*/
+    .checkout-section {
+        background-color: #f4f6f9;
+        padding-bottom: 50px;
+    }
+
+    /* TARJETAS */
+    .checkout-section .checkout-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        border: 1px solid #eee;
+        margin-bottom: 25px;
+    }
+
+    /* TÍTULOS DE SECCIÓN */
+    .checkout-section .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .checkout-section .section-header i {
+        font-size: 1.4rem;
+        color: var(--primary);
+        margin-right: 12px;
+    }
+
+    .checkout-section .section-header h5 {
+        font-weight: 900;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #111;
+    }
+
+    /* INPUTS MODERNOS */
+    .checkout-section .form-label-corp {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #666;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .checkout-section .form-control-corp {
+        border: 2px solid #eee;
+        border-radius: 8px;
+        padding: 12px 15px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #333;
+        background-color: #fff;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+    .checkout-section .form-control-corp:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1);
+    }
+
+    /* STEPPER */
+    .checkout-section .stepper-wrapper {
+        padding: 40px 0;
+    }
+
+    .checkout-section .stepper {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .checkout-section .stepper::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 15%;
+        right: 15%;
+        height: 3px;
+        background: #e0e0e0;
+        z-index: 0;
+    }
+
+    .checkout-section .step {
+        width: 33%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .checkout-section .step-circle {
+        width: 45px;
+        height: 45px;
+        background: #fff;
+        border: 3px solid #e0e0e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        font-weight: bold;
+        color: #ccc;
+        transition: 0.3s;
+    }
+
+    .checkout-section .step.active .step-circle {
+        border-color: var(--primary);
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 0 0 5px rgba(255, 69, 0, 0.15);
+    }
+
+    .checkout-section .step.completed .step-circle {
+        border-color: #198754;
+        background: #198754;
+        color: white;
+    }
+
+    .checkout-section .step-text {
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #999;
+    }
+
+    .checkout-section .step.active .step-text {
+        color: var(--primary);
+    }
+
+    /* BOTÓN PAGAR */
+    .checkout-section .btn-pay-corp {
+        width: 100%;
+        background: #111;
+        color: white;
+        padding: 18px;
+        border-radius: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkout-section .btn-pay-corp:not(:disabled):hover {
+        background: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 69, 0, 0.3);
+    }
+
+    /* RESUMEN FLOTANTE */
+    .checkout-section .sticky-summary {
+        position: sticky;
+        top: 110px;
+    }
+
+    .checkout-section .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+
+    .checkout-section .total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 2px dashed #eee;
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+
+    /*RESET PASSWORD*/
+    .card-body form button.btn.btn-primary.w-100.py-3.fw-bold.rounded-pill[type="submit"] {
+        background-color: var(--primary) !important;
+        color: white !important;
+    }
+
+    .card-body form button.btn.btn-primary.w-100.py-3.fw-bold.rounded-pill[type="submit"]:hover{
+        background-color: var(--primary-dark) !important;
+    }
+
+    .card-body a.d-block.mt-4.text-muted.small:hover{
+        color: var(--dark) !important;
+        font-weight: bold !important;
+    }
+
+    /*GESTIONAR USUARIOS*/
+    /* 1. BOTÓN "GUARDAR" (Dentro del Modal) 
+       Selector: Padre + Etiqueta con 5 clases encadenadas */
+    .modal-footer button.btn.btn-primary-custom.rounded-pill.px-5.shadow {
+        background-color: var(--primary);
+        border: 2px solid transparent;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: var(--transition);
+    }
+
+    .modal-footer button.btn.btn-primary-custom.rounded-pill.px-5.shadow:hover {
+        background-color: #e03e00;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 69, 0, 0.3) !important;
+        border-color: rgba(255,255,255,0.2);
+    }
+
+    /* 2. BOTÓN "VOLVER" (En el Header Admin)
+       Selector: Padre + Etiqueta con 4 clases encadenadas */
+    .admin-header a.btn.btn-outline-light.rounded-pill.px-4 {
+        border-width: 2px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: var(--transition);
+    }
+
+    .admin-header a.btn.btn-outline-light.rounded-pill.px-4:hover {
+        background-color: #ffffff;
+        color: var(--dark-bg) !important;
+        transform: scale(1.05);
+    }
+
+    /* 3. BOTÓN "NUEVO USUARIO" (Toolbar principal)
+       Selector: Padre + Etiqueta con 6 clases encadenadas */
+    .text-md-end button.btn.btn-primary-custom.rounded-pill.px-4.py-2.shadow-sm {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition);
+    }
+
+    .text-md-end button.btn.btn-primary-custom.rounded-pill.px-4.py-2.shadow-sm:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15) !important;
+    }
+
+    /* 4. BOTONES DE FILTRO (Todos, Clientes, Admins)
+       Selector: Padre + Etiqueta con todas las clases de estado */
+    .mb-3.d-flex.gap-2.flex-wrap a.btn.btn-sm.rounded-pill.fw-bold {
+        min-width: 80px;
+        transition: var(--transition);
+    }
+
+    /* Ejemplo específico para el filtro "TODOS" cuando es oscuro */
+    .mb-3.d-flex.gap-2.flex-wrap a.btn.btn-sm.rounded-pill.fw-bold.btn-dark {
+        border: 1px solid #000;
+    }
+
+    /* 5. BOTÓN LUPA (Buscador)
+       Selector: Padre (form) + Etiqueta con 3 clases */
+    form.d-flex.bg-white.p-1.rounded-pill.border.shadow-sm button.btn.btn-dark.rounded-pill.px-4 {
+        background-color: var(--dark-bg);
+        border: none;
+        transition: var(--transition);
+    }
+
+    form.d-flex.bg-white.p-1.rounded-pill.border.shadow-sm button.btn.btn-dark.rounded-pill.px-4:hover {
+        background-color: #000;
+        padding-left: 30px !important; /* Efecto de expansión */
+        padding-right: 30px !important;
+    }

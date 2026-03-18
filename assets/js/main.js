@@ -150,190 +150,22 @@ function initLiveSearch() {
 }
 
 // --- 6. CARRUSELES (SLICK) - PRODUCTOS Y VIDEOS ---
-// Reemplaza la función initSliders() COMPLETA:
+// Los sliders PRINCIPALES se inicializan en footer.php con jQuery $(document).ready()
+// Esta función es un respaldo seguro que NO re-inicializa si footer.php ya lo hizo.
 
 function initSliders() {
-    // Esperar a que jQuery esté completamente listo
-    if (typeof $ === 'undefined') {
-        console.warn('jQuery no está cargado');
-        return;
-    }
-
-    // Dar más tiempo para que el DOM esté 100% listo
-    setTimeout(() => {
-        // ===== CARRUSEL DE PRODUCTOS =====
-        const $productCarousel = $('.product-carousel');
-        if ($productCarousel.length > 0 && $.fn.slick) {
-            // Verificar que tenga elementos
-            if ($productCarousel.find('.p-1').length > 0) {
-                try {
-                    // Destruir si ya existe
-                    if ($productCarousel.hasClass('slick-initialized')) {
-                        $productCarousel.slick('unslick');
-                    }
-
-                    $productCarousel.slick({
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                        autoplay: true,
-                        autoplaySpeed: 3000,
-                        prevArrow: $('.prev-prod'),
-                        nextArrow: $('.next-prod'),
-                        infinite: true,
-                        dots: false,
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: { slidesToShow: 3 }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: { slidesToShow: 2, arrows: false }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: { slidesToShow: 1, arrows: false }
-                            }
-                        ]
-                    });
-                    console.log('✅ Product Carousel inicializado correctamente');
-                } catch(e) {
-                    console.error('❌ Error inicializando product-carousel:', e.message);
-                }
-            } else {
-                console.warn('⚠️ No hay elementos en product-carousel');
-            }
-        } else {
-            console.warn('⚠️ product-carousel no encontrado o Slick no disponible');
-        }
-
-        // ===== CARRUSEL DE VIDEOS =====
-        const $videoCarousel = $('.video-carousel');
-        if ($videoCarousel.length > 0 && $.fn.slick) {
-            // Verificar que tenga elementos
-            if ($videoCarousel.find('.p-3').length > 0) {
-                try {
-                    // Destruir si ya existe
-                    if ($videoCarousel.hasClass('slick-initialized')) {
-                        $videoCarousel.slick('unslick');
-                    }
-
-                    $videoCarousel.slick({
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        centerMode: true,
-                        arrows: false,
-                        infinite: true,
-                        dots: false,
-                        autoplay: false,
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: { slidesToShow: 2 }
-                            },
-                            {
-                                breakpoint: 768,
-                                settings: {
-                                    slidesToShow: 1,
-                                    centerMode: true,
-                                    centerPadding: '40px'
-                                }
-                            }
-                        ]
-                    });
-                    console.log('✅ Video Carousel inicializado correctamente');
-                } catch(e) {
-                    console.error('❌ Error inicializando video-carousel:', e.message);
-                }
-            } else {
-                console.warn('⚠️ No hay elementos en video-carousel');
-            }
-        } else {
-            console.warn('⚠️ video-carousel no encontrado o Slick no disponible');
-        }
-
-    }, 500); // Aumentar delay a 500ms para asegurar que el DOM esté listo
-}
-
-// --- 7. TIKTOK SLIDER (NUEVA FUNCIÓN SEPARADA) ---
-// Agregar esta función NUEVA después de initSliders():
-
-// --- 8. INICIALIZAR CARRUSEL DE TIKTOK ---
-// En la función initTikTokCarousel(), CAMBIAR:
-
-function initTikTokCarousel() {
+    // Los sliders se inicializan en footer.php para evitar conflictos de doble-init.
+    // Esta función solo existe para que la llamada en DOMContentLoaded no falle.
     if (typeof $ === 'undefined' || !$.fn.slick) {
-        console.warn('jQuery o Slick no está disponible');
+        console.warn('⚠️ jQuery o Slick no disponible aún (se inicializará desde footer)');
         return;
     }
-
-    setTimeout(() => {
-        const $tiktokCarousel = $('.tiktok-carousel');
-        
-        if ($tiktokCarousel.length > 0) {
-            // Agregar click handlers a los videos
-            document.querySelectorAll('.tiktok-video-wrapper').forEach(video => {
-                video.addEventListener('click', function() {
-                    const url = this.dataset.url;
-                    if (url) {
-                        window.open(url, '_blank', 'width=600,height=800');
-                    }
-                });
-            });
-
-            // Solo inicializar carrusel si hay videos
-            if ($tiktokCarousel.find('.p-2').length > 0) {  // ✅ Verificar que tenga elementos
-                if (!$tiktokCarousel.hasClass('slick-initialized')) {
-                    try {
-                        $tiktokCarousel.slick({
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                            centerMode: true,
-                            centerPadding: '60px',
-                            arrows: true,
-                            dots: false,
-                            infinite: true,
-                            autoplay: false,
-                            prevArrow: '<button class="btn btn-light rounded-circle prev-tiktok shadow-sm" style="z-index:10;"><i class="bi bi-chevron-left"></i></button>',
-                            nextArrow: '<button class="btn btn-light rounded-circle next-tiktok shadow-sm" style="z-index:10;"><i class="bi bi-chevron-right"></i></button>',
-                            responsive: [
-                                {
-                                    breakpoint: 1024,
-                                    settings: {
-                                        slidesToShow: 2,
-                                        centerPadding: '40px'
-                                    }
-                                },
-                                {
-                                    breakpoint: 768,
-                                    settings: {
-                                        slidesToShow: 1,
-                                        centerMode: true,
-                                        centerPadding: '30px',
-                                        arrows: false
-                                    }
-                                }
-                            ]
-                        });
-                        console.log('✅ TikTok Carousel inicializado correctamente');
-                    } catch(e) {
-                        console.error('❌ Error inicializando tiktok-carousel:', e.message);
-                    }
-                }
-            } else {
-                console.warn('⚠️ No hay videos de TikTok para mostrar');
-            }
-        } else {
-            console.warn('⚠️ Elemento .tiktok-carousel no encontrado');
-        }
-    }, 600);
+    console.log('ℹ️ initSliders() llamado desde main.js — sliders se gestionan desde footer.php');
 }
 
-// Llamar la función en DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    actualizarBadge();
-    initMegaMenu();
-    initLiveSearch();
-    initSliders();
-    initTikTokCarousel();  // ← AGREGAR ESTA LÍNEA
-});
+// --- 7. TIKTOK SLIDER ---
+function initTikTokCarousel() {
+    // TikTok carousel se inicializa en footer.php.
+    // Esta función solo existe para que la llamada en DOMContentLoaded no falle.
+    console.log('ℹ️ initTikTokCarousel() llamado desde main.js — se gestiona desde footer.php');
+}

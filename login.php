@@ -8,52 +8,12 @@ if (isset($_SESSION['user_id'])) {
 }
 ?>
 
-<style>
-    /* Estilos exclusivos para Login/Registro */
-    .auth-bg {
-        background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
-        background-size: cover;
-        min-height: 85vh;
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-
-    /* Capa oscura sobre la imagen */
-    .auth-bg::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        /* Oscuridad al 70% */
-        backdrop-filter: blur(5px);
-    }
-
-    .auth-card {
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        position: relative;
-        z-index: 2;
-        overflow: hidden;
-        border-top: 5px solid var(--primary);
-    }
-
-    .auth-header {
-        text-align: center;
-        padding: 30px 30px 10px 30px;
-    }
-</style>
-
-<div class="auth-bg">
+<div class="auth-bg-l">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5 col-lg-4">
 
-                <div class="auth-card animate-card">
+                <div class="auth-card-l animate-card">
 
                     <!-- ENCABEZADO -->
                     <div class="auth-header">
@@ -81,10 +41,16 @@ if (isset($_SESSION['user_id'])) {
                                     ELECTRÓNICO</label>
                             </div>
 
-                            <div class="form-floating-custom mb-4">
-                                <input type="password" name="password" class="form-control-modern" placeholder=" "
-                                    required>
-                                <label class="form-label-modern"><i class="bi bi-lock me-1"></i> CONTRASEÑA</label>
+                            <div class="form-floating-custom mb-3 password-wrapper">
+                                <input type="password" id="passwordInput" name="password"
+                                    class="form-control-modern" placeholder=" " minlength="6" required>
+                                <label class="form-label-modern">
+                                    <i class="bi bi-lock me-1"></i> CONTRASEÑA (MIN 6)
+                                </label>
+                                <!-- Botón ojito -->
+                                <button type="button" class="toggle-password">
+                                    <i class="bi bi-eye"></i>
+                                </button>
                             </div>
 
                             <!-- BOTÓN POWER -->
@@ -127,5 +93,23 @@ if (isset($_SESSION['user_id'])) {
         });
     </script>
 <?php endif; ?>
+
+<!--SCRIPT PARA MOSTRAR CONTRASEÑA-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const togglePassword = document.querySelector('.toggle-password');
+        const passwordInput = document.getElementById('passwordInput');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+
+            // Cambiar icono
+            const icon = this.querySelector('i');
+            icon.classList.toggle('bi-eye');
+            icon.classList.toggle('bi-eye-slash');
+        });
+    });
+</script>
 
 <?php require_once 'includes/footer.php'; ?>

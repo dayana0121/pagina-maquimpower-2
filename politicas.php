@@ -77,7 +77,7 @@
                     <a class="nav-link" href="politicas.php/#envios">7. Envíos</a>
                     <a class="nav-link" href="politicas.php/#pagos">8. Pagos y Comprobantes</a>
                 </nav>
-            </div>
+            </div>  
         </div>
 
         <!-- CONTENIDO -->

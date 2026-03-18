@@ -113,19 +113,4 @@ $listaCategorias = $pdo->query("SELECT DISTINCT categoria FROM productos WHERE c
     </div>
 </div>
 
-<style>
-    /* Ajustes Específicos para este archivo */
-    .hero-search { height: 200px; }
-    @media (max-width: 768px) {
-        .hero-search { height: 150px; }
-        .img-wrap { height: 140px; } /* Imagen más pequeña en móvil */
-        .prod-card { border-radius: 8px; } /* Bordes menos redondos en móvil */
-    }
-    
-    .prod-card { transition: transform 0.3s, box-shadow 0.3s; }
-    .prod-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
-    .prod-card:hover .img-wrap img { transform: scale(1.05); }
-    .prod-card:hover .p-title { color: var(--primary) !important; }
-</style>
-
 <?php require_once 'includes/footer.php'; ?>

@@ -3,15 +3,15 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            
+
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-5">
                 <div class="card-header bg-dark text-white text-center py-4 border-bottom border-warning border-5">
                     <h3 class="fw-black m-0 text-uppercase">Libro de Reclamaciones Virtual</h3>
                     <small class="text-white-50">Conforme al Código de Protección y Defensa del Consumidor</small>
                 </div>
-                
+
                 <div class="card-body p-5">
-                    
+
                     <div class="alert alert-light border d-flex align-items-center mb-5">
                         <div class="display-4 me-3">🏢</div>
                         <div>
@@ -21,7 +21,7 @@
                     </div>
 
                     <form id="claimForm">
-                        
+
                         <!-- 1. IDENTIFICACIÓN -->
                         <h5 class="fw-bold text-primary mb-4 pb-2 border-bottom">1. Identificación del Consumidor</h5>
                         <div class="row g-3 mb-4">
@@ -79,7 +79,7 @@
                                 <label class="form-label small fw-bold">Descripción del Bien/Servicio (Nombre del producto)</label>
                                 <input type="text" class="form-control" placeholder="Ej: Hidrolavadora Karcher K3..." required>
                             </div>
-                             <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label class="form-label small fw-bold">Monto Reclamado (S/)</label>
                                 <input type="number" class="form-control" placeholder="0.00" required>
                             </div>
@@ -137,15 +137,15 @@
 </div>
 
 <script>
-function enviarReclamo() {
-    // Aquí iría la lógica de envío real
-    Swal.fire({
-        icon: 'success',
-        title: 'Reclamo Registrado',
-        text: 'Se ha enviado una copia a su correo electrónico. Nos pondremos en contacto en el plazo de ley.',
-        confirmButtonColor: '#FF4500'
-    });
-}
+    function enviarReclamo() {
+        // Aquí iría la lógica de envío real
+        Swal.fire({
+            icon: 'success',
+            title: 'Reclamo Registrado',
+            text: 'Se ha enviado una copia a su correo electrónico. Nos pondremos en contacto en el plazo de ley.',
+            confirmButtonColor: '#FF4500'
+        });
+    }
 </script>
 
 <?php require_once 'includes/footer.php'; ?>

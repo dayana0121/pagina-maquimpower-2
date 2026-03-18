@@ -4,7 +4,7 @@ require_once 'includes/header.php';
 ?>
 
 <div class="main-content">
-    
+
     <!-- HERO -->
     <section class="hero-nosotros text-white py-5 mb-5">
         <div class="container position-relative z-1 text-center py-5">
@@ -14,7 +14,7 @@ require_once 'includes/header.php';
     </section>
 
     <div class="container nosotros">
-        
+
         <!-- INTRODUCCIÓN (TEXTO ACTUALIZADO) -->
         <div class="row align-items-center g-5 mb-5">
             <div class="col-lg-6 reveal">
@@ -65,7 +65,7 @@ require_once 'includes/header.php';
 
             <!-- justify-content-center para que la fila de abajo (3 items) quede centrada -->
             <div class="row g-4 justify-content-center">
-                <?php 
+                <?php
                 $valores = [
                     ['Compromiso', 'bi-shield-check', 'Nos dedicamos a cumplir con responsabilidad cada promesa hecha a nuestros clientes y aliados.'],
                     ['Honestidad', 'bi-info-circle', 'Trabajamos con transparencia en cada venta, recomendación y servicio que brindamos.'],
@@ -76,14 +76,14 @@ require_once 'includes/header.php';
                     ['Trabajo en equipo', 'bi-people', 'Fomentamos un ambiente de colaboración dentro y fuera de la empresa para lograr objetivos comunes.']
                 ];
                 $delay = 0;
-                foreach($valores as $v): $delay += 0.1; ?>
-                <div class="col-md-4 col-lg-3 reveal" style="animation-delay: <?= $delay ?>s;">
-                    <div class="card card-valor h-100 p-4 shadow-sm text-center">
-                        <div class="icon-box mx-auto"><i class="bi <?= $v[1] ?>"></i></div>
-                        <h5 class="fw-bold"><?= $v[0] ?></h5>
-                        <p class="small text-muted mb-0"><?= $v[2] ?></p>
+                foreach ($valores as $v): $delay += 0.1; ?>
+                    <div class="col-md-4 col-lg-3 reveal" style="animation-delay: <?= $delay ?>s;">
+                        <div class="card card-valor h-100 p-4 shadow-sm text-center">
+                            <div class="icon-box mx-auto"><i class="bi <?= $v[1] ?>"></i></div>
+                            <h5 class="fw-bold"><?= $v[0] ?></h5>
+                            <p class="small text-muted mb-0"><?= $v[2] ?></p>
+                        </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </section>
@@ -100,7 +100,7 @@ require_once 'includes/header.php';
                         <div class="col-lg-7 p-4 p-md-5">
                             <h2 class="display-6 fw-black text-white text-uppercase mb-3">¿Listo para potenciar <br><span class="text-primary">tu negocio?</span></h2>
                             <p class="text-white-50 mb-4">En Maquimpower, más que vender maquinaria, impulsamos negocios. Ya sea que busques hidrolavadoras, aspiradoras industriales, shampooneras o accesorios, estamos aquí para ayudarte a crecer con tecnología confiable y envío rápido a todo el Perú.</p>
-                            
+
                             <div class="row g-3">
                                 <div class="col-12 col-md-6">
                                     <div class="d-flex align-items-center gap-3 p-3 rounded-4 bg-white bg-opacity-5 border border-white border-opacity-10">

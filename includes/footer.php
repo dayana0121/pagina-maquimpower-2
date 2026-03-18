@@ -131,7 +131,7 @@
 
 <!-- LIBRERÍAS JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS ya cargado en header.php — NO duplicar aquí -->
 
 <!-- SLICK CAROUSEL -->
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -140,60 +140,100 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- JS DEL SITIO -->
-<script src="assets/js/main.js?v=1.0.2"></script>
-
+<script src="assets/js/main.js?v=1.0.3"></script>
 <script>
 $(document).ready(function () {
 
+    // ============================================
+    // CONFIGURACIÓN BASE PARA TODOS LOS SLIDERS
+    // ============================================
     const commonSettings = {
         dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 1,
+        slidesToScroll: 1,     // ← UNO A UNO, no en bloques
         autoplay: true,
         autoplaySpeed: 4000,
         arrows: false,
+        pauseOnHover: true,
+        swipeToSlide: true,    // ← Permite deslizar libremente
         responsive: [
-            { breakpoint: 1200, settings: { slidesToShow: 3 } },
-            { breakpoint: 992, settings: { slidesToShow: 2 } },
-            { breakpoint: 576, settings: { slidesToShow: 1, centerMode: true, centerPadding: '40px' } }
+            { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+            { breakpoint: 992,  settings: { slidesToShow: 2, slidesToScroll: 1 } },
+            { breakpoint: 576,  settings: { slidesToShow: 1, slidesToScroll: 1, centerMode: true, centerPadding: '40px' } }
         ]
     };
 
-    // DESTACADOS
-    const slidersDestacados = $('.slider-destacados');
+    // ============================================
+    // 1. SLIDER DESTACADOS (#slider1 + #carrusel)
+    // ============================================
+    function iniciarSliderDestacados() {
+        if ($('#slider1').hasClass('slick-initialized')) {
+            $('#slider1').slick('unslick');
+        }
+        if ($('#carrusel').hasClass('slick-initialized')) {
+            $('#carrusel').slick('unslick');
+        }
 
-    slidersDestacados.each(function(){
-        $(this).slick(commonSettings);
+        if ($(window).width() >= 992) {
+            // 💻 PC → 2 sliders sincronizados
+            // Ahora que AMBOS sliders tienen la misma cantidad de elementos (12)
+            // asNavFor funcionará perfectamente sin romper el bucle infinito.
+            $('#slider1').slick({
+                ...commonSettings,
+                asNavFor: '#carrusel'
+            });
+
+            $('#carrusel').slick({
+                ...commonSettings,
+                asNavFor: '#slider1'
+            });
+        } else {
+            // En móvil solo mostramos 1 fila
+            $('#slider1').slick(commonSettings);
+        }
+    }
+
+    // Iniciar
+    iniciarSliderDestacados();
+
+    // Re-ejecutar al cambiar tamaño (con debounce para no romper nada)
+    var resizeTimer;
+    $(window).on('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            iniciarSliderDestacados();
+        }, 500); // 500ms debounce
     });
 
     // BOTONES DESTACADOS
+    // Solo necesitamos mover uno, asNavFor moverá el otro automáticamente.
     $('.slider-prev-1').click(function(){
-        slidersDestacados.each(function(){
-            $(this).slick('slickPrev');
-        });
+        $('#slider1').slick('slickPrev');
     });
-
     $('.slider-next-1').click(function(){
-        slidersDestacados.each(function(){
-            $(this).slick('slickNext');
+        $('#slider1').slick('slickNext');
+    });
+
+    // ============================================
+    // 2. SLIDER OFERTAS
+    // ============================================
+    if ($('.slider-ofertas').length && !$('.slider-ofertas').hasClass('slick-initialized')) {
+        $('.slider-ofertas').slick({
+            ...commonSettings,
+            arrows: true,
+            prevArrow: $('.slider-prev-2'),
+            nextArrow: $('.slider-next-2')
         });
-    });
+    }
 
-    // OFERTAS
-    $('.slider-ofertas').slick({
-        ...commonSettings,
-        arrows: true,
-        prevArrow: $('.slider-prev-2'),
-        nextArrow: $('.slider-next-2')
-    });
-
-    // TIKTOK
-    if ($('.tiktok-carousel').length) {
-
+    // ============================================
+    // 3. SLIDER TIKTOK
+    // ============================================
+    if ($('.tiktok-carousel').length && !$('.tiktok-carousel').hasClass('slick-initialized')) {
         $('.tiktok-carousel').slick({
-            dots: true,
+            dots: false,
             infinite: true,
             speed: 600,
             slidesToShow: 4,
@@ -201,21 +241,20 @@ $(document).ready(function () {
             autoplay: true,
             autoplaySpeed: 4500,
             arrows: false,
+            swipeToSlide: true,
             responsive: [
                 { breakpoint: 1200, settings: { slidesToShow: 3 } },
-                { breakpoint: 768, settings: { slidesToShow: 1 } }
+                { breakpoint: 768,  settings: { slidesToShow: 1 } }
             ]
         });
 
-        // BOTONES PERSONALIZADOS
+        // BOTONES PERSONALIZADOS TIKTOK
         $('.tiktok-prev').click(function(){
             $('.tiktok-carousel').slick('slickPrev');
         });
-
         $('.tiktok-next').click(function(){
             $('.tiktok-carousel').slick('slickNext');
         });
-
     }
 
 });

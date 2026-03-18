@@ -588,6 +588,9 @@ require_once 'includes/header.php';
         alert("🚨 ERROR DETECTADO EN JS:\n\n" + e.message + "\n\nLínea: " + e.lineno);
     });
 
+    //======================
+    //ACORDEÓN
+    //======================
     document.addEventListener('DOMContentLoaded', function () {
         updateCartBadge();
         debugActualizarMonitor();

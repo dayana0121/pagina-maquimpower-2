@@ -26,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $usuario) {
         // Actualizar clave y borrar token
         $upd = $pdo->prepare("UPDATE usuarios SET password = ?, reset_token = NULL, reset_expires = NULL WHERE id = ?");
         $upd->execute([$hash, $usuario['id']]);
-        
+
         $mensaje = "¡Contraseña actualizada! Ya puedes iniciar sesión.";
         $tipoMsg = "success";
         // Ocultar formulario
-        $usuario = false; 
+        $usuario = false;
     } else {
         $mensaje = "Las contraseñas no coinciden.";
         $tipoMsg = "warning";
@@ -46,31 +46,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $usuario) {
                     <h4 class="fw-bold m-0">NUEVA CONTRASEÑA</h4>
                 </div>
                 <div class="card-body p-5">
-                    
-                    <?php if($mensaje): ?>
+
+                    <?php if ($mensaje): ?>
                         <div class="alert alert-<?php echo $tipoMsg; ?> text-center mb-4">
                             <?php echo $mensaje; ?>
                         </div>
-                        <?php if($tipoMsg == 'success'): ?>
+                        <?php if ($tipoMsg == 'success'): ?>
                             <a href="login.php" class="btn btn-dark w-100 fw-bold">IR AL LOGIN</a>
                         <?php endif; ?>
                     <?php endif; ?>
 
-                    <?php if($usuario): ?>
-                    <form method="POST">
-                        <div class="mb-3">
-                            <label class="fw-bold small">Nueva Contraseña</label>
-                            <input type="password" name="password" class="form-control form-control-lg" minlength="6" required>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="fw-bold small">Confirmar Contraseña</label>
-                            <input type="password" name="confirm_password" class="form-control form-control-lg" minlength="6" required>
-                        </div>
+                    <?php if ($usuario): ?>
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label class="fw-bold small">Nueva Contraseña</label>
+                                <input type="password" name="password" class="form-control form-control-lg" minlength="6" required>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary w-100 btn-lg fw-bold">GUARDAR CAMBIOS</button>
-                    </form>
-                    <?php elseif($tipoMsg == 'danger'): ?>
+                            <div class="mb-4">
+                                <label class="fw-bold small">Confirmar Contraseña</label>
+                                <input type="password" name="confirm_password" class="form-control form-control-lg" minlength="6" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 btn-lg fw-bold">GUARDAR CAMBIOS</button>
+                        </form>
+                    <?php elseif ($tipoMsg == 'danger'): ?>
                         <a href="recuperar.php" class="btn btn-outline-dark w-100">SOLICITAR NUEVO LINK</a>
                     <?php endif; ?>
 

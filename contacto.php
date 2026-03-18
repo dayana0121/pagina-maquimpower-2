@@ -12,7 +12,7 @@
 
 <div class="container contacto py-5">
     <div class="row g-5">
-        
+
         <!-- INFORMACIÓN (Izquierda) -->
         <div class="col-lg-5">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4">
@@ -31,7 +31,7 @@
                             <small class="text-success fw-bold"><i class="bi bi-clock"></i> Lun-Sab: 8am - 6pm</small>
                         </div>
                     </div>
-                    
+
                     <!-- Teléfonos -->
                     <div class="d-flex mb-4">
                         <div class="flex-shrink-0">
@@ -68,7 +68,7 @@
         <div class="col-lg-7">
             <div class="checkout-card h-100">
                 <h3 class="fw-black mb-4">ENVÍANOS UN MENSAJE</h3>
-                
+
                 <form id="contactForm">
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -109,27 +109,30 @@
 </div>
 
 <script>
-function enviarContacto() {
-    Swal.fire({
-        icon: 'success',
-        title: '¡MENSAJE ENVIADO!',
-        text: 'Un asesor comercial te contactará en breve.',
-        confirmButtonColor: '#FF4500',
-        confirmButtonText: 'ENTENDIDO',
-        background: '#fff',
-        customClass: {
-            title: 'popup-title',
-            text: 'popup-text',
-            popup: 'popup-contacto',
-        confirmButton: 'btn-confirm-contacto'
-        }
-    });
-    document.getElementById('contactForm').reset();
-}
+    function enviarContacto() {
+        Swal.fire({
+            icon: 'success',
+            title: '¡MENSAJE ENVIADO!',
+            text: 'Un asesor comercial te contactará en breve.',
+            confirmButtonColor: '#FF4500',
+            confirmButtonText: 'ENTENDIDO',
+            background: '#fff',
+            customClass: {
+                title: 'popup-title',
+                text: 'popup-text',
+                popup: 'popup-contacto',
+                confirmButton: 'btn-confirm-contacto'
+            }
+        });
+        document.getElementById('contactForm').reset();
+    }
 </script>
 
 <style>
-    .hover-orange:hover { color: var(--primary) !important; transition: 0.3s; }
+    .hover-orange:hover {
+        color: var(--primary) !important;
+        transition: 0.3s;
+    }
 </style>
 
 <?php require_once 'includes/footer.php'; ?>

@@ -2,7 +2,10 @@
 require_once 'includes/db.php';
 require_once 'includes/header.php';
 
-if (!isset($_SESSION['user_id'])) { header("Location: /pagina/login.php"); exit; }
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /pagina/login.php");
+    exit;
+}
 
 // Obtener pedidos del usuario
 $stmt = $pdo->prepare("SELECT * FROM pedidos WHERE usuario_id = ? ORDER BY id DESC");
@@ -32,7 +35,7 @@ $pedidos = $stmt->fetchAll();
         <!-- Historial -->
         <div class="col-lg-9">
             <h3 class="fw-black text-uppercase mb-4">Historial de Compras</h3>
-            
+
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -46,25 +49,30 @@ $pedidos = $stmt->fetchAll();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($pedidos as $p): ?>
-                            <tr>
-                                <td class="ps-4 fw-bold">#<?= str_pad($p['id'], 5, '0', STR_PAD_LEFT) ?></td>
-                                <td><?= date('d/m/Y', strtotime($p['created_at'])) ?></td>
-                                <td>
-                                    <?php 
-                                        $bg = match($p['estado']) { 'pendiente'=>'warning', 'pagado'=>'success', 'enviado'=>'primary', default=>'secondary' };
+                            <?php foreach ($pedidos as $p): ?>
+                                <tr>
+                                    <td class="ps-4 fw-bold">#<?= str_pad($p['id'], 5, '0', STR_PAD_LEFT) ?></td>
+                                    <td><?= date('d/m/Y', strtotime($p['created_at'])) ?></td>
+                                    <td>
+                                        <?php
+                                        $bg = match ($p['estado']) {
+                                            'pendiente' => 'warning',
+                                            'pagado' => 'success',
+                                            'enviado' => 'primary',
+                                            default => 'secondary'
+                                        };
                                         echo "<span class='badge bg-$bg text-uppercase'>{$p['estado']}</span>";
-                                    ?>
-                                </td>
-                                <td class="fw-bold">S/ <?= number_format($p['total'], 2) ?></td>
-                                <td class="text-end pe-4">
-                                    <!-- BOTÓN CORREGIDO -->
-                                    <button class="btn btn-outline-dark btn-sm rounded-pill px-3" 
+                                        ?>
+                                    </td>
+                                    <td class="fw-bold">S/ <?= number_format($p['total'], 2) ?></td>
+                                    <td class="text-end pe-4">
+                                        <!-- BOTÓN CORREGIDO -->
+                                        <button class="btn btn-outline-dark btn-sm rounded-pill px-3"
                                             onclick='verDetalle(<?= json_encode($p) ?>)'>
-                                        Detalles
-                                    </button>
-                                </td>
-                            </tr>
+                                            Detalles
+                                        </button>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -85,15 +93,15 @@ $pedidos = $stmt->fetchAll();
             <div class="modal-body p-4 bg-light">
                 <h6 class="fw-bold text-muted small mb-3 text-uppercase">Productos</h6>
                 <div id="ud-items" class="bg-white p-3 rounded shadow-sm mb-3"></div>
-                
+
                 <div class="d-flex justify-content-between fw-bold fs-5">
                     <span>Total:</span>
                     <span id="ud-total" class="text-primary"></span>
                 </div>
-                
+
                 <hr>
                 <div class="alert alert-light border small text-muted">
-                    <i class="bi bi-geo-alt-fill text-danger me-1"></i> 
+                    <i class="bi bi-geo-alt-fill text-danger me-1"></i>
                     <strong>Dirección de Envío:</strong> <span id="ud-dir"></span>
                 </div>
             </div>
@@ -103,20 +111,20 @@ $pedidos = $stmt->fetchAll();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-function verDetalle(p) {
-    document.getElementById('ud-id').innerText = String(p.id).padStart(5,'0');
-    document.getElementById('ud-total').innerText = 'S/ ' + parseFloat(p.total).toFixed(2);
-    
-    // Dirección
-    let dir = JSON.parse(p.direccion_json || '{}');
-    document.getElementById('ud-dir').innerText = `${dir.direccion || 'Sin dirección'}, ${dir.distrito_nom || ''}`;
+    function verDetalle(p) {
+        document.getElementById('ud-id').innerText = String(p.id).padStart(5, '0');
+        document.getElementById('ud-total').innerText = 'S/ ' + parseFloat(p.total).toFixed(2);
 
-    // Items
-    let items = JSON.parse(p.detalle_json || '[]');
-    let html = '';
-    items.forEach(i => {
-        let img = i.img || 'assets/img/no-photo.png';
-        html += `
+        // Dirección
+        let dir = JSON.parse(p.direccion_json || '{}');
+        document.getElementById('ud-dir').innerText = `${dir.direccion || 'Sin dirección'}, ${dir.distrito_nom || ''}`;
+
+        // Items
+        let items = JSON.parse(p.detalle_json || '[]');
+        let html = '';
+        items.forEach(i => {
+            let img = i.img || 'assets/img/no-photo.png';
+            html += `
             <div class="d-flex align-items-center mb-2 pb-2 border-bottom border-light">
                 <img src="${img}" width="40" height="40" class="rounded me-3 border bg-white object-fit-contain">
                 <div class="lh-1 w-100">
@@ -127,11 +135,11 @@ function verDetalle(p) {
                     </div>
                 </div>
             </div>`;
-    });
-    document.getElementById('ud-items').innerHTML = html;
-    
-    new bootstrap.Modal(document.getElementById('modalDetalleUser')).show();
-}
+        });
+        document.getElementById('ud-items').innerHTML = html;
+
+        new bootstrap.Modal(document.getElementById('modalDetalleUser')).show();
+    }
 </script>
 
 <?php require_once 'includes/footer.php'; ?>

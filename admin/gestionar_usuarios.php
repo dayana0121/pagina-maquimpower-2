@@ -100,60 +100,6 @@ $usuarios = $stmt->fetchAll();
     <title>Gestión de Usuarios | MaquimAdmin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary: #FF4500;
-            --dark-bg: #1a1a1a;
-        }
-
-        body {
-            background: #f8f9fa;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .admin-header {
-            background: var(--dark-bg);
-            color: white;
-            padding: 25px 0;
-            border-bottom: 4px solid var(--primary);
-        }
-
-        .btn-primary-custom {
-            background: var(--primary);
-            border: none;
-            font-weight: 700;
-        }
-
-        .btn-primary-custom:hover {
-            background: #e03e00;
-        }
-
-        .card-custom {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-
-        .table-custom th {
-            background: #333;
-            color: white;
-            font-weight: 500;
-            border: none;
-        }
-
-        .avatar-circle {
-            width: 40px;
-            height: 40px;
-            background: #eee;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #555;
-        }
-    </style>
 </head>
 
 <body>
