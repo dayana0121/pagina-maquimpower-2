@@ -5,6 +5,7 @@
     --grey-light: #f4f4f4;
     --grey-ligth-2: #333;
     --transition: all 0.3s ease;
+    --bs-danger-rgb: 220, 53, 69;
 }
 
 .text-primary {
@@ -49,7 +50,7 @@ body {
 
 /* --- HEADER & TOP BAR --- */
 .top-bar {
-    background: #111; /* Negro puro en vez de naranja chillón */
+    background: #111;
     color: #fff;
     font-size: 0.75rem;
     padding: 6px 0;
@@ -57,8 +58,8 @@ body {
     letter-spacing: 1px;
 }
 .top-bar span { opacity: 0.8; }
-/* --- FIX: Z-INDEX WAR (Buscador vs Categorías) --- */
 
+/* --- FIX: Z-INDEX WAR (Buscador vs Categorías) --- */
 /* 1. Elevamos el Header por encima de la barra pegajosa */
 .header-main {
     position: relative;
@@ -126,8 +127,8 @@ body {
 .avatar-circle {
     width: 42px;
     height: 42px;
-    background-color: #212529; /* Fondo oscuro */
-    color: #ff4500;            /* Naranja principal */
+    background-color: #212529; 
+    color: #ff4500;            
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,6 +152,32 @@ body {
     color: #212529;
     text-transform: uppercase;
 }
+
+/* Badge de Administrador */
+.admin-badge {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Efectos del Dropdown */
+.dropdown-item {
+    border-radius: 8px;
+    margin: 2px 0;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    padding-left: 1.25rem;
+}
+
 
 /* --- FIX: ARREGLO DE MENÚ DESPLEGABLE --- */
 
@@ -2563,6 +2590,11 @@ footer {
     transition: all 0.3s ease;
 }
 
+
+/*************PERFIL****************/
+.modal-body .alert .text-danger{
+    color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
+}
 
 
 /*********************ACADEMIA***************/

@@ -338,7 +338,6 @@ try {
                          alt="Logo" 
                          style="max-height: 60px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
                 </a>
-
                 <div class="d-flex align-items-center gap-2">
                     <?php if(!isset($_SESSION['user_id'])): ?>
                         <a href="/pagina/login.php" class="text-dark"><i class="bi bi-person-circle fs-2"></i></a>
@@ -351,7 +350,6 @@ try {
                     </a>
                 </div>
             </div>
-            
             <div class="mt-3 position-relative"> <form class="search-modern-mobile bg-light d-flex rounded-pill px-3 py-2" action="/pagina/categoria.php" method="GET">
         <input type="text" id="mobileSearchInput" name="q" class="form-control border-0 bg-transparent shadow-none" placeholder="Buscar máquinas o repuestos..." autocomplete="off" required>
         <button type="submit" class="btn text-primary p-0"><i class="bi bi-search fs-5"></i></button>
