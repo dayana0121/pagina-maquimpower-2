@@ -1,4 +1,3 @@
-
 </div>
 <footer class="bg-dark text-white pt-5 mt-auto" style="border-top: 5px solid var(--primary);">
     <div class="container pb-4">
@@ -142,120 +141,101 @@
 <!-- JS DEL SITIO -->
 <script src="assets/js/main.js?v=1.0.3"></script>
 <script>
-$(document).ready(function () {
+    $(document).ready(function() {
 
-    // ============================================
-    // CONFIGURACIÓN BASE PARA TODOS LOS SLIDERS
-    // ============================================
-    const commonSettings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,     // ← UNO A UNO, no en bloques
-        autoplay: true,
-        autoplaySpeed: 4000,
-        arrows: false,
-        pauseOnHover: true,
-        swipeToSlide: true,    // ← Permite deslizar libremente
-        responsive: [
-            { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-            { breakpoint: 992,  settings: { slidesToShow: 2, slidesToScroll: 1 } },
-            { breakpoint: 576,  settings: { slidesToShow: 1, slidesToScroll: 1, centerMode: true, centerPadding: '40px' } }
-        ]
-    };
-
-    // ============================================
-    // 1. SLIDER DESTACADOS (#slider1 + #carrusel)
-    // ============================================
-    function iniciarSliderDestacados() {
-        if ($('#slider1').hasClass('slick-initialized')) {
-            $('#slider1').slick('unslick');
-        }
-        if ($('#carrusel').hasClass('slick-initialized')) {
-            $('#carrusel').slick('unslick');
-        }
-
-        if ($(window).width() >= 992) {
-            // 💻 PC → 2 sliders sincronizados
-            // Ahora que AMBOS sliders tienen la misma cantidad de elementos (12)
-            // asNavFor funcionará perfectamente sin romper el bucle infinito.
-            $('#slider1').slick({
-                ...commonSettings,
-                asNavFor: '#carrusel'
+        // ============================================
+        // SLIDER OFERTAS
+        // ============================================
+        if ($('.slider-ofertas').length && !$('.slider-ofertas').hasClass('slick-initialized')) {
+            $('.slider-ofertas').slick({
+                dots: false,
+                infinite: true, // 🔑 bucle infinite
+                speed: 600,
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                autoplay: true, // 🔑 autoplay
+                autoplaySpeed: 4500,
+                arrows: false, // usamos botones personalizados
+                swipeToSlide: true,
+                responsive: [{
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
             });
 
-            $('#carrusel').slick({
-                ...commonSettings,
-                asNavFor: '#slider1'
+            // Aquí enganchas los eventos con console.log
+            $('.slider-ofertas').on('init', function(event, slick) {
+                console.log("🔧 INIT carrusel ofertas");
+                console.log("Total slides:", slick.slideCount);
+                console.log("Slides visibles:", slick.options.slidesToShow);
+                console.log("Ancho de cada slide:", slick.$slides[0].getBoundingClientRect().width);
             });
-        } else {
-            // En móvil solo mostramos 1 fila
-            $('#slider1').slick(commonSettings);
+
+            $('.slider-ofertas').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                console.log("➡️ beforeChange: de", currentSlide, "a", nextSlide);
+            });
+
+            $('.slider-ofertas').on('afterChange', function(event, slick, currentSlide) {
+                console.log("✅ afterChange: slide actual", currentSlide);
+                console.log("Slides visibles:", slick.options.slidesToShow);
+                console.log("Ancho contenedor:", slick.$slider.width());
+            });
+
+            // BOTONES PERSONALIZADOS OFERTAS
+            $('.slider-prev-2').click(function() {
+                $('.slider-ofertas').slick('slickPrev');
+            });
+            $('.slider-next-2').click(function() {
+                $('.slider-ofertas').slick('slickNext');
+            });
         }
-    }
 
-    // Iniciar
-    iniciarSliderDestacados();
+        // ============================================
+        // SLIDER TIKTOK
+        // ============================================
+        if ($('.tiktok-carousel').length && !$('.tiktok-carousel').hasClass('slick-initialized')) {
+            $('.tiktok-carousel').slick({
+                dots: false,
+                infinite: true, // 🔑 bucle infinito
+                speed: 600,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: true, // 🔑 autoplay
+                autoplaySpeed: 4500,
+                arrows: false, // usamos botones personalizados
+                swipeToSlide: true,
+                responsive: [{
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
 
-    // Re-ejecutar al cambiar tamaño (con debounce para no romper nada)
-    var resizeTimer;
-    $(window).on('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            iniciarSliderDestacados();
-        }, 500); // 500ms debounce
+            // BOTONES PERSONALIZADOS TIKTOK
+            $('.tiktok-prev').click(function() {
+                $('.tiktok-carousel').slick('slickPrev');
+            });
+            $('.tiktok-next').click(function() {
+                $('.tiktok-carousel').slick('slickNext');
+            });
+        }
+
     });
-
-    // BOTONES DESTACADOS
-    // Solo necesitamos mover uno, asNavFor moverá el otro automáticamente.
-    $('.slider-prev-1').click(function(){
-        $('#slider1').slick('slickPrev');
-    });
-    $('.slider-next-1').click(function(){
-        $('#slider1').slick('slickNext');
-    });
-
-    // ============================================
-    // 2. SLIDER OFERTAS
-    // ============================================
-    if ($('.slider-ofertas').length && !$('.slider-ofertas').hasClass('slick-initialized')) {
-        $('.slider-ofertas').slick({
-            ...commonSettings,
-            arrows: true,
-            prevArrow: $('.slider-prev-2'),
-            nextArrow: $('.slider-next-2')
-        });
-    }
-
-    // ============================================
-    // 3. SLIDER TIKTOK
-    // ============================================
-    if ($('.tiktok-carousel').length && !$('.tiktok-carousel').hasClass('slick-initialized')) {
-        $('.tiktok-carousel').slick({
-            dots: false,
-            infinite: true,
-            speed: 600,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4500,
-            arrows: false,
-            swipeToSlide: true,
-            responsive: [
-                { breakpoint: 1200, settings: { slidesToShow: 3 } },
-                { breakpoint: 768,  settings: { slidesToShow: 1 } }
-            ]
-        });
-
-        // BOTONES PERSONALIZADOS TIKTOK
-        $('.tiktok-prev').click(function(){
-            $('.tiktok-carousel').slick('slickPrev');
-        });
-        $('.tiktok-next').click(function(){
-            $('.tiktok-carousel').slick('slickNext');
-        });
-    }
-
-});
 </script>

@@ -23,7 +23,7 @@ function renderHomeCard($p)
     $descuento = $tieneOferta ? round((($p['precio'] - $p['precio_oferta']) / $p['precio']) * 100) : 0;
 
     ob_start();
-    ?>
+?>
     <div class="px-2 h-100 reveal-item">
         <a href="<?= $link ?>" class="text-decoration-none product-card-link">
             <div class="prod-card h-100 position-relative bg-white border border-light rounded-4 overflow-hidden p-2">
@@ -83,8 +83,9 @@ function renderHomeCard($p)
             </div>
         </a>
     </div>
-    <?php
-    return ob_get_clean();}
+<?php
+    return ob_get_clean();
+}
 ?>
 
 
@@ -233,12 +234,8 @@ function renderHomeCard($p)
     <!-- Carrusel 1 -->
     <div id="slider1" class="slider-destacados slick-slider">
         <?php foreach ($productos as $p): ?>
-    <?= renderHomeCard($p) ?>
-<?php endforeach; ?>
-
-<?php foreach ($productos as $p): ?>
-    <?= renderHomeCard($p) ?>
-<?php endforeach; ?>variableW
+            <?= renderHomeCard($p) ?>
+        <?php endforeach; ?>
     </div>
 
     <!-- Carrusel 1.1 -->
@@ -269,10 +266,10 @@ function renderHomeCard($p)
     <div class="prod-slider-container">
         <div class="slider-ofertas">
             <?php foreach ($productosOferta as $p): ?>
-            <?= renderHomeCard($p) ?>
-        <?php endforeach; ?>
+                <?= renderHomeCard($p) ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-     </div>
 </div>
 
 
@@ -293,79 +290,79 @@ function renderHomeCard($p)
 
         <div class="tiktok-slider-container">
 
-    <!-- BOTON IZQUIERDA -->
-    <button class="tiktok-btn tiktok-prev">
-        <i class="bi bi-chevron-left"></i>
-    </button>
+            <!-- BOTON IZQUIERDA -->
+            <button class="tiktok-btn tiktok-prev">
+                <i class="bi bi-chevron-left"></i>
+            </button>
 
-        <!-- CARRUSEL DE VIDEOS -->
-        <div class="tiktok-carousel">
-            <?php
-            $tiktoks = [
-                ['id' => '7527428893381348664', 'title' => 'Tutorial Puzzi'],
-                ['id' => '7484263372117036294', 'title' => 'Espumadoras Pro'],
-                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
-                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
-                ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
-            ];
-            foreach ($tiktoks as $vid): ?>
-                <div class="tiktok-slide"> <!-- SLIDERl -->
-                    <div class="tiktok-wrapper shadow-sm border">
-                        <!-- FACHADA -->
-                        <div class="tiktok-facade" data-id="<?= $vid['id'] ?>" onclick="cargarVideoIframe(this)">
-                            <div class="tiktok-placeholder">
-                                <i class="bi bi-tiktok brand-icon"></i>
-                                <div class="play-button">
-                                    <i class="bi bi-play-fill"></i>
+            <!-- CARRUSEL DE VIDEOS -->
+            <div class="tiktok-carousel">
+                <?php
+                $tiktoks = [
+                    ['id' => '7527428893381348664', 'title' => 'Tutorial Puzzi'],
+                    ['id' => '7484263372117036294', 'title' => 'Espumadoras Pro'],
+                    ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
+                    ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
+                    ['id' => '7502488436641697079', 'title' => 'Vaporizadoras'],
+                ];
+                foreach ($tiktoks as $vid): ?>
+                    <div class="tiktok-slide"> <!-- SLIDERl -->
+                        <div class="tiktok-wrapper shadow-sm border">
+                            <!-- FACHADA -->
+                            <div class="tiktok-facade" data-id="<?= $vid['id'] ?>" onclick="cargarVideoIframe(this)">
+                                <div class="tiktok-placeholder">
+                                    <i class="bi bi-tiktok brand-icon"></i>
+                                    <div class="play-button">
+                                        <i class="bi bi-play-fill"></i>
+                                    </div>
+                                    <p class="text-white mt-3 fw-bold small text-uppercase px-3 text-center text-truncate w-75">
+                                        <?= $vid['title'] ?>
+                                    </p>
                                 </div>
-                                <p class="text-white mt-3 fw-bold small text-uppercase px-3 text-center text-truncate w-75">
-                                    <?= $vid['title'] ?>
-                                </p>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </div>
 
-    <!-- BOTON DERECHA -->
-    <button class="tiktok-btn tiktok-next">
-        <i class="bi bi-chevron-right"></i>
-    </button>
-    </div>
+            <!-- BOTON DERECHA -->
+            <button class="tiktok-btn tiktok-next">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
 </section>
 <?php if (isset($_GET['registro']) && $_GET['registro'] == 'exito'): ?>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-                <?php if (isset($_GET['mail']) && $_GET['mail'] == 'ok'): ?>
-                    // SI EL CORREO SE ENVIÓ BIEN
-                    Swal.fire({
-                        title: '¡CUENTA CREADA!',
-                        text: 'Te hemos enviado un correo de bienvenida. ¡Revisa tu bandeja de entrada!',
-                        icon: 'success',
-                        background: '#1a1a1a',
-                        color: '#fff',
-                        confirmButtonColor: '#FF4500'
-                    }).then(() => {
-                        // Limpiamos la URL para que no vuelva a salir si recarga la página
-                        window.history.replaceState(null, null, window.location.pathname);
-                    });
-                <?php else: ?>
-                    // SI HUBO UN ERROR CON HOSTINGER
-                    Swal.fire({
-                        title: '¡CUENTA CREADA!',
-                        html: 'Tu cuenta está lista, pero <b>tuvimos un problema al enviarte el correo</b> de bienvenida. <br><br> (Revisa tus credenciales de Hostinger).',
-                        icon: 'warning',
-                        background: '#1a1a1a',
-                        color: '#fff',
-                        confirmButtonColor: '#FF4500'
-                    }).then(() => {
-                        window.history.replaceState(null, null, window.location.pathname);
-                    });
-                <?php endif; ?>
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if (isset($_GET['mail']) && $_GET['mail'] == 'ok'): ?>
+                // SI EL CORREO SE ENVIÓ BIEN
+                Swal.fire({
+                    title: '¡CUENTA CREADA!',
+                    text: 'Te hemos enviado un correo de bienvenida. ¡Revisa tu bandeja de entrada!',
+                    icon: 'success',
+                    background: '#1a1a1a',
+                    color: '#fff',
+                    confirmButtonColor: '#FF4500'
+                }).then(() => {
+                    // Limpiamos la URL para que no vuelva a salir si recarga la página
+                    window.history.replaceState(null, null, window.location.pathname);
+                });
+            <?php else: ?>
+                // SI HUBO UN ERROR CON HOSTINGER
+                Swal.fire({
+                    title: '¡CUENTA CREADA!',
+                    html: 'Tu cuenta está lista, pero <b>tuvimos un problema al enviarte el correo</b> de bienvenida. <br><br> (Revisa tus credenciales de Hostinger).',
+                    icon: 'warning',
+                    background: '#1a1a1a',
+                    color: '#fff',
+                    confirmButtonColor: '#FF4500'
+                }).then(() => {
+                    window.history.replaceState(null, null, window.location.pathname);
+                });
+            <?php endif; ?>
+        });
     </script>
 <?php endif; ?>
 
@@ -411,7 +408,8 @@ function renderHomeCard($p)
                     <img src="<?= $img ?>" class="mx-4 opacity-50 hover-opacity-100 transition-opacity"
                         style="height: 40px; width: auto; filter: grayscale(100%); transition: 0.3s;"
                         onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%)'">
-                <?php endforeach; endfor; ?>
+            <?php endforeach;
+            endfor; ?>
         </div>
     </div>
 </div>
@@ -448,14 +446,18 @@ function renderHomeCard($p)
     }
 </script>
 <script>
-
     // ANIMACIÓN CASCADA
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
             });
-        }, { threshold: 0.1 });
+        }, {
+            threshold: 0.1
+        });
         document.querySelectorAll('.reveal-item').forEach((item, index) => {
             item.style.transitionDelay = (index % 4) * 100 + 'ms';
             observer.observe(item);

@@ -36,7 +36,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sku = strtoupper(trim($_POST['sku'] ?? ''));
     $precio = floatval($_POST['precio'] ?? 0);
     $stock = (int) ($_POST['stock'] ?? 0);
-    $desc = $_POST['descripcion'] ?? '';
+    // Procesar los datos al guardar
+    $descripcion_general_raw = $_POST['descripcion_general_input'] ?? '';
+    $especificaciones_tecnicas_raw = $_POST['especificaciones_tecnicas_input'] ?? '';
+
+    $descripcion_general_processed = nl2br(htmlspecialchars($descripcion_general_raw));
+
+    $especificaciones_tecnicas_processed = '';
+    $lines = explode("\n", $especificaciones_tecnicas_raw);
+    $formatted_specs = [];
+
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if (empty($line)) continue;
+
+        $parts = explode(':', $line, 2);
+        if (count($parts) === 2) {
+            $key = trim($parts[0]);
+            $value = trim($parts[1]);
+            if (!empty($key) && !empty($value)) {
+                $formatted_specs[] = htmlspecialchars($key) . ': ' . htmlspecialchars($value);
+            }
+        } else {
+            $formatted_specs[] = htmlspecialchars($line);
+        }
+    }
+    $especificaciones_tecnicas_processed = implode("\n", $formatted_specs);
+
+    $delimiter = "---MAQUIMPOWER_ESPECIFICACIONES_TECNICAS_START---";
+    $desc = $descripcion_general_processed . "\n\n" . $delimiter . "\n\n" . $especificaciones_tecnicas_processed;
+
+
     $cat = strtoupper(trim($_POST['categoria'] ?? ''));
     $video = $_POST['video_url'] ?? '';
     $etiqueta = $_POST['etiqueta'] ?? '';
@@ -65,16 +95,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // A. Si pidieron borrar
     if (isset($_POST['borrar_pdf']) && $_POST['borrar_pdf'] == '1') {
-        $pdfFinal = null; 
+        $pdfFinal = null;
     }
 
     // B. Si subieron archivo nuevo
     if (isset($_FILES['pdf_file']) && $_FILES['pdf_file']['size'] > 0) {
-        
+
         if ($_FILES['pdf_file']['error'] === UPLOAD_ERR_OK) {
             $pdfName = $_FILES['pdf_file']['name'];
             $pdfExt = strtolower(pathinfo($pdfName, PATHINFO_EXTENSION));
-            
+
             if ($pdfExt === 'pdf') {
                 // Definir carpeta física y url web
                 $uploadDir = "../assets/fichas_tecnicas/"; // Dónde se guarda físicamente
@@ -86,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 $newPdfName = "ficha-" . $slug . "-" . time() . ".pdf";
-                
+
                 // Mover archivo
                 if (move_uploaded_file($_FILES['pdf_file']['tmp_name'], $uploadDir . $newPdfName)) {
                     $pdfFinal = $webPath . $newPdfName;
@@ -97,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $msg .= "⚠️ El archivo subido no es un PDF válido. ";
             }
         }
-    } 
+    }
     // C. Si pusieron link externo
     elseif (!empty($_POST['pdf_link'])) {
         $pdfFinal = trim($_POST['pdf_link']);
@@ -120,8 +150,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $newName = $slug . '-' . time() . '-' . $i . '.' . $ext;
                     if (move_uploaded_file($_FILES['galeria_files']['tmp_name'][$i], $targetDir . $newName)) {
                         $webUrl = "/assets/img/productos/" . $newName;
-                        $finalImages[] = $webUrl; 
-                        $uploadedMap['new_' . $i] = $webUrl; 
+                        $finalImages[] = $webUrl;
+                        $uploadedMap['new_' . $i] = $webUrl;
                     }
                 }
             }
@@ -173,13 +203,45 @@ if ($id > 0) {
 }
 
 $defaults = [
-    'nombre' => '', 'sku' => '', 'precio' => '', 'precio_lista' => '',
-    'stock_actual' => 10, 'descripcion' => '', 'meta_description' => '',
-    'categoria' => '', 'etiqueta' => '', 'video_url' => '',
-    'pdf_url' => '', 'imagen_url' => '', 'imagen_alt' => '',
-    'galeria' => '[]', 'slug' => ''
+    'nombre' => '',
+    'sku' => '',
+    'precio' => '',
+    'precio_lista' => '',
+    'stock_actual' => 10,
+    'descripcion' => '',
+    'meta_description' => '',
+    'categoria' => '',
+    'etiqueta' => '',
+    'video_url' => '',
+    'pdf_url' => '',
+    'imagen_url' => '',
+    'imagen_alt' => '',
+    'galeria' => '[]',
+    'slug' => ''
 ];
 $p = is_array($p) ? array_merge($defaults, $p) : $defaults;
+
+$full_db_description = $p['descripcion'] ?? '';
+$delimiter = "---MAQUIMPOWER_ESPECIFICACIONES_TECNICAS_START---";
+
+$parts_from_db = explode("\n\n" . $delimiter . "\n\n", $full_db_description, 2);
+if (count($parts_from_db) < 2) {
+    $parts_from_db = explode($delimiter, $full_db_description, 2);
+}
+
+if (count($parts_from_db) < 2) {
+    $legacy_split = preg_split('/(<b>)?Especificaciones:(<\/b>)?/i', $full_db_description, 2);
+    if (count($legacy_split) == 2) {
+        $parts_from_db = $legacy_split;
+    }
+}
+
+$p['descripcion_general_input'] = $parts_from_db[0] ?? '';
+$p['especificaciones_tecnicas_input'] = $parts_from_db[1] ?? '';
+
+$p['descripcion_general_input'] = str_replace(['<br />', '<br>', '<br/>'], "\n", htmlspecialchars_decode($p['descripcion_general_input']));
+$p['especificaciones_tecnicas_input'] = str_replace(['<br />', '<br>', '<br/>'], "\n", htmlspecialchars_decode($p['especificaciones_tecnicas_input']));
+
 
 $porcentaje_actual = 0;
 if ($p['precio'] > 0 && $p['precio_lista'] > 0) {
@@ -378,30 +440,32 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
             background-color: #e9ecef;
             border-color: var(--primary) !important;
         }
+
         /* Indica que es arrastrable */
-.gallery-item {
-    cursor: grab; 
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+        .gallery-item {
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-.gallery-item:active {
-    cursor: grabbing;
-}
+        .gallery-item:active {
+            cursor: grabbing;
+        }
 
-/* Estilo cuando estás arrastrando un elemento (transparencia) */
-.sortable-ghost {
-    opacity: 0.4;
-    background-color: #f8f9fa;
-    border: 2px dashed #ccc;
-}
+        /* Estilo cuando estás arrastrando un elemento (transparencia) */
+        .sortable-ghost {
+            opacity: 0.4;
+            background-color: #f8f9fa;
+            border: 2px dashed #ccc;
+        }
 
-/* Estilo del elemento que tienes agarrado */
-.sortable-drag {
-    opacity: 1;
-    background: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    transform: scale(1.05); /* Efecto pop-up */
-}
+        /* Estilo del elemento que tienes agarrado */
+        .sortable-drag {
+            opacity: 1;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+            /* Efecto pop-up */
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 </head>
@@ -409,9 +473,9 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
 <body>
 
     <div class="admin-header">
-            <div class="container d-flex justify-content-between align-items-center mb-4">
+        <div class="container d-flex justify-content-between align-items-center mb-4">
             <h3 class="m-0 fw-black"><i class="bi bi-gear-fill me-2"></i> EDITOR DE PRODUCTO</h3>
-            
+
             <a href="<?php echo $rutaVolver; ?>" class="btn btn-dark rounded-pill px-4 fw-bold shadow-sm border-0">
                 <i class="bi bi-arrow-left me-2"></i>Volver
             </a>
@@ -474,11 +538,18 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
                                     </select>
                                 </div>
 
-                                <div class="col-12">
-                                    <label>Descripción</label>
-                                    <textarea name="descripcion" class="form-control"
-                                        rows="6"><?php echo htmlspecialchars($p['descripcion']); ?></textarea>
+                                <div class="col-12 mb-3">
+                                    <label class="fw-bold text-dark">1. DESCRIPCIÓN GENERAL & QUÉ INCLUYE</label>
+                                    <textarea name="descripcion_general_input" id="descripcion_general_input" class="form-control" rows="8"><?php echo htmlspecialchars($p['descripcion_general_input']); ?></textarea>
+                                    <small class="text-muted">Use puntos o guiones para las listas.</small>
                                 </div>
+
+                                <div class="col-12 mb-3">
+                                    <label class="fw-bold text-dark">2. ESPECIFICACIONES TÉCNICAS (Ficha)</label>
+                                    <textarea name="especificaciones_tecnicas_input" id="especificaciones_tecnicas_input" class="form-control" rows="6"><?php echo htmlspecialchars($p['especificaciones_tecnicas_input']); ?></textarea> <small class="text-muted">Asegúrese de que cada característica esté en una nueva línea y separada por dos puntos.</small>
+                                </div>
+
+
                                 <div class="col-12 mt-3">
                                     <label class="text-primary"><i class="bi bi-google me-1"></i> META DESCRIPCIÓN
                                         (SEO)</label>
@@ -616,13 +687,13 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
                                     if (!in_array($p['imagen_url'], $currentImages)) {
                                         array_unshift($currentImages, $p['imagen_url']);
                                     }
-                                }   
+                                }
                                 // Limpiar
                                 $currentImages = array_values(array_unique($currentImages));
 
                                 foreach ($currentImages as $idx => $img):
                                     $isCover = ($img === $p['imagen_url']);
-                                    ?>
+                                ?>
                                     <div class="gallery-item existing-item">
                                         <img src="<?= $img ?>">
 
@@ -705,7 +776,6 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
                 slugField.value = slug;
             }
         }
-
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 
@@ -743,7 +813,7 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
             Array.from(dt.files).forEach((file, index) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     const div = document.createElement('div');
                     div.className = 'gallery-item new-pending-item animate__animated animate__fadeIn';
                     div.innerHTML = `
@@ -826,23 +896,23 @@ $rutaVolver = isset($_SESSION['dashboard_url_volver']) ? $_SESSION['dashboard_ur
             })
         }
         document.addEventListener('DOMContentLoaded', function() {
-    var el = document.getElementById('unified-gallery');
-    
-    if(el) {
-        var sortable = Sortable.create(el, {
-            animation: 150, // Suavidad de la animación (ms)
-            ghostClass: 'sortable-ghost', // Clase para el elemento fantasma (el hueco)
-            chosenClass: 'sortable-chosen', // Clase para el elemento seleccionado
-            dragClass: 'sortable-drag', // Clase mientras se arrastra
-            
-            // Esto asegura que cuando arrastres, el input oculto también se mueva
-            // y PHP reciba el nuevo orden automáticamente al guardar.
-            onEnd: function (evt) {
-                console.log('Nuevo orden establecido');
+            var el = document.getElementById('unified-gallery');
+
+            if (el) {
+                var sortable = Sortable.create(el, {
+                    animation: 150, // Suavidad de la animación (ms)
+                    ghostClass: 'sortable-ghost', // Clase para el elemento fantasma (el hueco)
+                    chosenClass: 'sortable-chosen', // Clase para el elemento seleccionado
+                    dragClass: 'sortable-drag', // Clase mientras se arrastra
+
+                    // Esto asegura que cuando arrastres, el input oculto también se mueva
+                    // y PHP reciba el nuevo orden automáticamente al guardar.
+                    onEnd: function(evt) {
+                        console.log('Nuevo orden establecido');
+                    }
+                });
             }
         });
-    }
-});
     </script>
 
 </body>

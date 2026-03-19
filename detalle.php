@@ -74,6 +74,31 @@ if (!$p) {
 
 // --- SI LLEGAMOS AQUÍ, ES PORQUE $p EXISTE ---
 
+// --- SI LLEGAMOS AQUÍ, ES PORQUE $p EXISTE ---
+
+// 🔥 AQUÍ VA TU CÓDIGO
+$delimiter = "---MAQUIMPOWER_ESPECIFICACIONES_TECNICAS_START---";
+$full_product_description = $p['descripcion'] ?? '';
+
+$description_parts = explode("\n\n" . $delimiter . "\n\n", $full_product_description, 2);
+if (count($description_parts) < 2) {
+    $description_parts = explode($delimiter, $full_product_description, 2);
+}
+
+if (count($description_parts) < 2) {
+    $legacy_split = preg_split('/(<b>)?Especificaciones:(<\/b>)?/i', $full_product_description, 2);
+    if (count($legacy_split) == 2) {
+        $general_description_for_display = $legacy_split[0] ?? '';
+        $technical_specs_for_display = $legacy_split[1] ?? '';
+    } else {
+        $general_description_for_display = $full_product_description;
+        $technical_specs_for_display = '';
+    }
+} else {
+    $general_description_for_display = $description_parts[0] ?? '';
+    $technical_specs_for_display = $description_parts[1] ?? '';
+}
+
 $agotado = ($p['stock_actual'] <= 0);
 $img_raw = "https://maquimpower.com/assets/img/gal_1769633279_0.webp";
 $imgPrincipal = str_replace('/var/www/html', '', $img_raw);
@@ -199,7 +224,7 @@ require_once 'includes/header.php';
 
                     <!-- PRECIO -->
                     <div class="mb-4 bg-white p-3 rounded-4 shadow-sm border">
-                        <?php 
+                        <?php
                         // 1. Aseguramos que los valores sean números reales
                         $p_lista = floatval($p['precio_lista']); // El precio inflado (ej: 4736.84)
                         $p_real = floatval($p['precio']);       // El precio real (ej: 4500.00)
@@ -224,7 +249,7 @@ require_once 'includes/header.php';
                                 </span>
                             </div>
                         <?php endif; ?>
-                        
+
                         <!-- PRECIO PRINCIPAL: NEGRO (text-dark), muy negrita (fw-bold) y grande -->
                         <div class="price-tag-large text-dark fw-bold" style="font-size: 3.2rem; letter-spacing: -2px; line-height: 1.1;">
                             S/ <?php echo number_format($p_real, 2); ?>
@@ -297,12 +322,42 @@ require_once 'includes/header.php';
                             </h2>
                             <div id="collapseDesc" class="accordion-collapse collapse show"
                                 data-bs-parent="#accordionProduct">
-                                <div class="accordion-body text-secondary small" style="white-space: pre-line;">
+                                <div class="accordion-body text-secondary" style="font-size: 0.9rem; line-height: 1.7;">
                                     <?php
-                                    $cleanDesc = explode("Especificaciones:", $p['descripcion'])[0];
-                                    echo strip_tags($cleanDesc);
+                                    $raw_text = htmlspecialchars_decode($general_description_for_display);
+                                    $raw_text = str_replace(array('<br />', '<br>', '<br/>'), "\n", $raw_text);
+
+                                    $lines = explode("\n", $raw_text);
+                                    $in_list = false;
+                                    $html_output = '';
+
+                                    foreach ($lines as $line) {
+                                        $trimmed = trim($line);
+                                        if (empty($trimmed)) continue;
+
+                                        if (preg_match('/^([•-])/u', $trimmed)) {
+                                            if (!$in_list) {
+                                                $html_output .= "<ul class='ps-4 mb-4 mt-2' style='list-style-type: disc;'>\n";
+                                                $in_list = true;
+                                            }
+                                            $clean_line = trim(preg_replace('/^([•-])\s*/u', '', $trimmed));
+                                            $html_output .= "<li class='mb-2'>" . $clean_line . "</li>\n";
+                                        } else {
+                                            if ($in_list) {
+                                                $html_output .= "</ul>\n";
+                                                $in_list = false;
+                                            }
+                                            $html_output .= "<p class='mb-3'>" . $trimmed . "</p>\n";
+                                        }
+                                    }
+                                    if ($in_list) {
+                                        $html_output .= "</ul>\n";
+                                    }
+
+                                    echo $html_output;
                                     ?>
                                 </div>
+
                             </div>
                         </div>
 
@@ -321,14 +376,21 @@ require_once 'includes/header.php';
                                     <table class="table table-striped table-hover m-0" style="font-size: 0.85rem;">
                                         <tbody>
                                             <?php
-                                            $lineas = explode("\n", strip_tags($p['descripcion']));
-                                            foreach ($lineas as $linea) {
+                                            $lineas_specs = explode("\n", $technical_specs_for_display);
+                                            foreach ($lineas_specs as $linea) {
+                                                $linea = trim(strip_tags($linea));
+                                                if (empty($linea)) continue;
+
                                                 if (strpos($linea, ':') !== false && strlen($linea) < 150) {
                                                     $partes = explode(':', $linea, 2);
                                                     echo "<tr>
-                                                            <th class='ps-4 text-muted fw-bold' style='width:40%'>" . trim($partes[0]) . "</th>
-                                                            <td class='fw-bold text-dark'>" . trim($partes[1]) . "</td>
-                                                          </tr>";
+                    <th class='ps-4 text-muted fw-bold' style='width:40%'>" . trim($partes[0]) . "</th>
+                    <td class='fw-bold text-dark'>" . trim($partes[1]) . "</td>
+                  </tr>";
+                                                } else {
+                                                    echo "<tr>
+                    <td colspan='2' class='ps-4 text-muted fw-bold'>" . htmlspecialchars($linea) . "</td>
+                  </tr>";
                                                 }
                                             }
                                             ?>
@@ -414,16 +476,23 @@ require_once 'includes/header.php';
             let nuevaCant = cart[existingIndex].cantidad + cantidad;
             if (nuevaCant > stockMax) {
                 cart[existingIndex].cantidad = stockMax;
-                MiniAlerta.fire({ title: 'STOCK MÁXIMO ALCANZADO', icon: 'warning' });
+                MiniAlerta.fire({
+                    title: 'STOCK MÁXIMO ALCANZADO',
+                    icon: 'warning'
+                });
             } else {
                 cart[existingIndex].cantidad = nuevaCant;
             }
             cart[existingIndex].maxStock = stockMax;
         } else {
             cart.push({
-                id: id, sku: sku, nombre: nombre,
-                precio: parseFloat(precio), img: imagen,
-                cantidad: cantidad, maxStock: stockMax
+                id: id,
+                sku: sku,
+                nombre: nombre,
+                precio: parseFloat(precio),
+                img: imagen,
+                cantidad: cantidad,
+                maxStock: stockMax
             });
         }
 
@@ -438,7 +507,7 @@ require_once 'includes/header.php';
     }
 
     // Declaramos la función original explícitamente en window para poder interceptarla luego
-    window.prepararCompra = function (id, sku, nombre, precio, imagen, stockMax) {
+    window.prepararCompra = function(id, sku, nombre, precio, imagen, stockMax) {
         const cantInput = document.getElementById('cantidad');
 
         if (!cantInput) {
@@ -449,17 +518,26 @@ require_once 'includes/header.php';
         const cantidad = parseInt(cantInput.value);
 
         if (isNaN(cantidad) || cantidad < 1) {
-            MiniAlerta.fire({ title: 'Ingresa una cantidad válida', icon: 'error' });
+            MiniAlerta.fire({
+                title: 'Ingresa una cantidad válida',
+                icon: 'error'
+            });
             return;
         }
 
         if (cantidad > stockMax) {
-            MiniAlerta.fire({ title: 'Stock insuficiente (Máx: ' + stockMax + ')', icon: 'warning' });
+            MiniAlerta.fire({
+                title: 'Stock insuficiente (Máx: ' + stockMax + ')',
+                icon: 'warning'
+            });
             return;
         }
 
         addToCart(id, sku, nombre, precio, imagen, cantidad, stockMax);
-        MiniAlerta.fire({ title: 'PRODUCTO AÑADIDO AL CARRITO', icon: 'success' });
+        MiniAlerta.fire({
+            title: 'PRODUCTO AÑADIDO AL CARRITO',
+            icon: 'success'
+        });
     };
 
     // ==========================================
@@ -486,7 +564,11 @@ require_once 'includes/header.php';
             document.querySelectorAll('.thumb-img').forEach((t, i) => {
                 if (i === currentIndex) {
                     t.classList.add('active');
-                    t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    t.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
                 } else {
                     t.classList.remove('active');
                 }
@@ -500,7 +582,10 @@ require_once 'includes/header.php';
         const originalClass = icon.className;
 
         const exito = () => {
-            MiniAlerta.fire({ title: 'ENLACE COPIADO', icon: 'success' });
+            MiniAlerta.fire({
+                title: 'ENLACE COPIADO',
+                icon: 'success'
+            });
             icon.className = 'bi bi-check-lg text-success fw-bold';
             setTimeout(() => icon.className = originalClass, 2000);
         };
@@ -514,9 +599,16 @@ require_once 'includes/header.php';
 
     function fallbackCopy(text, onSuccess) {
         let ta = document.createElement("textarea");
-        ta.value = text; ta.style.position = "fixed"; ta.style.left = "-9999px";
-        document.body.appendChild(ta); ta.focus(); ta.select();
-        try { document.execCommand('copy'); onSuccess(); } catch (e) { }
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try {
+            document.execCommand('copy');
+            onSuccess();
+        } catch (e) {}
         document.body.removeChild(ta);
     }
 
@@ -554,7 +646,7 @@ require_once 'includes/header.php';
 
     // Secuestro de la función para el log
     const funcionOriginal = window.prepararCompra;
-    window.prepararCompra = function (id, sku, nombre, precio, imagen, stockMax) {
+    window.prepararCompra = function(id, sku, nombre, precio, imagen, stockMax) {
         const log = document.getElementById('debug-log');
 
         // Si el div de debug existe, escribimos en él
@@ -584,25 +676,25 @@ require_once 'includes/header.php';
     // ==========================================
     // 5. EVENTOS DE INICIO Y CAZADOR DE ERRORES
     // ==========================================
-    window.addEventListener('error', function (e) {
+    window.addEventListener('error', function(e) {
         alert("🚨 ERROR DETECTADO EN JS:\n\n" + e.message + "\n\nLínea: " + e.lineno);
     });
 
     //======================
     //ACORDEÓN
     //======================
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         updateCartBadge();
         debugActualizarMonitor();
 
         // Lógica visual del Acordeón
         const accordions = document.querySelectorAll('.accordion-collapse');
         accordions.forEach(acc => {
-            acc.addEventListener('show.bs.collapse', function () {
+            acc.addEventListener('show.bs.collapse', function() {
                 const btn = document.querySelector(`[data-bs-target="#${this.id}"]`);
                 if (btn) btn.querySelector('.custom-chevron').classList.add('rotated');
             });
-            acc.addEventListener('hide.bs.collapse', function () {
+            acc.addEventListener('hide.bs.collapse', function() {
                 const btn = document.querySelector(`[data-bs-target="#${this.id}"]`);
                 if (btn) btn.querySelector('.custom-chevron').classList.remove('rotated');
             });
