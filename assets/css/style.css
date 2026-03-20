@@ -6,6 +6,8 @@
     --grey-ligth-2: #333;
     --transition: all 0.3s ease;
     --bs-danger-rgb: 220, 53, 69;
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-icon: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
 }
 
 .text-primary {
@@ -218,7 +220,7 @@ body {
 
 /* --- FIX 2: LOGO MÁS GRANDE --- */
 .header-logo-img {
-    height: 140px; /* Aumentado de 100px a 140px */
+    height: 10x; /* Aumentado de 100px a 140px */
     width: auto;
     transition: 0.3s;
 }
@@ -244,13 +246,13 @@ body {
 .search-modern {
     background: #f8f9fa;
     border-radius: 50px;      /* Bordes muy redondeados */
-    padding: 10px 20px;    
+    padding: 8px 15px;    
     display: flex;
     align-items: center;
     border: 1px solid #e0e0e0; /* Borde sutil */
     box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
-    width: 100%;              /* Que ocupe todo el espacio de su columna */
-    max-width: 500px;         /* Ajusta este número según qué tan largo lo quieras */
+    width: 127%;              /* Que ocupe todo el espacio de su columna */
+    max-width: 1400px;         /* Ajusta este número según qué tan largo lo quieras */
     margin: 0 auto;           /* Lo centra en su contenedor */
     transition: all 0.3s ease;
 }
@@ -562,11 +564,48 @@ position: absolute;
 
 
 /* --- MOBILE APP EXPERIENCE --- */
-/* --- MOBILE APP EXPERIENCE (V2.0 Calibrada) --- */
+.accordion-flush{
+    margin-bottom: 0px !important;
+}
+/* --- FIX 3: MENÚ MÓVIL ACORDEÓN --- 
+.accordion-button-custom {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    color: #212529;
+}*/
+
+/* Llamando desde el padre #mobAcc para forzar la flecha */
+#mobAcc .accordion-button::after {
+    display: block !important;
+    content: "" !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    margin-left: auto !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    filter: none !important; 
+    opacity: 1 !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Cuando el acordeón está abierto, rotar y cambiar a naranja */
+#mobAcc .accordion-button:not(.collapsed)::after {
+    transform: rotate(-180deg) !important;
+    filter: invert(45%) sepia(95%) saturate(1354%) hue-rotate(350deg) brightness(100%) contrast(105%) !important;
+}
 
 /*HEADER EN MOBILE*/
 .offcanvas {
     z-index: 2000 !important;
+    margin-bottom: -30px !important;
 }
 
 .offcanvas-backdrop {
@@ -615,6 +654,28 @@ position: absolute;
     background: linear-gradient(135deg, #0a0a0a 0%, #222 100%);
 }
 /*BARRA LATERAL DE MENU*/
+/*ACORDEONES*/
+.accordion-button::after {
+    filter: grayscale(1);
+    transform: scale(0.8);
+}
+.accordion-button::after {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: auto;
+    color: #000 !important;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: var(--bs-accordion-btn-icon-transition);
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+
 .tiktok-card {
     background: #000000;
     background: linear-gradient(135deg, #000000 0%, #25F4EE 300%);
@@ -652,7 +713,20 @@ position: absolute;
 
 /*ETSILOS DEL INDEX*/
 /* HERO */
-.hero-section-dark{background:#0e0e0e;background-image:radial-gradient(#333 1px,transparent 1px);background-size:30px 30px;min-height:580px;display:flex;align-items:center;overflow:hidden}
+.hero-section-dark{
+    background:#0b0b0b; 
+    background-image:
+    radial-gradient(circle at 75% 50%, rgba(255, 69, 0, 0.12) 0%, transparent 80%), 
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);  
+    background-size:
+    100% 100%,
+    35px 35px;
+    background-repeat: no-repeat, repeat;
+    min-height:580px;
+    display:flex;
+    align-items:center;
+    overflow:hidden
+}
 .hero-title{font-size:3.5rem;line-height:1.1;font-weight:900;color:#fff}
 .text-stroke-orange{color:transparent;-webkit-text-stroke:2px #FF4500;font-family:'Arial Black',sans-serif}
 .hero-logo-big{max-height:320px;width:auto;filter:drop-shadow(0 10px 20px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.175,.885,.32,1.275)}
@@ -701,7 +775,7 @@ position: absolute;
          -o-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
 }
-
+/*
 .slick-track {
     position: relative;
     top: 0;
@@ -709,14 +783,16 @@ position: absolute;
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
+}*/
 .slick-track:before, .slick-track:after {
     display: table;
     content: '';
 }
 .slick-track:after { clear: both; }
 
+/*
 .slick-loading .slick-track { visibility: hidden; }
+*/
 /* Ajuste responsive para que las tarjetas no se rompan */
 .slick-slide {
     min-height: 1px; /* evita colapso */
@@ -1217,23 +1293,65 @@ position: absolute;
 
 /* ====== SLICK SLIDER ====== */
 
-/*NUEVO DESTACADOS*/
-.custom-slider {
-    overflow: hidden;
-    width: 100%;
+/*DESTACADOS*/
+.slick-destacados {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.slider-track {
-    display: flex !important;
-    flex-direction: row !important;
+.slick-destacados .slick-track,
+.slick-destacados .slick-list {
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-destacados .slick-list {
+    margin: 0;
+    /* 🔥 quitar margen */
+    padding: 0 38px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+/* Padding horizontal para separar las tarjetas a los lados (Aplica a PC y Móvil) */
+.slider-destacados-desktop .slick-slide,
+.slider-destacados-mobile .slick-slide {
+    padding: 0 10px;
+}
+
+/* Separación vertical entre la tarjeta de arriba y la de abajo (Solo en PC) */
+.slider-destacados-desktop .slick-slide>div {
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Evitamos que la tarjeta de más abajo deje un espacio extra innecesario */
+.slider-destacados-desktop .slick-slide>div:last-child {
+    margin-bottom: 0;
+}
+
+/* Centrado del contenido SIN tocar el layout interno de Slick  */
+.slider-destacados-desktop .slick-slide>div,
+.slider-destacados-mobile .slick-slide>div,
+.slider-ofertas .slick-slide>div {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+
+.slick-track {
     will-change: transform;
 }
 
-.slide {
-    min-width: 25%;
-    flex: 0 0 25%;
-    box-sizing: border-box;
-    padding: 10px;
+/*  No cambiar el display de .slick-slide (Slick lo controla).  */
+.slider-destacados-desktop .slick-slide,
+.slider-destacados-mobile .slick-slide,
+.slider-ofertas .slick-slide {
+    height: 100%;
 }
 
 /* responsive */
@@ -1250,52 +1368,6 @@ position: absolute;
         flex: 0 0 100%;
     }
 }
-/*DESTACADOS*/
-
-
-.slick-destacados {
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    user-select: none;
-    touch-action: pan-y;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.slick-destacados .slick-track, .slick-destacados .slick-list {
-    transform: translate3d(0, 0, 0);
-}
-
-.slick-destacados .slick-list {
-    margin: 0;   /* 🔥 quitar margen */
-    padding: 0 38px; 
-    position: relative;
-    display: block;
-    overflow: hidden;
-}
-
-.slider-destacados .slick-slide{
-    padding:0 10px;
-}
-
-/* Centrado del contenido SIN tocar el layout interno de Slick */
-.slider-destacados .slick-slide > div,
-.slider-ofertas .slick-slide > div {
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-}
-
-.slick-track {
-    will-change: transform;
-}
-
-/* No cambiar el display de .slick-slide (Slick lo controla). */
-.slider-destacados .slick-slide,
-.slider-ofertas .slick-slide {
-    height: 100%;
-}
-
 /* ====== ANIMACIÓN ====== */
 .reveal-item{
     opacity:0;
@@ -1306,12 +1378,6 @@ position: absolute;
 .reveal-item.visible{
     opacity:1;
     transform:translateY(0);
-}
-/* ====== SLIDER DESTACADOS ====== */
-.slider-destacados {
-    margin-top: -20px;
-    background-color: #fafafa;   /*COLOR DE FONDE DE TODO*/
-    overflow: hidden;
 }
 
 /*OFERTAS*/

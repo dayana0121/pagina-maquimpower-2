@@ -1,7 +1,7 @@
 <?php
 /**
  * Este script actualiza todos los enlaces absolutos al root (/)
- * y los cambia por (/pagina/) en todos los archivos PHP, JS, HTML.
+ * y los cambia por (/) en todos los archivos PHP, JS, HTML.
  */
 
 $dir = 'C:/xampp/htdocs/pagina';
@@ -19,18 +19,18 @@ foreach ($iterator as $file) {
 
 // Para JS también las comillas simples
 $reemplazos = [
-    'href="/' => 'href="/pagina/',
-    "href='/" => "href='/pagina/",
-    'action="/' => 'action="/pagina/',
-    'src="/' => 'src="/pagina/',
-    "src='/" => "src='/pagina/",
-    "fetch('/" => "fetch('/pagina/",
-    "fetch(\"/" => "fetch(\"/pagina/",
-    "|| '/assets" => "|| '/pagina/assets",
-    "'/api/" => "'/pagina/api/",
-    "\"/api/" => "\"/pagina/api/",
-    "<a href=\"/" => "<a href=\"/pagina/",
-    "<a href='/" => "<a href='/pagina/",
+    'href="/' => 'href="/',
+    "href='/" => "href='/",
+    'action="/' => 'action="/',
+    'src="/' => 'src="/',
+    "src='/" => "src='/",
+    "fetch('/" => "fetch('/",
+    "fetch(\"/" => "fetch(\"/",
+    "|| '/assets" => "|| '/assets",
+    "'/api/" => "'/api/",
+    "\"/api/" => "\"/api/",
+    "<a href=\"/" => "<a href=\"/",
+    "<a href='/" => "<a href='/",
 ];
 
 $countGlobal = 0;
@@ -44,7 +44,7 @@ foreach ($archivosParaModificar as $archivo) {
     $nuevoContenido = str_replace(array_keys($reemplazos), array_values($reemplazos), $contenido);
 
     // Y para los redirect en PHP tipo header('Location: /')
-    $nuevoContenido = str_replace("Location: /", "Location: /pagina/", $nuevoContenido);
+    $nuevoContenido = str_replace("Location: /", "Location: /", $nuevoContenido);
 
     if ($contenido !== $nuevoContenido) {
         file_put_contents($archivo, $nuevoContenido);

@@ -52,27 +52,27 @@
                     style="font-size: 0.9rem; letter-spacing: 1px;">PRODUCTOS</h5>
                 <ul class="list-unstyled">
                     <li class="mb-2">
-                        <a href="/pagina/categoria/limpieza-y-mantenimiento" class="footer-link d-flex align-items-center">
+                        <a href="/categoria/limpieza-y-mantenimiento" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Limpieza y Mantenimiento
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/pagina/categoria/herramientas-profesionales" class="footer-link d-flex align-items-center">
+                        <a href="/categoria/herramientas-profesionales" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Herramientas Profesionales
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/pagina/categoria/equipos-de-espumado" class="footer-link d-flex align-items-center">
+                        <a href="/categoria/equipos-de-espumado" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Equipos de Espumado
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/pagina/categoria/vaporizadores-y-turbinas" class="footer-link d-flex align-items-center">
+                        <a href="/categoria/vaporizadores-y-turbinas" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Vaporizadores y Turbinas
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="/pagina/categoria/maquinarias" class="footer-link d-flex align-items-center">
+                        <a href="/categoria/maquinarias" class="footer-link d-flex align-items-center">
                             <i class="bi bi-chevron-right me-2 small opacity-50"></i> Carwash & Detailing
                         </a>
                     </li>
@@ -142,61 +142,79 @@
 <script src="assets/js/main.js?v=1.0.3"></script>
 <script>
     $(document).ready(function() {
-
         // ============================================
-        // SLIDER OFERTAS
+        // SLIDERS DE PRODUCTOS
         // ============================================
-        if ($('.slider-ofertas').length && !$('.slider-ofertas').hasClass('slick-initialized')) {
-            $('.slider-ofertas').slick({
-                dots: false,
-                infinite: true, // 🔑 bucle infinite
-                speed: 600,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                autoplay: true, // 🔑 autoplay
-                autoplaySpeed: 4500,
-                arrows: false, // usamos botones personalizados
-                swipeToSlide: true,
-                responsive: [{
+        if ($.fn.slick) {
+            if ($('.slider-destacados-desktop').length && !$('.slider-destacados-desktop').hasClass('slick-initialized')) {
+                $('.slider-destacados-desktop').slick({
+                    infinite: true,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    arrows: true,
+                    prevArrow: $('.slider-prev-1'),
+                    nextArrow: $('.slider-next-1'),
+                    responsive: [{
                         breakpoint: 1200,
                         settings: {
                             slidesToShow: 3
                         }
-                    },
-                    {
+                    }]
+                });
+            }
+
+            if ($('.slider-destacados-mobile').length && !$('.slider-destacados-mobile').hasClass('slick-initialized')) {
+                $('.slider-destacados-mobile').slick({
+                    infinite: true,
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    arrows: true,
+                    prevArrow: $('.slider-prev-1'),
+                    nextArrow: $('.slider-next-1'),
+                    responsive: [{
                         breakpoint: 768,
                         settings: {
                             slidesToShow: 1
                         }
-                    }
-                ]
-            });
+                    }]
+                });
+            }
 
-            // Aquí enganchas los eventos con console.log
-            $('.slider-ofertas').on('init', function(event, slick) {
-                console.log("🔧 INIT carrusel ofertas");
-                console.log("Total slides:", slick.slideCount);
-                console.log("Slides visibles:", slick.options.slidesToShow);
-                console.log("Ancho de cada slide:", slick.$slides[0].getBoundingClientRect().width);
-            });
-
-            $('.slider-ofertas').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                console.log("➡️ beforeChange: de", currentSlide, "a", nextSlide);
-            });
-
-            $('.slider-ofertas').on('afterChange', function(event, slick, currentSlide) {
-                console.log("✅ afterChange: slide actual", currentSlide);
-                console.log("Slides visibles:", slick.options.slidesToShow);
-                console.log("Ancho contenedor:", slick.$slider.width());
-            });
-
-            // BOTONES PERSONALIZADOS OFERTAS
-            $('.slider-prev-2').click(function() {
-                $('.slider-ofertas').slick('slickPrev');
-            });
-            $('.slider-next-2').click(function() {
-                $('.slider-ofertas').slick('slickNext');
-            });
+            if ($('.slider-ofertas').length && !$('.slider-ofertas').hasClass('slick-initialized')) {
+                $('.slider-ofertas').slick({
+                    infinite: true,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3500,
+                    arrows: true,
+                    prevArrow: $('.slider-prev-2'),
+                    nextArrow: $('.slider-next-2'),
+                    responsive: [{
+                            breakpoint: 1200,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 576,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
         }
 
         // ============================================
@@ -236,6 +254,5 @@
                 $('.tiktok-carousel').slick('slickNext');
             });
         }
-
     });
 </script>

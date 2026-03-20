@@ -1,6 +1,6 @@
 Options -Indexes
 RewriteEngine On
-RewriteBase /pagina/
+RewriteBase /
 
 # 1. FORZAR HTTPS (Desactivado en Local)
 # RewriteCond %{HTTPS} off

@@ -3,7 +3,7 @@
 <!-- SEGURIDAD: Si ya estás dentro, al Home -->
 <?php
 if (isset($_SESSION['user_id'])) {
-    echo "<script>window.location.href='/pagina/index.php';</script>";
+    echo "<script>window.location.href='/index.php';</script>";
     exit;
 }
 ?>
@@ -64,7 +64,7 @@ if (isset($_SESSION['user_id'])) {
                                     <input class="form-check-input" type="checkbox" id="remember" name="remember">
                                     <label class="form-check-label small text-muted" for="remember">Recordarme</label>
                                 </div>
-                                <a href="/pagina/recuperar.php" class="small fw-bold text-primary text-decoration-none">
+                                <a href="/recuperar.php" class="small fw-bold text-primary text-decoration-none">
                                     ¿Olvidaste tu clave?
                                 </a>
                             </div>
@@ -74,7 +74,7 @@ if (isset($_SESSION['user_id'])) {
                     <!-- FOOTER TARJETA -->
                     <div class="bg-light p-3 text-center border-top">
                         <span class="small text-muted">¿Aún no tienes cuenta?</span><br>
-                        <a href="/pagina/registro.php" class="fw-black text-dark text-decoration-none text-uppercase ls-1">
+                        <a href="/registro.php" class="fw-black text-dark text-decoration-none text-uppercase ls-1">
                             Crear Cuenta Nueva
                         </a>
                     </div>

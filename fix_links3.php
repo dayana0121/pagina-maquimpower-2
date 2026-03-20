@@ -1,7 +1,7 @@
 <?php
 /**
- * Arregla las duplicaciones manuales de /pagina/pagina/pagina/ 
- * dejándolo solo como /pagina/
+ * Arregla las duplicaciones manuales de /pagina/ 
+ * dejándolo solo como /
  */
 
 $dir = 'C:/xampp/htdocs/pagina';
@@ -19,11 +19,11 @@ foreach ($iterator as $file) {
 
             $contenido = file_get_contents($archivo);
 
-            // Reemplazar múltiples /pagina/ por un solo /pagina/
-            $nuevoContenido = preg_replace('#(/pagina)+/#', '/pagina/', $contenido);
+            // Reemplazar múltiples / por un solo /
+            $nuevoContenido = preg_replace('#(/pagina)+/#', '/', $contenido);
 
             // Reemplazar baseUrl si tiene múltiples /pagina
-            $nuevoContenido = preg_replace('#"//pagina/pagina#', '"//pagina', $nuevoContenido); // Por si acaso
+            $nuevoContenido = preg_replace('#"//pagina#', '"//pagina', $nuevoContenido); // Por si acaso
             $nuevoContenido = preg_replace('#\$_SERVER\[\'HTTP_HOST\'\] \. "(/pagina)+"#', '$_SERVER[\'HTTP_HOST\'] . "/pagina"', $nuevoContenido);
 
             if ($contenido !== $nuevoContenido) {

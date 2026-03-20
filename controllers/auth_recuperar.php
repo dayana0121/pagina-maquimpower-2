@@ -37,7 +37,7 @@ if ($stmt->rowCount() > 0) {
         $mail->Body    = "<h2>Recuperación de Acceso</h2><p>Haz clic abajo para cambiar tu clave:</p><a href='$link' style='background:#FF4500;color:white;padding:10px;text-decoration:none;'>CAMBIAR CONTRASEÑA</a>";
 
         $mail->send();
-        echo "<script>alert('Correo enviado. Revisa tu bandeja.'); window.location.href='/pagina/login.php';</script>";
+        echo "<script>alert('Correo enviado. Revisa tu bandeja.'); window.location.href='/login.php';</script>";
     } catch (Exception $e) {
         echo "Error al enviar: {$mail->ErrorInfo}";
     }

@@ -212,7 +212,8 @@ footer { margin-top: auto; background: var(--dark); color: #ccc; padding-top: 50
 .wa-circle {
     background: black;
     color: white;
-    width: 35px; height: 35px;
+    width: 35px; 
+    height: 35px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
 }

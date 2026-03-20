@@ -3,7 +3,7 @@
 <!-- SEGURIDAD: Si ya estás dentro, al Home -->
 <?php
 if (isset($_SESSION['user_id'])) {
-    echo "<script>window.location.href='/pagina/index.php';</script>";
+    echo "<script>window.location.href='/index.php';</script>";
     exit;
 }
 ?>
@@ -24,7 +24,7 @@ if (isset($_SESSION['user_id'])) {
                     <div class="card-body p-4 pt-2">
 
                         <!-- FORMULARIO -->
-                        <form action="/pagina/controllers/auth.php" method="POST">
+                        <form action="/controllers/auth.php" method="POST">
                             <input type="hidden" name="action" value="register">
 
                             <!-- FILA 1: NOMBRE Y APELLIDO -->
@@ -75,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="mp-check-group mt-3">
                                     <input type="checkbox" name="accept_legal" id="legal" class="mp-check-input" required>
                                     <label for="legal" class="mp-check-label">
-                                        He leído y acepto la <a href="/pagina/politicas-de-privacidad.php" target="_blank">Política de Privacidad</a> y los <a href="/pagina/terminos.php" target="_blank">Términos y Condiciones</a> de MaquimPower.
+                                        He leído y acepto la <a href="/politicas-de-privacidad.php" target="_blank">Política de Privacidad</a> y los <a href="/terminos.php" target="_blank">Términos y Condiciones</a> de MaquimPower.
                                     </label>
                                 </div>
 
@@ -97,7 +97,7 @@ if (isset($_SESSION['user_id'])) {
                     <!-- FOOTER TARJETA -->
                     <div class="bg-light p-3 text-center border-top">
                         <span class="small text-muted">¿Ya tienes cuenta?</span><br>
-                        <a href="/pagina/login.php" class="fw-black text-dark text-decoration-none text-uppercase ls-1">
+                        <a href="/login.php" class="fw-black text-dark text-decoration-none text-uppercase ls-1">
                             Iniciar Sesión
                         </a>
                     </div>

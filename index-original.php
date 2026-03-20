@@ -504,7 +504,7 @@ function renderHomeCard($p)
         <div class="d-flex gap-2 overflow-auto" style="scrollbar-width: none;">
             <a href="categoria.php?c=ofertas"
                 class="btn btn-sm btn-danger rounded-pill fw-bold text-nowrap px-3 shadow-sm"><i
-                    class="bi bi-lightning-fill"></i> OFERTAS</a>
+                    class="bi bi-lightning-fill"></i> ⚡ PROMOS</a>
             <a href="categoria.php?c=limpieza"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">Limpieza</a>
             <a href="categoria.php?c=carwash"
@@ -540,7 +540,7 @@ function renderHomeCard($p)
                         </p>
 
                         <div class="d-flex gap-3">
-                            <a href="/pagina/categoria.php/maquinarias" class="btn btn-light rounded-pill px-5 py-3 fw-bold">
+                            <a href="/categoria.php/maquinarias" class="btn btn-light rounded-pill px-5 py-3 fw-bold">
                                 VER CATÁLOGO
                             </a>
 
@@ -553,7 +553,7 @@ function renderHomeCard($p)
                     </div>
 
                     <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
-                        <img src="/pagina/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png" class="hero-logo-big">
+                        <img src="/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png" class="hero-logo-big">
                     </div>
 
                 </div>
@@ -563,8 +563,8 @@ function renderHomeCard($p)
 
     <!-- SLIDE 2 -->
     <div class="hero-slide hero-banner-slide">
-        <img src="/pagina/assets/img/Banner 1 Hidrolavadoras.webp" class="hero-banner desktop" alt="Banner Hidrolavadoras">
-        <img src="/pagina/assets/img/Banner 1 Hidrolavadoras (Mobile).webp" class="hero-banner mobile"
+        <img src="/assets/img/Banner 1 Hidrolavadoras.webp" class="hero-banner desktop" alt="Banner Hidrolavadoras">
+        <img src="/assets/img/Banner 1 Hidrolavadoras (Mobile).webp" class="hero-banner mobile"
             alt="Banner Hidrolavadoras Móvil">
     </div>
 
@@ -899,7 +899,7 @@ function renderHomeCard($p)
 
 <!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/pagina//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <!-- SCRIPT DE CARGA DIFERIDA (BUCLE + AUTOPLAY) -->
 <script>

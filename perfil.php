@@ -3,7 +3,7 @@ require_once 'includes/db.php';
 require_once 'includes/header.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /pagina/login.php");
+    header("Location: /login.php");
     exit;
 }
 
@@ -27,7 +27,7 @@ $pedidos = $stmt->fetchAll();
                 <p class="small text-white-50">Cliente MaquimPower</p>
                 <div class="d-grid gap-2 mt-3">
                     <a href="perfil.php" class="btn btn-primary fw-bold">Mis Pedidos</a>
-                    <a href="/pagina/controllers/auth.php?action=logout" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
+                    <a href="/controllers/auth.php?action=logout" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
                 </div>
             </div>
         </div>

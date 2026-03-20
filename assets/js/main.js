@@ -123,15 +123,15 @@ function initLiveSearch() {
             let q = this.value;
             if (q.length < 2) { resultsDiv.style.display = 'none'; return; }
 
-            fetch('/pagina/api/live_search.php?q=' + encodeURIComponent(q))
+            fetch('/api/live_search.php?q=' + encodeURIComponent(q))
                 .then(res => res.json())
                 .then(data => {
                     if (data && data.length > 0) {
                         let html = '<ul class="list-group list-group-flush text-start">';
                         data.forEach(p => {
-                            let img = p.imagen_url || '/pagina/assets/img/no-photo.png';
+                            let img = p.imagen_url || '/assets/img/no-photo.png';
                             html += `<li class="list-group-item list-group-item-action p-2">
-                                <a href="/pagina/producto/${p.slug}" class="d-flex align-items-center text-decoration-none text-dark">
+                                <a href="/producto/${p.slug}" class="d-flex align-items-center text-decoration-none text-dark">
                                     <img src="${img}" style="width:40px;height:40px;object-fit:contain;margin-right:10px">
                                     <div><div class="fw-bold small">${p.nombre}</div><small class="text-primary fw-bold">S/ ${parseFloat(p.precio).toFixed(2)}</small></div>
                                 </a></li>`;

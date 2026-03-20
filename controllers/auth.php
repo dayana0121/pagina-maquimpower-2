@@ -23,13 +23,13 @@ if ($action == 'login') {
 
         // Redirección
         if ($user['rol'] == 'admin') {
-            header("Location: /pagina/admin/dashboard.php");
+            header("Location: /admin/dashboard.php");
         } else {
-            header("Location: /pagina/index.php");
+            header("Location: /index.php");
         }
         exit;
     } else {
-        header("Location: /pagina/login.php?error=credenciales");
+        header("Location: /login.php?error=credenciales");
         exit;
     }
 }
@@ -46,7 +46,7 @@ elseif ($action == 'register') {
     $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
     $stmt->execute([$email]);
     if ($stmt->fetch()) {
-        header("Location: /pagina/registro.php?error=existe");
+        header("Location: /registro.php?error=existe");
         exit;
     }
 
@@ -65,13 +65,13 @@ elseif ($action == 'register') {
 
         // REDIRECCIÓN CON MENSAJE DE ESTADO
         if ($mailEnviado) {
-            header("Location: /pagina/index.php?registro=exito&mail=ok");
+            header("Location: /index.php?registro=exito&mail=ok");
         } else {
-            header("Location: /pagina/index.php?registro=exito&mail=error");
+            header("Location: /index.php?registro=exito&mail=error");
         }
         exit;
     } else {
-        header("Location: /pagina/registro.php?error=db");
+        header("Location: /registro.php?error=db");
         exit;
     }
 }
@@ -79,10 +79,10 @@ elseif ($action == 'register') {
 // --- LOGOUT ---
 elseif ($action == 'logout') {
     session_destroy();
-    header("Location: /pagina/index.php");
+    header("Location: /index.php");
     exit;
 } else {
-    header("Location: /pagina/login.php");
+    header("Location: /login.php");
     exit;
 }
 ?>

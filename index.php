@@ -97,13 +97,13 @@ function renderHomeCard($p)
         <div class="d-flex gap-2 overflow-auto" style="scrollbar-width: none;">
             <a href="categoria.php?c=ofertas"
                 class="btn btn-sm btn-danger rounded-pill fw-bold text-nowrap px-3 shadow-sm"><i
-                    class="bi bi-lightning-fill"></i> OFERTAS</a>
+                    class="bi bi-lightning-fill"></i> PROMOS</a>
             <a href="categoria.php?c=limpieza"
-                class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">Limpieza</a>
+                class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">MAQUINARIAS</a>
             <a href="categoria.php?c=carwash"
-                class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">Carwash</a>
+                class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">DETAILING</a>
             <a href="categoria.php?c=herramientas"
-                class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">Herramientas</a>
+                class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">REPUESTOS</a>
         </div>
     </div>
 </div>
@@ -117,8 +117,7 @@ function renderHomeCard($p)
     <div class="hero-slide active">
         <div class="hero-section-dark">
             <div class="container position-relative z-2">
-                <div class="row align-items-center">
-
+                <div class="position-relative row align-items-center">
                     <div class="col-lg-6 pt-5 pt-lg-0">
                         <div class="pill-orange mb-3"></div>
 
@@ -133,7 +132,7 @@ function renderHomeCard($p)
                         </p>
 
                         <div class="d-flex gap-3">
-                            <a href="/pagina/categoria.php/maquinarias" class="btn btn-light rounded-pill px-5 py-3 fw-bold">
+                            <a href="/categoria.php/maquinarias" class="btn btn-light rounded-pill px-5 py-3 fw-bold">
                                 VER CATÁLOGO
                             </a>
 
@@ -146,7 +145,7 @@ function renderHomeCard($p)
                     </div>
 
                     <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
-                        <img src="/pagina/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png" class="hero-logo-big">
+                        <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png" class="hero-logo-big">
                     </div>
 
                 </div>
@@ -156,8 +155,8 @@ function renderHomeCard($p)
 
     <!-- SLIDE 2 -->
     <div class="hero-slide hero-banner-slide">
-        <img src="/pagina/assets/img/Banner 1 Hidrolavadoras.jpg" class="hero-banner desktop" alt="Banner Hidrolavadoras">
-        <img src="/pagina/assets/img/Banner 1 Hidrolavadoras (Mobile).webp" class="hero-banner mobile"
+        <img src="<?= $baseUrl ?>/assets/img/Banner 1 Hidrolavadoras.jpg" class="hero-banner desktop" alt="Banner Hidrolavadoras">
+        <img src="<?= $baseUrl ?>/assets/img/Banner 1 Hidrolavadoras (Mobile).webp" class="hero-banner mobile"
             alt="Banner Hidrolavadoras Móvil">
     </div>
 
@@ -231,20 +230,28 @@ function renderHomeCard($p)
         </div>
     </div>
 
-    <!-- Carrusel 1 -->
-    <div id="slider1" class="slider-destacados slick-slider">
-        <?php foreach ($productos as $p): ?>
-            <?= renderHomeCard($p) ?>
+    <div class="slider-destacados-desktop d-none d-lg-block">
+        <?php
+        $chunks = array_chunk($productos, 2);
+        foreach ($chunks as $chunk): ?>
+            <div> <?php foreach ($chunk as $p): ?>
+                    <div style="margin-bottom: 20px;">
+                        <?= renderHomeCard($p) ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         <?php endforeach; ?>
     </div>
 
-    <!-- Carrusel 1.1 -->
-    <div id="carrusel" class="slider-destacados slick-slider d-none d-lg-block">
+    <div class="slider-destacados-mobile d-block d-lg-none">
         <?php foreach ($productos as $p): ?>
-            <?= renderHomeCard($p) ?>
+            <div>
+                <?= renderHomeCard($p) ?>
+            </div>
         <?php endforeach; ?>
     </div>
 </div>
+
 
 <!-- SECTION 4: OFERTAS -->
 <div class="container py-5">
@@ -366,7 +373,7 @@ function renderHomeCard($p)
     </script>
 <?php endif; ?>
 
-
+<!-- SCRIP DE BUCLE DE DESTACADOS -->
 
 
 <!-- SCRIPT (BUCLE + AUTOPLAY) -->
@@ -474,6 +481,5 @@ function renderHomeCard($p)
         slides[index].classList.add('active');
     }, 6000);
 </script>
-
 
 <?php require_once 'includes/footer.php'; ?>

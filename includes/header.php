@@ -26,7 +26,7 @@ if (isset($_GET['ajax_search']) && isset($_GET['q'])) {
                     $img = str_replace('/var/www/html', '', $img);
 
                     echo '
-                    <a href="/pagina/producto/' . $r['slug'] . '" class="search-item">
+                    <a href="/producto/' . $r['slug'] . '" class="search-item">
                         <img src="' . $img . '" alt="Producto">
                         <div class="info">
                             <h6>' . $r['nombre'] . '</h6>
@@ -34,7 +34,7 @@ if (isset($_GET['ajax_search']) && isset($_GET['q'])) {
                         </div>
                     </a>';
                 }
-                echo '<a href="/pagina/categoria.php?q=' . urlencode($q) . '" class="search-view-all">VER TODOS LOS RESULTADOS</a>';
+                echo '<a href="/categoria.php?q=' . urlencode($q) . '" class="search-view-all">VER TODOS LOS RESULTADOS</a>';
             } else {
                 echo '<div class="p-3 text-center text-muted small">No encontramos coincidencias.</div>';
             }
@@ -88,7 +88,7 @@ try {
         gtag('js', new Date());
         gtag('config', 'G-XXXXXXXXXX');
     </script>
-    <base href="/pagina/">
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -243,18 +243,19 @@ try {
             <!-- VISTA ESCRITORIO (PC) -->
             <div class="row align-items-center d-none d-lg-flex">
                 <!-- 1. LOGO -->
-                <div class="col-lg-4">
-                    <a href="/pagina/" class="d-inline-block">
+                <div class="col-lg-3 text-center">
+                    <a href="/" class="d-inline-block align-items-center text-center text-decoration-none position-relative">
                         <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png"
                             alt="MAQUIMPOWER"
                             class="header-logo-img"
-                            style="max-height: 200px; width: auto; transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                            style="max-height: 180px; width: auto; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                        <div style="height: 70px;"></div>
                     </a>
                 </div>
 
                 <!-- 2. BUSCADOR -->
-                <div class="col-lg-4">
-                    <form class="search-modern" action="/pagina/categoria.php" method="GET">
+                <div class="col-lg-5 text-center">
+                    <form class="search-modern" action="/categoria.php" method="GET">
                         <input type="text" name="q" placeholder="¿Qué máquina buscas hoy?" required>
                         <button type="submit"><i class="bi bi-search"></i></button>
                     </form>
@@ -293,7 +294,7 @@ try {
                                             </div>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item py-2 fw-bold text-primary" href="/pagina/admin/dashboard.php">
+                                            <a class="dropdown-item py-2 fw-bold text-primary" href="/admin/dashboard.php">
                                                 <i class="bi bi-speedometer2 me-2"></i> Dashboard Control
                                             </a>
                                         </li>
@@ -302,28 +303,28 @@ try {
                                         </li>
                                     <?php endif; ?>
 
-                                    <li><a class="dropdown-item py-2" href="/pagina/perfil.php"><i class="bi bi-bag-check me-2"></i> Mis Pedidos</a></li>
-                                    <li><a class="dropdown-item py-2" href="/pagina/perfil.php#cuenta"><i class="bi bi-person-gear me-2"></i> Mi Perfil</a></li>
+                                    <li><a class="dropdown-item py-2" href="/perfil.php"><i class="bi bi-bag-check me-2"></i> Mis Pedidos</a></li>
+                                    <li><a class="dropdown-item py-2" href="/perfil.php#cuenta"><i class="bi bi-person-gear me-2"></i> Mi Perfil</a></li>
                                     <li>
                                         <hr class="dropdown-divider opacity-50">
                                     </li>
 
                                     <li>
-                                        <a class="dropdown-item py-2 text-danger fw-bold" href="/pagina/controllers/auth.php?action=logout">
+                                        <a class="dropdown-item py-2 text-danger fw-bold" href="/controllers/auth.php?action=logout">
                                             <i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         <?php else: ?>
-                            <a href="/pagina/login.php" class="btn btn-outline-dark btn-sm rounded-pill px-3 fw-bold shadow-sm hover-primary">
+                            <a href="/login.php" class="btn btn-outline-dark btn-sm rounded-pill px-3 fw-bold shadow-sm hover-primary">
                                 <i class="bi bi-person me-1"></i> INGRESAR
                             </a>
                         <?php endif; ?>
                     </div>
 
                     <!-- B. Carrito (Recuperado) -->
-                    <a href="/pagina/carrito" class="text-dark d-flex align-items-center text-decoration-none position-relative">
+                    <a href="/carrito" class="text-dark d-flex align-items-center text-decoration-none position-relative">
                         <i class="bi bi-cart3 fs-2"></i>
                         <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill border border-white" style="font-size: 0.7rem;">
                             <?= isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0 ?>
@@ -344,25 +345,26 @@ try {
                         <i class="bi bi-list fs-1"></i>
                     </button>
 
-                    <a href="/pagina/" class="mx-auto">
+                    <a href="/" class="mx-auto" style="width: 100%; max-width: 180px;">
                         <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png"
                             alt="Logo"
-                            style="max-height: 60px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                            style="max-height: 140px; width: auto; position:absolute; top:30%; left:50%; transform: translate(-50%, -50%); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                            <div style="height: 60px;"></div>
                     </a>
                     <div class="d-flex align-items-center gap-2">
                         <?php if (!isset($_SESSION['user_id'])): ?>
-                            <a href="/pagina/login.php" class="text-dark"><i class="bi bi-person-circle fs-2"></i></a>
+                            <a href="/login.php" class="text-dark"><i class="bi bi-person-circle fs-2"></i></a>
                         <?php else: ?>
-                            <a href="/pagina/perfil.php" class="text-dark"><i class="bi bi-person-circle fs-2"></i></a>
+                            <a href="/perfil.php" class="text-dark"><i class="bi bi-person-circle fs-2"></i></a>
                         <?php endif; ?>
-                        <a href="/pagina/carrito" class="text-dark position-relative">
+                        <a href="/carrito" class="text-dark position-relative">
                             <i class="bi bi-cart3 fs-2"></i>
                             <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill" style="font-size: 0.5rem;">0</span>
                         </a>
                     </div>
                 </div>
                 <div class="mt-3 position-relative">
-                    <form class="search-modern-mobile bg-light d-flex rounded-pill px-3 py-2" action="/pagina/categoria.php" method="GET">
+                    <form class="search-modern-mobile bg-light d-flex rounded-pill px-3 py-2" action="/categoria.php" method="GET">
                         <input type="text" id="mobileSearchInput" name="q" class="form-control border-0 bg-transparent shadow-none" placeholder="Buscar máquinas o repuestos..." autocomplete="off" required>
                         <button type="submit" class="btn text-primary p-0"><i class="bi bi-search fs-5"></i></button>
                     </form>
@@ -380,14 +382,14 @@ try {
             <ul class="nav justify-content-center position-relative">
 
                 <li class="nav-item-mega">
-                    <a href="/pagina/categoria/ofertas" class="nav-link-corp text-danger fw-bold d-flex align-items-center">
+                    <a href="/categoria/ofertas" class="nav-link-corp text-danger fw-bold d-flex align-items-center">
                         <span class="pulse-red me-2"></span> ⚡ PROMOS
                     </a>
                 </li>
 
                 <?php foreach ($menu_jerarquico as $h1): ?>
                     <li class="nav-item-mega group">
-                        <a href="/pagina/categoria/<?= $h1['slug'] ?>" class="nav-link-corp text-uppercase fw-bold">
+                        <a href="/categoria/<?= $h1['slug'] ?>" class="nav-link-corp text-uppercase fw-bold">
                             <?= $h1['nombre'] ?>
                             <?php if (!empty($h1['sub'])) echo '<i class="bi bi-chevron-down ms-1 small opacity-50"></i>'; ?>
                         </a>
@@ -405,14 +407,14 @@ try {
                                                 <div class="nietos-wrapper">
                                                     <?php if (!empty($h2['sub'])): ?>
                                                         <?php foreach ($h2['sub'] as $h3): ?>
-                                                            <a href="/pagina/categoria/<?= $h3['slug'] ?>" class="d-block py-1 text-muted text-decoration-none hover-orange1 small">
+                                                            <a href="/categoria/<?= $h3['slug'] ?>" class="d-block py-1 text-muted text-decoration-none hover-orange1 small">
                                                                 <i class="bi bi-caret-right-fill text-primary opacity-25 me-1"></i>
                                                                 <?= $h3['nombre'] ?>
                                                             </a>
                                                         <?php endforeach; ?>
                                                     <?php endif; ?>
                                                 </div>
-                                                <a href="/pagina/categoria/<?= $h2['slug'] ?>" class="fw-bold text-primary mt-3 d-inline-block small text-decoration-none">
+                                                <a href="/categoria/<?= $h2['slug'] ?>" class="fw-bold text-primary mt-3 d-inline-block small text-decoration-none">
                                                     VER TODO <i class="bi bi-arrow-right"></i>
                                                 </a>
                                             </div>
@@ -425,7 +427,7 @@ try {
                                                 </div>
                                                 <p class="small fw-bold text-dark mb-1">CALIDAD GARANTIZADA</p>
                                                 <p class="text-muted mb-3" style="font-size: 0.7rem;">Soporte técnico especializado en toda la línea <?= $h1['nombre'] ?>.</p>
-                                                <a href="/pagina/categoria/<?= $h1['slug'] ?>" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold shadow-sm">
+                                                <a href="/categoria/<?= $h1['slug'] ?>" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold shadow-sm">
                                                     VER CATÁLOGO
                                                 </a>
                                             </div>
@@ -470,62 +472,62 @@ try {
                             <p class="m-0 small text-white-50">Bienvenido,</p>
                             <p class="m-0 fw-bold"><?= explode(' ', $_SESSION['user_name'])[0]; ?></p>
                         </div>
-                        <a href="/pagina/controllers/auth.php?action=logout" class="ms-auto text-white-50 fs-4"><i class="bi bi-box-arrow-right"></i></a>
+                        <a href="/controllers/auth.php?action=logout" class="ms-auto text-white-50 fs-4"><i class="bi bi-box-arrow-right"></i></a>
                     </div>
                 <?php else: ?>
-                    <a href="/pagina/login.php" class="btn btn-primary w-100 py-3 rounded-4 fw-black shadow-sm" style="font-size: 0.9rem;">
+                    <a href="/login.php" class="btn btn-primary w-100 py-3 rounded-4 fw-black shadow-sm" style="font-size: 0.9rem;">
                         INGRESAR A MI CUENTA
                     </a>
                 <?php endif; ?>
             </div>
 
             <div class="accordion accordion-flush" id="mobAcc">
+            
+            <div class="px-3 mb-2">
+                <a href="/categoria/ofertas" class="d-flex align-items-center p-3 rounded-3 bg-danger bg-opacity-10 text-danger text-decoration-none fw-bold">
+                    <i class="bi bi-lightning-charge-fill me-2"></i> OFERTAS DEL MES
+                    <i class="bi bi-chevron-right ms-auto small"></i>
+                </a>
+            </div>
 
-                <div class="px-3 mb-2">
-                    <a href="/pagina/categoria/ofertas" class="d-flex align-items-center p-3 rounded-3 bg-danger bg-opacity-10 text-danger text-decoration-none fw-bold">
-                        <i class="bi bi-lightning-charge-fill me-2"></i> OFERTAS DEL MES
-                        <i class="bi bi-chevron-right ms-auto small"></i>
-                    </a>
-                </div>
-
-                <?php foreach ($menu_jerarquico as $h1): ?>
-                    <div class="accordion-item border-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed py-3 px-4 fw-bold text-dark text-uppercase border-0 shadow-none bg-transparent"
+            <?php foreach ($menu_jerarquico as $h1): ?>
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed py-3 px-4 fw-bold text-dark text-uppercase border-0 shadow-none bg-transparent" 
                                 type="button" data-bs-toggle="collapse" data-bs-target="#m-<?= $h1['id'] ?>" style="font-size: 0.95rem;">
-                                <?= $h1['nombre'] ?>
-                            </button>
-                        </h2>
-                        <div id="m-<?= $h1['id'] ?>" class="accordion-collapse collapse" data-bs-parent="#mobAcc">
-                            <div class="accordion-body p-0 pb-3 bg-light">
-
-                                <?php foreach ($h1['sub'] as $h2): ?>
-                                    <div class="px-4 py-3">
-                                        <a href="/pagina/categoria/<?= $h2['slug'] ?>" class="d-flex align-items-center mb-3 text-decoration-none">
-                                            <div class="bg-primary rounded-1 me-2" style="width: 4px; height: 16px;"></div>
-                                            <span class="fw-bold text-dark small text-uppercase"><?= $h2['nombre'] ?></span>
-                                        </a>
-
-                                        <div class="d-flex flex-wrap gap-2">
-                                            <?php foreach ($h2['sub'] as $h3): ?>
-                                                <a href="/pagina/categoria/<?= $h3['slug'] ?>" class="pill-link">
-                                                    <?= $h3['nombre'] ?>
-                                                </a>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-
-                                <div class="px-4 pt-2">
-                                    <a href="/pagina/categoria/<?= $h1['slug'] ?>" class="btn btn-outline-dark btn-sm w-100 rounded-pill fw-bold py-2">
-                                        Ver todo <?= $h1['nombre'] ?>
+                            <?= $h1['nombre'] ?>
+                        </button>
+                    </h2>
+                    <div id="m-<?= $h1['id'] ?>" class="accordion-collapse collapse" data-bs-parent="#mobAcc">
+                        <div class="accordion-body p-0 pb-3 bg-light">
+                            
+                            <?php foreach ($h1['sub'] as $h2): ?>
+                                <div class="px-4 py-3">
+                                    <a href="/categoria/<?= $h2['slug'] ?>" class="d-flex align-items-center mb-3 text-decoration-none">
+                                        <div class="bg-primary rounded-1 me-2" style="width: 4px; height: 16px;"></div>
+                                        <span class="fw-bold text-dark small text-uppercase"><?= $h2['nombre'] ?></span>
                                     </a>
+                                    
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <?php foreach ($h2['sub'] as $h3): ?>
+                                            <a href="/categoria/<?= $h3['slug'] ?>" class="pill-link">
+                                                <?= $h3['nombre'] ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </div>
+                            <?php endforeach; ?>
+                            
+                            <div class="px-4 pt-2">
+                                <a href="/categoria/<?= $h1['slug'] ?>" class="btn btn-outline-dark btn-sm w-100 rounded-pill fw-bold py-2">
+                                    Ver todo <?= $h1['nombre'] ?>
+                                </a>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
             <div class="mt-2">
                 <div class="px-3 mb-3">

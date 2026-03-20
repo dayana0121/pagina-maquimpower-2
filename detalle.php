@@ -45,7 +45,7 @@ if (!$p && !empty($slugOriginal)) {
     // Bajamos el umbral a 60% para ser más "atrapalotodo"
     if ($maxPorcentaje > 60 && $mejorCoincidencia) {
         header("HTTP/1.1 301 Moved Permanently");
-        header("Location: /pagina/producto/" . $mejorCoincidencia);
+        header("Location: /producto/" . $mejorCoincidencia);
         exit;
     }
 }
@@ -60,7 +60,7 @@ if (!$p && !empty($slugOriginal)) {
 
     if ($p) {
         header("HTTP/1.1 301 Moved Permanently");
-        header("Location: /pagina/producto/" . $p['slug']);
+        header("Location: /producto/" . $p['slug']);
         exit;
     }
 }
@@ -68,7 +68,7 @@ if (!$p && !empty($slugOriginal)) {
 // NIVEL D: RED DE SEGURIDAD TOTAL (Si nada funcionó, NO MANDAR AL INDEX)
 if (!$p) {
     // Mandamos a la página de categorías pero con el término de búsqueda ya puesto
-    header("Location: /pagina/categoria.php?search=" . urlencode(str_replace('-', ' ', $slugOriginal)));
+    header("Location: /categoria.php?search=" . urlencode(str_replace('-', ' ', $slugOriginal)));
     exit;
 }
 
@@ -141,8 +141,8 @@ require_once 'includes/header.php';
         <!-- BREADCRUMB -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb small text-uppercase fw-bold m-0">
-                <li class="breadcrumb-item"><a href="/pagina/" class="text-muted text-decoration-none">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="/pagina/categoria.php?c=todo"
+                <li class="breadcrumb-item"><a href="/" class="text-muted text-decoration-none">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/categoria.php?c=todo"
                         class="text-muted text-decoration-none">Catálogo</a></li>
                 <li class="breadcrumb-item active text-primary" aria-current="page">Detalle</li>
             </ol>
