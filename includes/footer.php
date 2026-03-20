@@ -142,20 +142,166 @@
 <script src="assets/js/main.js?v=1.0.3"></script>
 <script>
     $(document).ready(function() {
+        function logDestacados(message, extra) {
+            console.log('[slider-destacados]', message, extra || {});
+        }
+
+        function logOfertas(message, extra) {
+            console.log('[slider-ofertas]', message, extra || {});
+        }
+
+        function applySlickComputedWidths($slider, slick, logFn, label) {
+            if (!$slider.length || !slick || typeof slick.slideWidth === 'undefined') {
+                return;
+            }
+
+            slick.$slides.each(function() {
+                this.style.setProperty('width', slick.slideWidth + 'px', 'important');
+            });
+
+            if (typeof logFn === 'function') {
+                logFn('widths aplicados', {
+                    slider: label,
+                    slideWidth: slick.slideWidth,
+                    slideCount: slick.$slides.length
+                });
+            }
+        }
+
         // ============================================
         // SLIDERS DE PRODUCTOS
         // ============================================
         if ($.fn.slick) {
-            if ($('.slider-destacados-desktop').length && !$('.slider-destacados-desktop').hasClass('slick-initialized')) {
-                $('.slider-destacados-desktop').slick({
+            const $destacadosTop = $('.slider-destacados-top');
+            const $destacadosBottom = $('.slider-destacados-bottom');
+            const $destacadosMobile = $('.slider-destacados-mobile');
+            let destacadosMode = null;
+
+            function destroyDestacadosSlider($slider, name) {
+                if ($slider.length && $slider.hasClass('slick-initialized')) {
+                    logDestacados('Destruyendo slider', { slider: name });
+                    $slider.slick('unslick');
+                }
+            }
+
+            function bindDestacadosDesktopEvents() {
+                $destacadosTop.off('.destacadosLog');
+                $destacadosBottom.off('.destacadosLog');
+
+                $destacadosTop.on('init.destacadosLog', function(event, slick) {
+                    logDestacados('desktop top init OK', {
+                        slideCount: slick.slideCount,
+                        slidesToShow: slick.options.slidesToShow,
+                        currentSlide: slick.currentSlide
+                    });
+                });
+
+                $destacadosBottom.on('init.destacadosLog', function(event, slick) {
+                    logDestacados('desktop bottom init OK', {
+                        slideCount: slick.slideCount,
+                        slidesToShow: slick.options.slidesToShow,
+                        currentSlide: slick.currentSlide
+                    });
+                });
+
+                $destacadosTop.on('afterChange.destacadosLog', function(event, slick, currentSlide) {
+                    logDestacados('desktop top afterChange', { currentSlide: currentSlide });
+                });
+
+                $destacadosBottom.on('afterChange.destacadosLog', function(event, slick, currentSlide) {
+                    logDestacados('desktop bottom afterChange', { currentSlide: currentSlide });
+                });
+
+                $destacadosTop.on('setPosition.destacadosLog', function(event, slick) {
+                    logDestacados('desktop top setPosition', {
+                        currentSlide: slick.currentSlide,
+                        slideWidth: slick.slideWidth,
+                        listWidth: slick.$list.width()
+                    });
+                });
+            }
+
+            function bindDestacadosMobileEvents() {
+                $destacadosMobile.off('.destacadosLog');
+
+                $destacadosMobile.on('init.destacadosLog', function(event, slick) {
+                    logDestacados('mobile init OK', {
+                        slideCount: slick.slideCount,
+                        slidesToShow: slick.options.slidesToShow,
+                        currentSlide: slick.currentSlide
+                    });
+                });
+
+                $destacadosMobile.on('afterChange.destacadosLog', function(event, slick, currentSlide) {
+                    logDestacados('mobile afterChange', { currentSlide: currentSlide });
+                });
+
+                $destacadosMobile.on('setPosition.destacadosLog', function(event, slick) {
+                    logDestacados('mobile setPosition', {
+                        currentSlide: slick.currentSlide,
+                        slideWidth: slick.slideWidth,
+                        listWidth: slick.$list.width()
+                    });
+                });
+            }
+
+            function bindDestacadosButtons(mode) {
+                $('.slider-prev-1').off('click.destacados');
+                $('.slider-next-1').off('click.destacados');
+
+                if (mode === 'desktop') {
+                    $('.slider-prev-1').on('click.destacados', function() {
+                        logDestacados('Click prev desktop', {
+                            topCurrent: $destacadosTop.slick('slickCurrentSlide'),
+                            bottomCurrent: $destacadosBottom.slick('slickCurrentSlide')
+                        });
+                        $destacadosTop.slick('slickPrev');
+                    });
+
+                    $('.slider-next-1').on('click.destacados', function() {
+                        logDestacados('Click next desktop', {
+                            topCurrent: $destacadosTop.slick('slickCurrentSlide'),
+                            bottomCurrent: $destacadosBottom.slick('slickCurrentSlide')
+                        });
+                        $destacadosTop.slick('slickNext');
+                    });
+                } else if (mode === 'mobile') {
+                    $('.slider-prev-1').on('click.destacados', function() {
+                        logDestacados('Click prev mobile', {
+                            currentSlide: $destacadosMobile.slick('slickCurrentSlide')
+                        });
+                        $destacadosMobile.slick('slickPrev');
+                    });
+
+                    $('.slider-next-1').on('click.destacados', function() {
+                        logDestacados('Click next mobile', {
+                            currentSlide: $destacadosMobile.slick('slickCurrentSlide')
+                        });
+                        $destacadosMobile.slick('slickNext');
+                    });
+                }
+            }
+
+            function initDesktopDestacados() {
+                if (!$destacadosTop.length || !$destacadosBottom.length) return;
+
+                bindDestacadosDesktopEvents();
+                logDestacados('Inicializando modo desktop', {
+                    viewport: window.innerWidth,
+                    topItems: $destacadosTop.children().length,
+                    bottomItems: $destacadosBottom.children().length
+                });
+
+                $destacadosTop.slick({
                     infinite: true,
                     slidesToShow: 4,
                     slidesToScroll: 1,
                     autoplay: true,
                     autoplaySpeed: 3000,
-                    arrows: true,
-                    prevArrow: $('.slider-prev-1'),
-                    nextArrow: $('.slider-next-1'),
+                    arrows: false,
+                    swipeToSlide: true,
+                    adaptiveHeight: false,
+                    asNavFor: '.slider-destacados-bottom',
                     responsive: [{
                         breakpoint: 1200,
                         settings: {
@@ -163,47 +309,164 @@
                         }
                     }]
                 });
+
+                $destacadosBottom.slick({
+                    infinite: true,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    autoplay: false,
+                    arrows: false,
+                    swipeToSlide: true,
+                    adaptiveHeight: false,
+                    asNavFor: '.slider-destacados-top',
+                    responsive: [{
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }]
+                });
+
+                bindDestacadosButtons('desktop');
             }
 
-            if ($('.slider-destacados-mobile').length && !$('.slider-destacados-mobile').hasClass('slick-initialized')) {
-                $('.slider-destacados-mobile').slick({
+            function initMobileDestacados() {
+                if (!$destacadosMobile.length) return;
+
+                bindDestacadosMobileEvents();
+                logDestacados('Inicializando modo mobile', {
+                    viewport: window.innerWidth,
+                    items: $destacadosMobile.children().length
+                });
+
+                $destacadosMobile.slick({
                     infinite: true,
                     slidesToShow: 2,
                     slidesToScroll: 1,
                     autoplay: true,
                     autoplaySpeed: 3000,
-                    arrows: true,
-                    prevArrow: $('.slider-prev-1'),
-                    nextArrow: $('.slider-next-1'),
+                    arrows: false,
+                    swipeToSlide: true,
+                    adaptiveHeight: false,
                     responsive: [{
-                        breakpoint: 768,
+                        breakpoint: 576,
                         settings: {
                             slidesToShow: 1
                         }
                     }]
                 });
+
+                bindDestacadosButtons('mobile');
             }
 
+            function setupDestacados() {
+                const nextMode = window.innerWidth >= 992 ? 'desktop' : 'mobile';
+                if (destacadosMode === nextMode) {
+                    if (nextMode === 'desktop') {
+                        $destacadosTop.slick('setPosition');
+                        $destacadosBottom.slick('setPosition');
+                    } else if (nextMode === 'mobile') {
+                        $destacadosMobile.slick('setPosition');
+                    }
+                    return;
+                }
+
+                destroyDestacadosSlider($destacadosTop, 'desktop-top');
+                destroyDestacadosSlider($destacadosBottom, 'desktop-bottom');
+                destroyDestacadosSlider($destacadosMobile, 'mobile');
+
+                destacadosMode = nextMode;
+                logDestacados('Cambio de modo', {
+                    mode: destacadosMode,
+                    viewport: window.innerWidth
+                });
+
+                if (destacadosMode === 'desktop') {
+                    initDesktopDestacados();
+                } else {
+                    initMobileDestacados();
+                }
+            }
+
+            let destacadosResizeTimer = null;
+            setupDestacados();
+
+            $(window).on('resize.destacados', function() {
+                clearTimeout(destacadosResizeTimer);
+                destacadosResizeTimer = setTimeout(function() {
+                    setupDestacados();
+                }, 150);
+            });
+
             if ($('.slider-ofertas').length && !$('.slider-ofertas').hasClass('slick-initialized')) {
-                $('.slider-ofertas').slick({
-                    infinite: true,
-                    slidesToShow: 4,
+                const $ofertas = $('.slider-ofertas');
+                const offersCount = $ofertas.children().length;
+                const desktopSlides = offersCount >= 4 ? 4 : Math.max(1, offersCount);
+                const tabletSlides = offersCount >= 3 ? 3 : Math.max(1, offersCount);
+                const mobileSlides = offersCount >= 2 ? 2 : 1;
+
+                logOfertas('Intentando inicializar', {
+                    items: offersCount,
+                    viewport: window.innerWidth,
+                    desktopSlides: desktopSlides,
+                    tabletSlides: tabletSlides,
+                    mobileSlides: mobileSlides
+                });
+
+                $ofertas.on('init', function(event, slick) {
+                    applySlickComputedWidths($ofertas, slick, logOfertas, 'ofertas');
+                    logOfertas('init OK', {
+                        slideCount: slick.slideCount,
+                        slidesToShow: slick.options.slidesToShow,
+                        currentSlide: slick.currentSlide
+                    });
+                });
+
+                $ofertas.on('setPosition', function(event, slick) {
+                    applySlickComputedWidths($ofertas, slick, logOfertas, 'ofertas');
+                    logOfertas('setPosition', {
+                        currentSlide: slick.currentSlide,
+                        slideWidth: slick.slideWidth,
+                        listWidth: slick.$list.width()
+                    });
+                });
+
+                $ofertas.on('afterChange', function(event, slick, currentSlide) {
+                    logOfertas('afterChange', {
+                        currentSlide: currentSlide
+                    });
+                });
+
+                $ofertas.on('breakpoint', function(event, slick, breakpoint) {
+                    logOfertas('breakpoint aplicado', {
+                        breakpoint: breakpoint,
+                        viewport: window.innerWidth,
+                        slidesToShow: slick.options.slidesToShow
+                    });
+                });
+
+                $ofertas.slick({
+                    infinite: offersCount > 1,
+                    slidesToShow: desktopSlides,
                     slidesToScroll: 1,
-                    autoplay: true,
+                    autoplay: offersCount > 1,
                     autoplaySpeed: 3500,
-                    arrows: true,
-                    prevArrow: $('.slider-prev-2'),
-                    nextArrow: $('.slider-next-2'),
+                    arrows: false,
+                    swipeToSlide: true,
+                    adaptiveHeight: false,
+                    centerMode: false,
+                    variableWidth: false,
+                    initialSlide: 0,
                     responsive: [{
                             breakpoint: 1200,
                             settings: {
-                                slidesToShow: 3
+                                slidesToShow: tabletSlides
                             }
                         },
                         {
                             breakpoint: 768,
                             settings: {
-                                slidesToShow: 2
+                                slidesToShow: mobileSlides
                             }
                         },
                         {
@@ -213,6 +476,20 @@
                             }
                         }
                     ]
+                });
+
+                $('.slider-prev-2').off('click.ofertas').on('click.ofertas', function() {
+                    logOfertas('Click prev', {
+                        currentSlide: $ofertas.slick('slickCurrentSlide')
+                    });
+                    $ofertas.slick('slickPrev');
+                });
+
+                $('.slider-next-2').off('click.ofertas').on('click.ofertas', function() {
+                    logOfertas('Click next', {
+                        currentSlide: $ofertas.slick('slickCurrentSlide')
+                    });
+                    $ofertas.slick('slickNext');
                 });
             }
         }

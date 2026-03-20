@@ -16,7 +16,10 @@ $stmt = $pdo->prepare("UPDATE usuarios SET reset_token = ?, reset_expires = ? WH
 $stmt->execute([$token, $expira, $email]);
 
 if ($stmt->rowCount() > 0) {
-    $link = "http://" . $_SERVER['HTTP_HOST'] . "/reset_password.php?token=$token";
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
+    $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    $basePath = preg_replace('#/controllers$#', '', ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/'));
+    $link = $protocol . "://" . $_SERVER['HTTP_HOST'] . $basePath . "/reset_password.php?token=$token";
     
     $mail = new PHPMailer(true);
     try {

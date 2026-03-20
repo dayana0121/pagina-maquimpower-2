@@ -48,7 +48,9 @@ if (isset($_GET['ajax_search']) && isset($_GET['q'])) {
 
 
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
-$baseUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . "/pagina";
+$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+$basePath = ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/');
+$baseUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . $basePath;
 
 // 2. LÓGICA DE CATEGORÍAS
 $menu_jerarquico = [];
@@ -84,13 +86,15 @@ try {
       gtag('js', new Date());
       gtag('config', 'G-XXXXXXXXXX');
     </script>
-    <base href="/">
+    <base href="<?= $basePath !== '' ? $basePath . '/' : '/' ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <?php
     if (!isset($baseUrl)) {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-        $baseUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . "/pagina";
+        $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+        $basePath = ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/');
+        $baseUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . $basePath;
     }
     /* =========================
        CONFIGURACIÓN SEO GLOBAL

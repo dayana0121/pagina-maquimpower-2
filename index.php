@@ -13,7 +13,7 @@ $stmtOfertas->execute();
 $productosOferta = $stmtOfertas->fetchAll();
 
 // --- HELPER RENDER CARD (Diseño Premium) ---
-function renderHomeCard($p)
+function renderHomeCard($p, $useReveal = false)
 {
     $agotado = ($p['stock_actual'] <= 0);
     $img = "https://maquimpower.com/assets/img/productos/aspiradora-de-polvo-y-agua-karcher-wdl1s-1000w-1773337996-0.webp";
@@ -24,7 +24,7 @@ function renderHomeCard($p)
 
     ob_start();
 ?>
-    <div class="px-2 h-100 reveal-item">
+    <div class="px-2 h-100<?= $useReveal ? ' reveal-item' : '' ?>">
         <a href="<?= $link ?>" class="text-decoration-none product-card-link">
             <div class="prod-card h-100 position-relative bg-white border border-light rounded-4 overflow-hidden p-2">
                 <div class="card-overlay"></div>
@@ -231,16 +231,25 @@ function renderHomeCard($p)
     </div>
 
     <div class="slider-destacados-desktop d-none d-lg-block">
-        <?php
-        $chunks = array_chunk($productos, 2);
-        foreach ($chunks as $chunk): ?>
-            <div> <?php foreach ($chunk as $p): ?>
-                    <div style="margin-bottom: 20px;">
+        <div class="slider-destacados-row slider-destacados-top">
+            <?php foreach ($productos as $index => $p): ?>
+                <?php if ($index % 2 === 0): ?>
+                    <div>
                         <?= renderHomeCard($p) ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endforeach; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="slider-destacados-row slider-destacados-bottom mt-3">
+            <?php foreach ($productos as $index => $p): ?>
+                <?php if ($index % 2 !== 0): ?>
+                    <div>
+                        <?= renderHomeCard($p) ?>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <div class="slider-destacados-mobile d-block d-lg-none">
@@ -412,7 +421,7 @@ function renderHomeCard($p)
             $brands = glob('assets/img/marcas/*.{png,jpg,webp,svg}', GLOB_BRACE);
             for ($i = 0; $i < 2; $i++):
                 foreach ($brands as $img): ?>
-                    <img src="<?= $img ?>" class="mx-4 opacity-50 hover-opacity-100 transition-opacity"
+                    <img src="<?= $baseUrl . '/' . ltrim(str_replace('\\', '/', $img), '/') ?>" class="mx-4 opacity-50 hover-opacity-100 transition-opacity"
                         style="height: 40px; width: auto; filter: grayscale(100%); transition: 0.3s;"
                         onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%)'">
             <?php endforeach;

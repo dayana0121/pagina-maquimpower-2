@@ -4,7 +4,9 @@ require_once 'includes/db.php';
 
 // Detectar el dominio automáticamente para evitar errores
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-$baseUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . "/pagina";
+$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+$basePath = ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/');
+$baseUrl = $protocol . "://" . $_SERVER['HTTP_HOST'] . $basePath;
 
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';

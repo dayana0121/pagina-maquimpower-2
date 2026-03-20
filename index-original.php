@@ -873,7 +873,7 @@ function renderHomeCard($p)
             $brands = glob('assets/img/marcas/*.{png,jpg,webp,svg}', GLOB_BRACE);
             for ($i = 0; $i < 2; $i++):
                 foreach ($brands as $img): ?>
-                    <img src="<?= $img ?>" class="mx-4 opacity-50 hover-opacity-100 transition-opacity"
+                    <img src="<?= $baseUrl . '/' . ltrim(str_replace('\\', '/', $img), '/') ?>" class="mx-4 opacity-50 hover-opacity-100 transition-opacity"
                         style="height: 40px; width: auto; filter: grayscale(100%); transition: 0.3s;"
                         onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%)'">
                 <?php endforeach; endfor; ?>

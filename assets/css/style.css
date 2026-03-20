@@ -1294,7 +1294,8 @@ position: absolute;
 /* ====== SLICK SLIDER ====== */
 
 /*DESTACADOS*/
-.slick-destacados {
+.slider-destacados-row,
+.slider-destacados-mobile {
     position: relative;
     display: block;
     box-sizing: border-box;
@@ -1303,12 +1304,15 @@ position: absolute;
     -webkit-tap-highlight-color: transparent;
 }
 
-.slick-destacados .slick-track,
-.slick-destacados .slick-list {
+.slider-destacados-row .slick-track,
+.slider-destacados-row .slick-list,
+.slider-destacados-mobile .slick-track,
+.slider-destacados-mobile .slick-list {
     transform: translate3d(0, 0, 0);
 }
 
-.slick-destacados .slick-list {
+.slider-destacados-row .slick-list,
+.slider-destacados-mobile .slick-list {
     margin: 0;
     /* 🔥 quitar margen */
     padding: 0 38px;
@@ -1318,29 +1322,24 @@ position: absolute;
 }
 
 /* Padding horizontal para separar las tarjetas a los lados (Aplica a PC y Móvil) */
-.slider-destacados-desktop .slick-slide,
+.slider-destacados-row .slick-slide,
 .slider-destacados-mobile .slick-slide {
     padding: 0 10px;
 }
 
 /* Separación vertical entre la tarjeta de arriba y la de abajo (Solo en PC) */
-.slider-destacados-desktop .slick-slide>div {
-    margin-bottom: 20px;
+.slider-destacados-row .slick-slide > div,
+.slider-destacados-mobile .slick-slide > div {
+    height: 100%;
+    width: 100%;
     display: block;
 }
 
 /* Evitamos que la tarjeta de más abajo deje un espacio extra innecesario */
-.slider-destacados-desktop .slick-slide>div:last-child {
-    margin-bottom: 0;
-}
-
-/* Centrado del contenido SIN tocar el layout interno de Slick  */
-.slider-destacados-desktop .slick-slide>div,
-.slider-destacados-mobile .slick-slide>div,
 .slider-ofertas .slick-slide>div {
     height: 100%;
     width: 100%;
-    justify-content: center;
+    display: block;
 }
 
 .slick-track {
@@ -1348,10 +1347,32 @@ position: absolute;
 }
 
 /*  No cambiar el display de .slick-slide (Slick lo controla).  */
-.slider-destacados-desktop .slick-slide,
+.slider-destacados-row .slick-slide,
 .slider-destacados-mobile .slick-slide,
 .slider-ofertas .slick-slide {
     height: 100%;
+}
+
+.slider-destacados-row .reveal-item,
+.slider-destacados-row .reveal-item .prod-card,
+.slider-destacados-mobile .reveal-item,
+.slider-destacados-mobile .reveal-item .prod-card {
+    height: 100%;
+}
+
+.slider-destacados-row .slick-cloned .reveal-item,
+.slider-destacados-mobile .slick-cloned .reveal-item,
+.slider-ofertas .slick-cloned .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.slider-destacados-desktop {
+    position: relative;
+}
+
+.slider-destacados-row + .slider-destacados-row {
+    margin-top: 20px;
 }
 
 /* responsive */
@@ -1393,6 +1414,12 @@ position: absolute;
     overflow: hidden;
 }
 
+.slider-ofertas .slick-list,
+.category-section .slick-list {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* Cada slide del carrusel */
 .slider-ofertas .slick-slide {
     display: flex;             /* convierte el slide en contenedor flex */
@@ -1412,6 +1439,18 @@ position: absolute;
     margin: 0;                 /* sin márgenes extra */
   }
   
+
+.category-section .slick-cloned .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.slider-ofertas .slick-slide > div,
+.slider-ofertas .product-card-link,
+.slider-ofertas .prod-card {
+    width: 100% !important;
+    max-width: none !important;
+}
 
 /* No forzar flex en .slick-track: rompe infinite/clones */
 

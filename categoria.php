@@ -126,9 +126,11 @@ function renderProductCard($p, $isSlider = false) {
     $precioShow = $tieneOferta ? $p['precio_oferta'] : $p['precio'];
     $descuento = $tieneOferta ? round((($p['precio'] - $p['precio_oferta']) / $p['precio']) * 100) : 0;
 
-    $wrapperClass = $isSlider ? 'px-2 h-100' : 'col'; 
+    $wrapperClass = $isSlider ? 'px-2 h-100' : 'col';
     // Clase 'reveal-item' para el JS de animación
-    $wrapperClass .= ' reveal-item';
+    if (!$isSlider) {
+        $wrapperClass .= ' reveal-item';
+    }
 
     ob_start(); 
     ?>
@@ -315,27 +317,62 @@ function renderProductCard($p, $isSlider = false) {
 
 </div>
 
-<!-- SCRIPTS (Slick + Animaciones) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
 <script>
 // 1. INICIALIZAR CARRUSEL
 $(document).ready(function(){
-    $('.prod-slider-container').slick({
-        dots: false,
-        infinite: true,
-        speed: 400,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: false,
-        prevArrow: '<button type="button" class="slick-prev"><i class="bi bi-chevron-left text-dark fs-5"></i></button>',
-        nextArrow: '<button type="button" class="slick-next"><i class="bi bi-chevron-right text-dark fs-5"></i></button>',
-        responsive: [
-            { breakpoint: 1200, settings: { slidesToShow: 3 } },
-            { breakpoint: 768, settings: { slidesToShow: 2 } },
-            { breakpoint: 480, settings: { slidesToShow: 2, arrows: false, autoplay: true, autoplaySpeed: 3000 } }
-        ]
+    function logCategorySlider(message, extra) {
+        console.log('[category-slider]', message, extra || {});
+    }
+
+    function applyCategoryWidths($slider, slick) {
+        if (!$slider.length || !slick || typeof slick.slideWidth === 'undefined') return;
+        slick.$slides.each(function() {
+            this.style.setProperty('width', slick.slideWidth + 'px', 'important');
+        });
+    }
+
+    $('.prod-slider-container').each(function(index){
+        const $slider = $(this);
+        const itemCount = $slider.children().length;
+
+        $slider.on('init', function(event, slick) {
+            applyCategoryWidths($slider, slick);
+            logCategorySlider('init OK', {
+                sliderIndex: index,
+                slideCount: slick.slideCount,
+                slidesToShow: slick.options.slidesToShow
+            });
+        });
+
+        $slider.on('setPosition', function(event, slick) {
+            applyCategoryWidths($slider, slick);
+            logCategorySlider('setPosition', {
+                sliderIndex: index,
+                currentSlide: slick.currentSlide,
+                slideWidth: slick.slideWidth,
+                listWidth: slick.$list.width()
+            });
+        });
+
+        $slider.slick({
+            dots: false,
+            infinite: itemCount > 1,
+            speed: 450,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: itemCount > 1,
+            autoplaySpeed: 3200,
+            centerMode: false,
+            variableWidth: false,
+            initialSlide: 0,
+            prevArrow: '<button type="button" class="slick-prev"><i class="bi bi-chevron-left text-dark fs-5"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="bi bi-chevron-right text-dark fs-5"></i></button>',
+            responsive: [
+                { breakpoint: 1200, settings: { slidesToShow: 3 } },
+                { breakpoint: 768, settings: { slidesToShow: 2 } },
+                { breakpoint: 480, settings: { slidesToShow: 1 } }
+            ]
+        });
     });
 });
 
