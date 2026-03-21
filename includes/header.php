@@ -229,6 +229,9 @@ try {
     <!-- librería PARA EL OJITO-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -252,7 +255,7 @@ try {
                         <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png"
                             alt="MAQUIMPOWER"
                             class="header-logo-img"
-                            style="max-height: 180px; width: auto; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                            style="max-height: 100px; width: auto; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
                         <div style="height: 70px;"></div>
                     </a>
                 </div>

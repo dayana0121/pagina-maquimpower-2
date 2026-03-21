@@ -101,11 +101,11 @@ function renderHomeCard($p, $useReveal = false)
             <a href="categoria.php?c=ofertas"
                 class="btn btn-sm btn-danger rounded-pill fw-bold text-nowrap px-3 shadow-sm"><i
                     class="bi bi-lightning-fill"></i> PROMOS</a>
-            <a href="categoria.php?c=limpieza"
+            <a href="categoria.php?c=maquinarias"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">MAQUINARIAS</a>
-            <a href="categoria.php?c=carwash"
+            <a href="categoria.php?c=detailing"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">DETAILING</a>
-            <a href="categoria.php?c=herramientas"
+            <a href="categoria.php?c=repuestos"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">REPUESTOS</a>
         </div>
     </div>
@@ -156,14 +156,29 @@ function renderHomeCard($p, $useReveal = false)
         </div>
     </div>
 
-    <!-- SLIDE 2 -->
+    <!-- SLIDE 2: BANNER 1 - HIDROLAVADORAS -->
     <div class="hero-slide hero-banner-slide">
-        <img src="<?= $baseUrl ?>/assets/img/Banner 1 Hidrolavadoras.jpg" class="hero-banner desktop" alt="Banner Hidrolavadoras">
-        <img src="<?= $baseUrl ?>/assets/img/Banner 1 Hidrolavadoras (Mobile).webp" class="hero-banner mobile"
-            alt="Banner Hidrolavadoras Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner1.jpg" class="hero-banner desktop" alt="Banner 1 - Hidrolavadoras">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-1-mobile.webp" class="hero-banner mobile" alt="Banner 1 - Hidrolavadoras Móvil">
     </div>
 
+    <!-- SLIDE 3: BANNER 2 - ASPIRADORA -->
+    <div class="hero-slide hero-banner-slide">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner2.jpg" class="hero-banner desktop" alt="Banner 2 - Aspiradora">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-2-mobile.webp" class="hero-banner mobile" alt="Banner 2 - Aspiradora Móvil">
+    </div>
 
+    <!-- SLIDE 4: BANNER 3 - IMPLEMENTA TU CARWASH -->
+    <div class="hero-slide hero-banner-slide">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner3.jpg" class="hero-banner desktop" alt="Banner 3 - Implementa tu carwash">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-3-mobile.webp" class="hero-banner mobile" alt="Banner 3 - Implementa tu carwash Móvil">
+    </div>
+
+    <!-- SLIDE 5: BANNER 4 - PROYECTO DETAILING -->
+    <div class="hero-slide hero-banner-slide">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner4.jpg" class="hero-banner desktop" alt="Banner 4 - Proyecto Detailing">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-4-mobile.webp" class="hero-banner mobile" alt="Banner 4 - Proyecto Detailing Móvil">
+    </div>
 
 </div>
 
@@ -233,34 +248,37 @@ function renderHomeCard($p, $useReveal = false)
         </div>
     </div>
 
-    <div class="slider-destacados-desktop d-none d-lg-block">
-        <div class="slider-destacados-row slider-destacados-top">
-            <?php foreach ($productos as $index => $p): ?>
-                <?php if ($index % 2 === 0): ?>
-                    <div>
-                        <?= renderHomeCard($p) ?>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-
-        <div class="slider-destacados-row slider-destacados-bottom mt-3">
-            <?php foreach ($productos as $index => $p): ?>
-                <?php if ($index % 2 !== 0): ?>
-                    <div>
-                        <?= renderHomeCard($p) ?>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
-    <div class="slider-destacados-mobile d-block d-lg-none">
-        <?php foreach ($productos as $p): ?>
-            <div>
-                <?= renderHomeCard($p) ?>
+    <!-- ✅ CONTENEDOR CENTRADO PARA DESTACADOS -->
+    <div class="slider-destacados-container">
+        <div class="slider-destacados-desktop d-none d-lg-block">
+            <div class="slider-destacados-row slider-destacados-top">
+                <?php foreach ($productos as $index => $p): ?>
+                    <?php if ($index % 2 === 0): ?>
+                        <div>
+                            <?= renderHomeCard($p) ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
+
+            <div class="slider-destacados-row slider-destacados-bottom mt-3">
+                <?php foreach ($productos as $index => $p): ?>
+                    <?php if ($index % 2 !== 0): ?>
+                        <div>
+                            <?= renderHomeCard($p) ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="slider-destacados-mobile d-block d-lg-none">
+            <?php foreach ($productos as $p): ?>
+                <div>
+                    <?= renderHomeCard($p) ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>
 
@@ -281,8 +299,8 @@ function renderHomeCard($p, $useReveal = false)
         </div>
     </div>
 
-    <!-- Carrusel 2 -->
-    <div class="prod-slider-container">
+    <!-- ✅ ENCUADRADO: Carrusel 2 con max-width centrado -->
+    <div class="prod-slider-container" style="max-width: 1400px; margin: 0 auto;">
         <div class="slider-ofertas">
             <?php foreach ($productosOferta as $p): ?>
                 <?= renderHomeCard($p) ?>
@@ -484,14 +502,56 @@ function renderHomeCard($p, $useReveal = false)
     });
 </script>
 <script>
-    const slides = document.querySelectorAll('.hero-slide');
-    let index = 0;
-
-    setInterval(() => {
-        slides[index].classList.remove('active');
-        index = (index + 1) % slides.length;
-        slides[index].classList.add('active');
-    }, 6000);
+    // ROTACIÓN AUTOMÁTICA DEL HERO SLIDER
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.hero-slider .hero-slide');
+        const slider = document.querySelector('.hero-slider');
+        
+        console.log('🎬 HERO SLIDER INICIANDO...');
+        console.log('Total de slides encontrados:', slides.length);
+        console.log('Contenedor slider:', slider);
+        
+        if (slider) {
+            console.log('✅ Slider encontrado');
+            console.log('Altura del slider:', window.getComputedStyle(slider).height);
+        }
+        
+        if (slides.length > 0) {
+            console.log('✅ Slides encontrados:', slides.length);
+            
+            // Mostrar info de cada slide
+            slides.forEach((slide, i) => {
+                console.log(`Slide ${i + 1}:`, slide.className, 'Active:', slide.classList.contains('active'));
+            });
+            
+            let index = 0;
+            
+            // Mostrar el primer slide inmediatamente
+            if (slides[0]) {
+                slides[0].classList.add('active');
+                console.log('✅ Slide 1 activado');
+            }
+            
+            // Rotación cada 6 segundos
+            setInterval(() => {
+                // Remover active del slide actual
+                slides[index].classList.remove('active');
+                console.log('❌ Slide', index + 1, 'desactivado');
+                
+                // Pasar al siguiente slide
+                index = (index + 1) % slides.length;
+                
+                // Agregar active al nuevo slide
+                slides[index].classList.add('active');
+                console.log('✅ Slide', index + 1, 'activado');
+                
+                // Verificar clases aplicadas
+                console.log('Clase active en slide', index + 1, ':', slides[index].classList.contains('active'));
+            }, 6000);
+        } else {
+            console.error('❌ No se encontraron slides en el DOM');
+        }
+    });
 </script>
 
 <?php require_once 'includes/footer.php'; ?>

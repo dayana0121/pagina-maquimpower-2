@@ -1,4 +1,13 @@
 if (typeof window.Notify === 'undefined') {
+    // ✅ NUEVO: Verifica que jQuery esté disponible al cargar main.js
+    if (typeof $ === 'undefined') {
+        console.error('❌ CRÍTICO: main.js se cargó ANTES de que jQuery estuviera disponible');
+        console.error('   Verifica que <script src="jquery..."></script> esté en header.php');
+        console.error('   Ubicación del error:', new Error().stack);
+    } else {
+        console.log('✅ main.js cargado. jQuery disponible:', $.fn.jquery);
+    }
+    
     window.Notify = {
         show: (icon, title, text) => {
             Swal.fire({
@@ -150,17 +159,31 @@ function initLiveSearch() {
 }
 
 // --- 6. CARRUSELES (SLICK) - PRODUCTOS Y VIDEOS ---
-// Los sliders PRINCIPALES se inicializan en footer.php con jQuery $(document).ready()
+// Los sliders PRINCIPALES se inicializan en footer.php con jQuery $(document).ready())
 // Esta función es un respaldo seguro que NO re-inicializa si footer.php ya lo hizo.
 
 function initSliders() {
     // Los sliders se inicializan en footer.php para evitar conflictos de doble-init.
     // Esta función solo existe para que la llamada en DOMContentLoaded no falle.
-    if (typeof $ === 'undefined' || !$.fn.slick) {
-        console.warn('⚠️ jQuery o Slick no disponible aún (se inicializará desde footer)');
+    
+    // ✅ MEJORADO: Console logs más informativos
+    if (typeof $ === 'undefined') {
+        console.error('❌ FATAL en initSliders(): jQuery NO ESTÁ DEFINIDO');
+        console.error('   Causa: jQuery debe ser cargado en header.php ANTES de main.js');
+        console.error('   Locación actual:', window.location.href);
+        console.error('   Stack:', new Error().stack);
         return;
     }
-    console.log('ℹ️ initSliders() llamado desde main.js — sliders se gestionan desde footer.php');
+    
+    if (!$.fn.slick) {
+        console.error('❌ FATAL en initSliders(): Slick plugin NO DISPONIBLE');
+        console.error('   jQuery versión:', $.fn.jquery);
+        console.error('   Causa: slick-carousel.min.js no se cargó correctamente en footer.php');
+        console.error('   Stack:', new Error().stack);
+        return;
+    }
+    
+    console.log('✅ initSliders() OK: jQuery ' + $.fn.jquery + ' + Slick disponibles');
 }
 
 // --- 7. TIKTOK SLIDER ---

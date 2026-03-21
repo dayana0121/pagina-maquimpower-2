@@ -61,12 +61,12 @@ body {
 }
 .top-bar span { opacity: 0.8; }
 
-/* --- FIX: Z-INDEX WAR (Buscador vs Categorías) --- */
+/* --- FIX: Z-INDEX WAR (Buscador vs CategorÃ­as) --- */
 /* 1. Elevamos el Header por encima de la barra pegajosa */
 .header-main {
     position: relative;
-    z-index: 1050; /* Más alto que el sticky (que suele ser 1020) */
-    background: white; /* Asegurar fondo sólido */
+    z-index: 1050; /* MÃ¡s alto que el sticky (que suele ser 1020) */
+    background: white; /* Asegurar fondo sÃ³lido */
 }
 
 /* FIX VISIBILIDAD */
@@ -100,19 +100,19 @@ body {
     opacity: 1; /* Asegurar visibilidad */
 }
 
-/* 3. Animación al pasar el mouse (Hover) */
+/* 3. AnimaciÃ³n al pasar el mouse (Hover) */
 .nav-bottom .dropdown-toggle:hover::after,
 .nav-bottom .dropdown:hover .dropdown-toggle::after {
     width: 100%;
     left: 0;
 }
 
-/* 4. Ajuste para que el botón no salte */
+/* 4. Ajuste para que el botÃ³n no salte */
 .nav-bottom .dropdown-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Misma altura que los demás */
+    height: 100%; /* Misma altura que los demÃ¡s */
 }
 
 .header-main .dropdown-toggle::after {
@@ -181,16 +181,16 @@ body {
 }
 
 
-/* --- FIX: ARREGLO DE MENÚ DESPLEGABLE --- */
+/* --- FIX: ARREGLO DE MENÃš DESPLEGABLE --- */
 
 /* 1. Matar la flecha triangular de Bootstrap */
 .nav-bottom .dropdown-toggle::after {
-    border: none !important;        /* Quita el triángulo */
+    border: none !important;        /* Quita el triÃ¡ngulo */
     margin-left: 0 !important;      /* Quita el espacio extra */
     vertical-align: baseline !important;
 }
 
-/* 2. Restaurar nuestra línea animada */
+/* 2. Restaurar nuestra lÃ­nea animada */
 .nav-bottom .dropdown-toggle::after {
     content: '' !important;
     position: absolute;
@@ -203,30 +203,30 @@ body {
     opacity: 1; /* Asegurar visibilidad */
 }
 
-/* 3. Animación al pasar el mouse (Hover) */
+/* 3. AnimaciÃ³n al pasar el mouse (Hover) */
 .nav-bottom .dropdown-toggle:hover::after,
 .nav-bottom .dropdown:hover .dropdown-toggle::after {
     width: 100%;
     left: 0;
 }
 
-/* 4. Ajuste para que el botón no salte */
+/* 4. Ajuste para que el botÃ³n no salte */
 .nav-bottom .dropdown-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Misma altura que los demás */
+    height: 100%; /* Misma altura que los demÃ¡s */
 }
 
-/* --- FIX 2: LOGO MÁS GRANDE --- */
+/* --- FIX 2: LOGO MÃS GRANDE --- */
 .header-logo-img {
-    height: 10x; /* Aumentado de 100px a 140px */
+    height: 255px; /* 3 veces mas grande */
     width: auto;
     transition: 0.3s;
 }
 @media (max-width: 768px) {
     .header-logo-img {
-        height: 90px; /* Ajuste para móvil */
+        height: 200px; /* 3 veces mas grande en movil */
     }
 }
 
@@ -252,7 +252,7 @@ body {
     border: 1px solid #e0e0e0; /* Borde sutil */
     box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
     width: 127%;              /* Que ocupe todo el espacio de su columna */
-    max-width: 1400px;         /* Ajusta este número según qué tan largo lo quieras */
+    max-width: 1400px;         /* Ajusta este nÃºmero segÃºn quÃ© tan largo lo quieras */
     margin: 0 auto;           /* Lo centra en su contenedor */
     transition: all 0.3s ease;
 }
@@ -283,7 +283,7 @@ body {
 }
 
 .search-modern button i {
-    font-size: 1.2rem;        /* Icono de lupa un poco más grande */
+    font-size: 1.2rem;        /* Icono de lupa un poco mÃ¡s grande */
 }
 
 .search-modern button:hover { transform: scale(1.2); }
@@ -332,7 +332,7 @@ body {
         background-color: #f2f2f2 !important; /* Gris suave al tocar */
     }
 
-    /* Imagen pequeña */
+    /* Imagen pequeÃ±a */
     .search-item img {
         width: 45px; 
         height: 45px; 
@@ -377,7 +377,7 @@ body {
     transition: all 0.3s ease;
     position: relative;
     font-weight: 800;          /* Letras bien negritas */
-    text-transform: uppercase; /* Todo en mayúsculas como la foto */
+    text-transform: uppercase; /* Todo en mayÃºsculas como la foto */
 }
 
 .nav-link-corp:hover {
@@ -386,7 +386,7 @@ body {
     border-bottom-color: var(--primary);
 }
 
-/* LÍNEA 1 (Superior) */
+/* LÃNEA 1 (Superior) */
 .nav-link-corp::before {
     content: '';
     position: absolute;
@@ -399,7 +399,7 @@ body {
     transition: width 0.3s ease;
 }
 
-/* LÍNEA 2 (Inferior) */
+/* LÃNEA 2 (Inferior) */
 .nav-link-corp::after {
     content: '';
     position: absolute;
@@ -420,11 +420,11 @@ body {
 }
 
 .nav-item-mega:hover .nav-link-corp::before {
-    width: 70%; /* Línea de arriba corta */
+    width: 70%; /* LÃ­nea de arriba corta */
 }
 
 .nav-item-mega:hover .nav-link-corp::after {
-    width: 100%; /* Línea de abajo más larga */
+    width: 100%; /* LÃ­nea de abajo mÃ¡s larga */
 }
 
 /* --- RESTO DE TUS ESTILOS --- */
@@ -478,7 +478,7 @@ position: absolute;
     transition: all 0.3s ease;      /* Suaviza cambios de color y movimiento */
 }
 
-/* Animación de la flecha (ícono) dentro de "VER TODO" */
+/* AnimaciÃ³n de la flecha (Ã­cono) dentro de "VER TODO" */
 .mega-menu a.text-primary:hover{
     margin-left: 20px;               /* La flechita se desplaza a la derecha */
     transition: margin-left 0.3s ease;
@@ -492,21 +492,21 @@ position: absolute;
 
 /* 2. Cuando pasas el mouse sobre el enlace... */
 .hover-orange1:hover i {
-    color: var(--primary) !important; /* El triángulo se vuelve naranja */
+    color: var(--primary) !important; /* El triÃ¡ngulo se vuelve naranja */
     transform: scale(1.2);           /* Opcional: crece un poquito para dar feedback */
-    opacity: 1 !important;           /* Asegura que brille al máximo */
+    opacity: 1 !important;           /* Asegura que brille al mÃ¡ximo */
 }
 
-/* 2. Estado cuando el mouse está ENCIMA (Hover) */
+/* 2. Estado cuando el mouse estÃ¡ ENCIMA (Hover) */
 .hover-orange1:hover {
     color: var(--primary) !important;
     padding-left: 10px !important; /* Se desplaza 10px a la derecha suavemente */
 }
 
-/* 3. Opcional: Si quieres que el ícono (caret) también cambie */
+/* 3. Opcional: Si quieres que el Ã­cono (caret) tambiÃ©n cambie */
 .hover-orange1:hover .bi-caret-right-fill {
-    opacity: 1 var(--primary) !important;         /* El ícono se enciende más */
-    margin-right: 8px;             /* El ícono también empuja un poco */
+    opacity: 1 var(--primary) !important;         /* El Ã­cono se enciende mÃ¡s */
+    margin-right: 8px;             /* El Ã­cono tambiÃ©n empuja un poco */
 }
 
 .hover-zoom {
@@ -567,7 +567,7 @@ position: absolute;
 .accordion-flush{
     margin-bottom: 0px !important;
 }
-/* --- FIX 3: MENÚ MÓVIL ACORDEÓN --- 
+/* --- FIX 3: MENÃš MÃ“VIL ACORDEÃ“N --- 
 .accordion-button-custom {
     background: none;
     border: none;
@@ -596,7 +596,7 @@ position: absolute;
     transition: transform 0.3s ease !important;
 }
 
-/* Cuando el acordeón está abierto, rotar y cambiar a naranja */
+/* Cuando el acordeÃ³n estÃ¡ abierto, rotar y cambiar a naranja */
 #mobAcc .accordion-button:not(.collapsed)::after {
     transform: rotate(-180deg) !important;
     filter: invert(45%) sepia(95%) saturate(1354%) hue-rotate(350deg) brightness(100%) contrast(105%) !important;
@@ -615,10 +615,10 @@ position: absolute;
 @media (max-width: 768px) {
     body { padding-bottom: 80px; } /* Espacio para que no tape contenido */
     .top-bar { display: none; } /* Ocultar barra negra */
-    .header-main { padding: 10px 0; } /* Header más compacto */
+    .header-main { padding: 10px 0; } /* Header mÃ¡s compacto */
 }
 
-/* CSS Limpio para Móvil */
+/* CSS Limpio para MÃ³vil */
 .fw-black { font-weight: 900; }
 
 .avatar-sm { width: 35px; height: 35px; font-size: 0.9rem; }
@@ -793,7 +793,7 @@ position: absolute;
 /* Ajuste responsive para que las tarjetas no se rompan */
 .slick-slide {
     min-height: 1px; /* evita colapso */
-    /* IMPORTANT: no forzar flex aquí; Slick calcula widths con floats */
+    /* IMPORTANT: no forzar flex aquÃ­; Slick calcula widths con floats */
 }
 
 .slick-slide {
@@ -827,12 +827,56 @@ position: absolute;
 .skeleton{background:#f6f7f8;background-image:linear-gradient(to right,#f6f7f8 0%,#edeef1 20%,#f6f7f8 40%,#f6f7f8 100%);background-repeat:no-repeat;background-size:1000px 100%;animation:shimmer 2s infinite linear}
 
 /* HERO SLIDER */
-.hero-slider{position:relative;width:100%;height:580px;overflow:hidden}
-.hero-slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;transform:scale(1.05);transition:opacity 1s,transform 1s;z-index:1}
-.hero-slide.active{opacity:1;transform:scale(1);z-index:2}
-.hero-banner{width:100%;height:100%;object-fit:cover;display:block}
-.hero-banner.mobile{display:none}
-.hero-banner.desktop{display:block}
+.hero-slider{
+    position:relative;
+    width:100%;
+    height: auto; min-height: 100vh;
+    overflow:hidden;
+    background:#000;
+}
+
+.hero-slide{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.05);
+    transition:opacity 1s ease-in-out, transform 1s ease-in-out;
+    z-index:1;
+}
+
+.hero-slide.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+    z-index:2;
+}
+
+.hero-banner-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-banner{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:contain;
+    object-position:center;
+    background-color:#ffffff;
+}
+
+.hero-banner.desktop{
+    display:block !important;
+}
+
+.hero-banner.mobile{
+    display:none !important;
+}
 
 /* RESPONSIVE */
 /* Mobile Adjustments */
@@ -866,7 +910,7 @@ position: absolute;
     .hero-slider {
         position: relative;
         width: 100%;
-        /* Altura controlada por media queries */
+        height: 900px;
         overflow: hidden;
     }
 
@@ -887,47 +931,17 @@ position: absolute;
         z-index: 2;
     }
 
-    /* Los banners */
-    .hero-banner {
+    .hero-section-dark {
+        height: 100%;
         width: 100%;
-        height: auto;
-        object-fit: cover;
-        display: block;
     }
 
-    /* Asegura que el hero original siga bien */
+    /* Asegura que las secciones oscuras ocupen todo el espacio */
     .hero-slide .hero-section-dark {
         height: 100%;
     }
 
-    /* (Bloque duplicado eliminado) */
-
-    /* ===== BANNERS ===== */
-    .hero-banner-slide {
-        position: relative;
-        width: 100%;
-        height: 580px;
-    }
-
-    .hero-banner {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* PC: llena el hero */
-    .hero-banner.desktop {
-        object-fit: cover;
-    }
-
-    /* Mobile: NO se recorta */
-    .hero-banner.mobile {
-        object-fit: contain;
-        background: #000;
-        /* relleno elegante si sobra espacio */
-    }
-
-
-    /* ===== RESPONSIVE SWITCH ===== */
+    /* ===== ESTILOS RESPONSIVE ===== */
     .hero-banner.mobile {
         display: none;
     }
@@ -940,39 +954,16 @@ position: absolute;
         display: none;
     }
 
-    /* Global Banner Slide Style */
-    .hero-banner-slide {
-        position: relative;
-        width: 100%;
-        /* Eliminamos altura fija aquí, heredará del slider */
-        height: 100%;
-    }
-
-    .hero-banner {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        display: block;
-    }
-
-    .hero-bg {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
     /* Breakpoints para ajustar altura y evitar recorte lateral excesivo */
     /* Desktop Grande (Default) */
     .hero-slider {
-        height: 580px;
+        height: 780px;
     }
 
     /* Laptop Grande */
     @media (max-width: 1440px) {
         .hero-slider {
-            height: 500px;
+            height: 7500px;
         }
 
         .hero-section-dark {
@@ -988,10 +979,10 @@ position: absolute;
         }
     }
 
-    /* Laptop Estándar / Tablet Landscape */
+    /* Laptop EstÃ¡ndar / Tablet Landscape */
     @media (max-width: 1200px) {
         .hero-slider {
-            height: 420px;
+            height: 450px;
         }
 
         .hero-section-dark {
@@ -1011,7 +1002,7 @@ position: absolute;
 
         /* Tablet Portrait */
         .hero-slider {
-            height: 380px;
+            height: 480px;
         }
 
         .hero-section-dark {
@@ -1032,18 +1023,18 @@ position: absolute;
 
         /* Mobile - Cambio de imagen */
         .hero-banner.desktop {
-            display: none;
+            display: none !important;
         }
 
         .hero-banner.mobile {
-            display: block;
+            display: block !important;
         }
 
         .hero-slider {
-            height: 500px;
+            height: 420px;
         }
 
-        /* Más alto en móvil para la imagen vertical */
+        /* MÃ¡s alto en mÃ³vil para la imagen vertical */
         .hero-section-dark {
             min-height: 500px;
         }
@@ -1053,7 +1044,18 @@ position: absolute;
             min-height: 500px;
         }
 
-        /* Ajuste altura móvil */
+        /* Ensure active slides show mobile images */
+        .hero-slide.active .hero-banner.mobile {
+            display: block !important;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hero-slide.active .hero-banner.desktop {
+            display: none !important;
+        }
+
+        /* Ajuste altura mÃ³vil */
 
         .hero-bg.desktop {
             display: none;
@@ -1282,7 +1284,7 @@ position: absolute;
 }
 
 
-/* ====== BOTÓN AGREGAR ====== */
+/* ====== BOTÃ“N AGREGAR ====== */
 .btn-add-mini{
     width:36px;
     height:36px;
@@ -1319,20 +1321,20 @@ position: absolute;
 .slider-destacados-row .slick-list,
 .slider-destacados-mobile .slick-list {
     margin: 0;
-    /* 🔥 quitar margen */
+    /* ðŸ”¥ quitar margen */
     padding: 0;
     position: relative;
     display: block;
     overflow: hidden;
 }
 
-/* Padding horizontal para separar las tarjetas a los lados (Aplica a PC y Móvil) */
+/* Padding horizontal para separar las tarjetas a los lados (Aplica a PC y MÃ³vil) */
 .slider-destacados-row .slick-slide,
 .slider-destacados-mobile .slick-slide {
     padding: 0 10px;
 }
 
-/* Separación vertical entre la tarjeta de arriba y la de abajo (Solo en PC) */
+/* SeparaciÃ³n vertical entre la tarjeta de arriba y la de abajo (Solo en PC) */
 .slider-destacados-row .slick-slide > div,
 .slider-destacados-mobile .slick-slide > div {
     height: 100%;
@@ -1340,7 +1342,7 @@ position: absolute;
     display: block;
 }
 
-/* Evitamos que la tarjeta de más abajo deje un espacio extra innecesario */
+/* Evitamos que la tarjeta de mÃ¡s abajo deje un espacio extra innecesario */
 .slider-ofertas .slick-slide>div {
     height: 100%;
     width: 100%;
@@ -1372,6 +1374,13 @@ position: absolute;
     transform: none !important;
 }
 
+/* âœ… CONTENEDOR CENTRADO PARA DESTACADOS */
+.slider-destacados-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1400px;
+}
+
 .slider-destacados-desktop {
     position: relative;
 }
@@ -1394,7 +1403,7 @@ position: absolute;
         flex: 0 0 100%;
     }
 }
-/* ====== ANIMACIÓN ====== */
+/* ====== ANIMACIÃ“N ====== */
 .reveal-item{
     opacity:0;
     transform:translateY(20px);
@@ -1429,19 +1438,19 @@ position: absolute;
 .slider-ofertas .slick-slide {
     display: flex;             /* convierte el slide en contenedor flex */
     justify-content: center;   /* centra la tarjeta dentro del slide */
-    padding: 0 10px;           /* separación uniforme entre productos */
+    padding: 0 10px;           /* separaciÃ³n uniforme entre productos */
     box-sizing: border-box; 
   }
   .slider-ofertas .slick-slide {
-  width: 280px !important;  /* ajusta según el ancho real de tu tarjeta */
+  width: 280px !important;  /* ajusta segÃºn el ancho real de tu tarjeta */
 }
 
   
   /* Tarjeta de producto dentro del slide */
   .slider-ofertas .prod-card {
     width: 100%;               /* ocupa el ancho disponible del slide */
-    max-width: 280px;          /* límite para que no se deforme */
-    margin: 0;                 /* sin márgenes extra */
+    max-width: 280px;          /* lÃ­mite para que no se deforme */
+    margin: 0;                 /* sin mÃ¡rgenes extra */
   }
   
 
@@ -1466,7 +1475,7 @@ position: absolute;
     display: block;
 }
 
-/* Normalizar ofertas para que use el mismo patrón visual limpio de destacados */
+/* Normalizar ofertas para que use el mismo patrÃ³n visual limpio de destacados */
 .slider-ofertas {
     position: relative;
     display: block;
@@ -1613,7 +1622,7 @@ footer {
 
 .social-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; border-color: #444; }
 .social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); }
-/* --- BOTÓN WHATSAPP PC --- */
+/* --- BOTÃ“N WHATSAPP PC --- */
 .btn-whatsapp-pc {
     position: fixed;
     bottom: 30px;
@@ -1658,7 +1667,7 @@ footer {
 .social-icon { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; transition: 0.3s; border-color: #444; }
 .social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-3px); color: white !important; }
 
-/* --- BOTÓN WHATSAPP PC --- */
+/* --- BOTÃ“N WHATSAPP PC --- */
 .btn-whatsapp-pc {
     position: fixed;
     bottom: 30px;
@@ -1710,7 +1719,7 @@ footer {
 }
 
 
-/*---------ICONS CON COLOR ANARANJADO NEÓN---------------*/
+/*---------ICONS CON COLOR ANARANJADO NEÃ“N---------------*/
 .bi-geo-alt-fill, .bi-envelope-fill, .bi-mortarboard-fill, .bi-journal-text, .bi-chat-left-dots-fill, .bi-tag-fill{
     color: var(--primary) !important;
 }
@@ -1737,7 +1746,7 @@ footer {
         transform: scale(1.12);
     }
 
-    /* 4. BOTÓN FLOTANTE */
+    /* 4. BOTÃ“N FLOTANTE */
     .btn-add-mini {
         width: 32px; height: 32px;
         background: #111; color: white;
@@ -1777,7 +1786,7 @@ footer {
 
     /* HEADER BANNER */
     .cat-header-overlay { background: linear-gradient(135deg, rgba(10,10,10,0.98) 0%, rgba(30,30,30,0.9) 100%); }
-    /* --- HEADER CINEMÁTICO --- */
+    /* --- HEADER CINEMÃTICO --- */
 .cat-header-overlay {
     background: radial-gradient(circle at top right, rgba(255, 69, 0, 0.15), transparent 60%),
                 linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -1817,7 +1826,7 @@ footer {
     background: var(--primary);
     margin-top: 15px;
     border-radius: 3px;
-    box-shadow: 0 0 15px var(--primary); /* Neón */
+    box-shadow: 0 0 15px var(--primary); /* NeÃ³n */
 }
 
 /* BREADCRUMBS FUTURISTAS */
@@ -1838,15 +1847,15 @@ footer {
 .position-relative .breadcrumb-item.active {
     color: #fff !important;
     font-weight: 800;
-    text-decoration: underline wavy var(--primary);
+    text-decoration: none;
 }
 
 .position-relative .breadcrumb-item + .breadcrumb-item::before {
     color: rgba(255,255,255,0.3);
-    content: "›";
+    content: "â€º";
 }
 
-/* ANIMACIÓN DE ENTRADA */
+/* ANIMACIÃ“N DE ENTRADA */
 .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(30px); }
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
@@ -1896,7 +1905,7 @@ footer {
 
 
 /***MAS CATEGORIAS**/
-/* --- CONTENEDOR DE SECCIÓN --- */
+/* --- CONTENEDOR DE SECCIÃ“N --- */
 .category-section {
     margin-bottom: 4rem;
     position: relative;
@@ -1980,7 +1989,7 @@ footer {
     transform: scale(1.08) !important;
 }
 
-/* Botón flotante */
+/* BotÃ³n flotante */
 .category-section .btn-add-mini {
     width: 36px !important;
     height: 36px !important;
@@ -2045,7 +2054,7 @@ footer {
         padding-top: 30px;
         padding-bottom: 80px;
     }
-    /* --- TARJETAS Y GALERÍA --- */
+    /* --- TARJETAS Y GALERÃA --- */
     .prod-gallery-card {
         background: white;
         border-radius: 16px;
@@ -2116,15 +2125,15 @@ footer {
     }
 
 
-    /* 2. OCULTAR BREADCRUMB EN MÓVIL (Ahorra 40px valiosos) */
+    /* 2. OCULTAR BREADCRUMB EN MÃ“VIL (Ahorra 40px valiosos) */
     .breadcrumb {
         display: none !important;
     }
 
-    /* 3. REDUCIR TAMAÑO DE IMAGEN */
+    /* 3. REDUCIR TAMAÃ‘O DE IMAGEN */
     .prod-gallery-card .d-flex {
         width: 100% !important;
-        height: 400px !important; /* más alto para que se vea grande */
+        height: 400px !important; /* mÃ¡s alto para que se vea grande */
         margin: 0px !important;
     }
 
@@ -2144,34 +2153,34 @@ footer {
         margin-left: 8px !important;
     }
 
-    /* 5. ACERCAR EL TÍTULO A LA IMAGEN */
+    /* 5. ACERCAR EL TÃTULO A LA IMAGEN */
     .col-lg-5.animate-up {
         margin-top: -10px !important; /* Subir bloque de info */
         padding-left: 15px !important;
         padding-right: 15px !important;
     }
  
-    /* 6. TÍTULO Y PRECIO MÁS COMPACTOS */
+    /* 6. TÃTULO Y PRECIO MÃS COMPACTOS */
     .display-6 {
-        font-size: 1.4rem !important; /* Título más pequeño */
+        font-size: 1.4rem !important; /* TÃ­tulo mÃ¡s pequeÃ±o */
         font-weight: 800;
         margin-bottom: 5px !important;
     }
     
     .text-primary.ls-1 {
-        font-size: 0.7rem !important; /* Categoría pequeña */
+        font-size: 0.7rem !important; /* CategorÃ­a pequeÃ±a */
         margin-top: 13px !important;
         margin-bottom: 15px !important;
     }
 
-    /* 7. PRECIO Y SKU EN UNA LÍNEA (ESTRATEGIA VISUAL) */
-    /* Opcional: Esto pone el SKU pequeño al lado del precio si quieres */
+    /* 7. PRECIO Y SKU EN UNA LÃNEA (ESTRATEGIA VISUAL) */
+    /* Opcional: Esto pone el SKU pequeÃ±o al lado del precio si quieres */
     .price-tag-large {
         font-size: 1.8rem !important;
     }
 
     
-    /* 8. MINIATURAS MÁS PEQUEÑAS */
+    /* 8. MINIATURAS MÃS PEQUEÃ‘AS */
     .thumb-img {
         margin-top: 8px;
         width: 50px !important;
@@ -2187,7 +2196,7 @@ footer {
         color: var(--primary) !important;
     }
 
-    /* --- ACORDEÓN --- */
+    /* --- ACORDEÃ“N --- */
     .accordion{
         margin-bottom: -50px;
     }
@@ -2226,13 +2235,13 @@ footer {
         transform: rotate(180deg);
     }
 
-    /* --- ANIMACIÓN ACORDEÓN SUAVE --- */
+    /* --- ANIMACIÃ“N ACORDEÃ“N SUAVE --- */
     .accordion-collapse {
         transition: height 0.35s ease-out;
         /* Forzar suavidad */
     }
 
-    /* Rotación de la flecha */
+    /* RotaciÃ³n de la flecha */
     .custom-chevron {
         transition: transform 0.3s ease-in-out;
     }
@@ -2241,7 +2250,7 @@ footer {
         transform: rotate(180deg);
     }
 
-    /* Evita que el botón cambie de tamaño al cambiar de icono */
+    /* Evita que el botÃ³n cambie de tamaÃ±o al cambiar de icono */
     .btn i {
         display: inline-block;
         vertical-align: middle;
@@ -2339,7 +2348,7 @@ footer {
         background-color: var(--primary) !important;
     }
 
-    /* BOTÓN PDF TÉCNICO */
+    /* BOTÃ“N PDF TÃ‰CNICO */
     .btn-pdf-download {
         border: 2px solid #e0e0e0;
         color: #555;
@@ -2366,7 +2375,7 @@ footer {
 
     .btn-pdf-download i {
         color: #dc3545;
-        /* Rojo clásico de PDF */
+        /* Rojo clÃ¡sico de PDF */
         font-size: 1.1rem;
         transition: transform 0.3s;
     }
@@ -2375,7 +2384,7 @@ footer {
         transform: scale(1.1);
     }
 
-    /* ANIMACIÓN DE ENTRADA SUAVE */
+    /* ANIMACIÃ“N DE ENTRADA SUAVE */
     .animate-up {
         animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         opacity: 0;
@@ -2397,7 +2406,7 @@ footer {
         }
     }
     /*MOBILE*/
-/* Estilos específicos para Celular */
+/* Estilos especÃ­ficos para Celular */
 @media (max-width: 768px) {
     /* 1. Imagen Principal: Fondo blanco puro y bordes suaves */
     .prod-gallery-card {
@@ -2420,14 +2429,14 @@ footer {
         align-items: center !important;
     }
 
-    /* Asegúrate de que la imagen dentro no se salga */
+    /* AsegÃºrate de que la imagen dentro no se salga */
     #mainImage {
         max-width: 100% !important;
         height: 100% !important;
         object-fit: contain;
     }
 
-    /* 2. Miniaturas: Más redondeadas y centradas */
+    /* 2. Miniaturas: MÃ¡s redondeadas y centradas */
     .thumb-img {
         width: 50px !important;
         height: 50px !important;
@@ -2438,7 +2447,7 @@ footer {
         border-color: #ff4500 !important; /* Color naranja de tu marca */
     }
 
-    /* 3. Título y Precio: Tipografía más limpia */
+    /* 3. TÃ­tulo y Precio: TipografÃ­a mÃ¡s limpia */
     h1.display-6 {
         font-size: 1.4rem !important;
         font-weight: 800 !important;
@@ -2459,7 +2468,7 @@ footer {
         font-weight: 700;
     }
 
-    /* 5. Botones de Navegación del Carrusel (Flechas) */
+    /* 5. Botones de NavegaciÃ³n del Carrusel (Flechas) */
     .gallery-nav {
         background: rgba(255,255,255,0.8) !important;
         color: #333 !important;
@@ -2468,7 +2477,7 @@ footer {
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 }
-    /* FLECHAS GALERÍA */
+    /* FLECHAS GALERÃA */
     .gallery-nav {
         position: absolute;
         top: 50%;
@@ -2536,7 +2545,7 @@ footer {
 .form-control-modern {
     width: 100%;
     padding: 14px 15px;
-    border: 2px solid #eee; /* Borde sólido */
+    border: 2px solid #eee; /* Borde sÃ³lido */
     border-radius: 6px;     /* Casi cuadrado */
     background: #f9f9f9;
     font-size: 0.95rem;
@@ -2549,7 +2558,7 @@ footer {
 .form-control-modern:focus {
     background: #fff;
     border-color: var(--primary); /* Borde Naranja al escribir */
-    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor técnico */
+    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor tÃ©cnico */
 }
 
 /* Etiquetas Flotantes */
@@ -2565,7 +2574,7 @@ footer {
     background: transparent;
     padding: 0 4px;
     font-weight: 600;
-    text-transform: uppercase; /* Letras mayúsculas tipo plano */
+    text-transform: uppercase; /* Letras mayÃºsculas tipo plano */
     letter-spacing: 0.5px;
 }
 
@@ -2583,7 +2592,7 @@ footer {
     margin-top: -5px;
     position: relative;
     z-index: 1;
-    overflow: hidden; /* Corta el brillo dentro del botón */
+    overflow: hidden; /* Corta el brillo dentro del botÃ³n */
     display: flex;
     width: 100%;
     align-items: center;
@@ -2602,7 +2611,7 @@ footer {
     border-image: initial;
 }
 
-/* Si tu animación usa un resplandor externo, asegúrate de que no tenga eventos de ratón */
+/* Si tu animaciÃ³n usa un resplandor externo, asegÃºrate de que no tenga eventos de ratÃ³n */
 .btn-pay-glow.shadow-sm::after {
     content: '';
     position: absolute;
@@ -2626,7 +2635,7 @@ footer {
     .auth-bg {
         background: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
         background-size: cover;
-        min-height: 90vh; /* Un poco más alto por ser registro */
+        min-height: 90vh; /* Un poco mÃ¡s alto por ser registro */
         display: flex;
         align-items: center;
         position: relative;
@@ -2634,7 +2643,7 @@ footer {
     .auth-bg::before {
         content: '';
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.75); /* Un poco más oscuro */
+        background: rgba(0, 0, 0, 0.75); /* Un poco mÃ¡s oscuro */
         backdrop-filter: blur(5px);
     }
     
@@ -2675,7 +2684,7 @@ footer {
 
 .mp-check-label a:hover { color: var(--primary); }
 
-/*PARA Q SE MUESTRE LA CONTRASEÑA*/
+/*PARA Q SE MUESTRE LA CONTRASEÃ‘A*/
 .password-wrapper {
     position: relative;
 }
@@ -2701,20 +2710,20 @@ footer {
 
 
 /*BOTON EN EL CELULAR*/
-/* Centrar el botón en pantallas pequeñas */
+/* Centrar el botÃ³n en pantallas pequeÃ±as */
 @media (max-width: 768px) {
     .contacto .btn-pay-glow {
-        display: block;        /* que ocupe su propia línea */
+        display: block;        /* que ocupe su propia lÃ­nea */
         margin: 0 auto;        /* lo centra horizontalmente */
         width: 100%;           /* opcional: que ocupe todo el ancho */
-        max-width: 300px;      /* opcional: límite para que no sea gigante */
+        max-width: 300px;      /* opcional: lÃ­mite para que no sea gigante */
         text-align: center;    /* asegura que el texto quede centrado */
     }
 }
 
 
-/*DISEÑO DEL MENSAJE Q SALE CUANDO YA SE ENVIANEL MENSAJE*/
-/* Título */
+/*DISEÃ‘O DEL MENSAJE Q SALE CUANDO YA SE ENVIANEL MENSAJE*/
+/* TÃ­tulo */
 .popup-title {
     font-family: 'Inter', sans-serif; /* o la fuente que quieras */
     font-size: 16px;
@@ -2741,7 +2750,7 @@ footer {
     padding: 10px;
 }
 
-/* Botón de confirmación de mensaje enviado*/
+/* BotÃ³n de confirmaciÃ³n de mensaje enviado*/
 .btn-confirm-contacto {
     font-weight: 800;
     text-transform: uppercase;
@@ -2764,7 +2773,7 @@ footer {
     width: 100%;
     padding: 14px 15px;
     color: var(--grey-ligth-2);
-    border: 2px solid #eee; /* línea base */
+    border: 2px solid #eee; /* lÃ­nea base */
     border-radius: 6px; /* medio cuadrado */
     font-size: 0.95rem;
     background: #f9f9f9;
@@ -2790,7 +2799,7 @@ footer {
 .form-control-modern:focus {
     background: #fff;
     border-color: var(--primary); /* Borde Naranja al escribir */
-    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor técnico */
+    box-shadow: 0 0 0 4px rgba(255, 69, 0, 0.1); /* Resplandor tÃ©cnico */
 }
 
 /* Efecto al escribir */
@@ -2802,7 +2811,7 @@ footer {
     background: white;
 }
 
-/* Botón */
+/* BotÃ³n */
 .contacto .btn-pay-glow {
     position: relative;
     z-index: 1;
@@ -2889,7 +2898,7 @@ footer {
     .blog-hero:hover .transition-zoom, 
     .blog-card:hover .transition-zoom { transform: scale(1.05); }
     
-    /* Elevación */
+    /* ElevaciÃ³n */
     .blog-card { transition: transform 0.3s, box-shadow 0.3s; }
     .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; }
 
@@ -2928,7 +2937,7 @@ footer {
     .icon-box {
         width: 65px; height: 65px;
         display: flex; align-items: center; justify-content: center;
-        border-radius: 50%; /* CÍRCULO PERFECTO */
+        border-radius: 50%; /* CÃRCULO PERFECTO */
         background: var(--primary);
         color: white;
         margin-bottom: 20px;
@@ -2936,13 +2945,13 @@ footer {
         box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
     }
 
-    /* BORDE NEÓN PARA VISIÓN */
+    /* BORDE NEÃ“N PARA VISIÃ“N */
     .border-neon {
         border-top: 4px solid #FF4500 !important;
         box-shadow: 0 -10px 20px rgba(255, 69, 0, 0.15) !important; /* Resplandor */
     }
 
-    /* ESTILO SECCIÓN FINAL (ICONOS REDONDOS) */
+    /* ESTILO SECCIÃ“N FINAL (ICONOS REDONDOS) */
     .feature-icon-circle {
         width: 60px; 
         height: 60px;
@@ -2954,14 +2963,14 @@ footer {
         font-size: 1.5rem;
     }
 
-    /*ESTILOS DE COLORES N¿ANARANJADO NEON*/
+    /*ESTILOS DE COLORES NÂ¿ANARANJADO NEON*/
     .nosotros .align-items-center .position-relative .position-absolute, .container .shadow-lg .g-0 .flex-column, .nosotros .py-5 .text-center .bg-primary{
         background-color: var(--primary) !important;
     }
 
      .container .shadow-lg .g-0 .flex-column h4{
         color: var(--grey-light) !important;            /* naranja corporativo */
-    letter-spacing: 2px !important;              /* separación entre letras */
+    letter-spacing: 2px !important;              /* separaciÃ³n entre letras */
     text-shadow: 0 0 12px rgba(255,69,0,0.7) !important; /* glow naranja */
      }
 
@@ -2983,7 +2992,7 @@ footer {
     margin-top: -90px;
  }
 
- /*DISEÑO DEL CARRITO*/
+ /*DISEÃ‘O DEL CARRITO*/
      /* FONDO INMERSIVO */
     .cart-bg {
         background: #f8f9fa;
@@ -2994,7 +3003,7 @@ footer {
         overflow: hidden;
     }
 
-    /* CANVAS PARTÍCULAS */
+    /* CANVAS PARTÃCULAS */
     #particleCanvas {
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         pointer-events: none; z-index: 0;
@@ -3066,7 +3075,7 @@ footer {
         padding-left: 10px;
     }
     .cart-item-card h6 {
-        font-size: 0.85rem; /* Texto un poco más pequeño */
+        font-size: 0.85rem; /* Texto un poco mÃ¡s pequeÃ±o */
     }
 }
 
@@ -3125,9 +3134,9 @@ footer {
 /*OTROS ESTILOS PARA EL MOVIL*/
 
 @media (max-width: 768px) {
-    /* 1. Subirlo para que no tape el menú de la App */
+    /* 1. Subirlo para que no tape el menÃº de la App */
     .cookie-banner-overlay {
-        bottom: 70px !important; /* Altura de la barra móvil */
+        bottom: 70px !important; /* Altura de la barra mÃ³vil */
         padding: 15px;
         align-items: flex-end; /* Pegado abajo pero con margen */
     }
@@ -3160,14 +3169,14 @@ footer {
     }
 
     .btn-cookie {
-        width: 100%; /* Botón ancho completo */
-        padding: 14px; /* Más fácil de tocar */
+        width: 100%; /* BotÃ³n ancho completo */
+        padding: 14px; /* MÃ¡s fÃ¡cil de tocar */
         font-size: 0.9rem;
         justify-content: center;
         text-align: center;
     }
 
-    /* Destacar más el botón de Aceptar */
+    /* Destacar mÃ¡s el botÃ³n de Aceptar */
     .btn-cookie-primary {
         font-weight: 900;
         font-size: 1rem;
@@ -3190,8 +3199,8 @@ footer {
     .hero-search { height: 200px; }
     @media (max-width: 768px) {
         .hero-search { height: 150px; }
-        .img-wrap { height: 140px; } /* Imagen más pequeña en móvil */
-        .prod-card { border-radius: 8px; } /* Bordes menos redondos en móvil */
+        .img-wrap { height: 140px; } /* Imagen mÃ¡s pequeÃ±a en mÃ³vil */
+        .prod-card { border-radius: 8px; } /* Bordes menos redondos en mÃ³vil */
     }
     
     .prod-card { transition: transform 0.3s, box-shadow 0.3s; }
@@ -3215,7 +3224,7 @@ footer {
         margin-bottom: 25px;
     }
 
-    /* TÍTULOS DE SECCIÓN */
+    /* TÃTULOS DE SECCIÃ“N */
     .checkout-section .section-header {
         display: flex;
         align-items: center;
@@ -3336,7 +3345,7 @@ footer {
         color: var(--primary);
     }
 
-    /* BOTÓN PAGAR */
+    /* BOTÃ“N PAGAR */
     .checkout-section .btn-pay-corp {
         width: 100%;
         background: #111;
@@ -3397,7 +3406,7 @@ footer {
     }
 
     /*GESTIONAR USUARIOS*/
-    /* 1. BOTÓN "GUARDAR" (Dentro del Modal) 
+    /* 1. BOTÃ“N "GUARDAR" (Dentro del Modal) 
        Selector: Padre + Etiqueta con 5 clases encadenadas */
     .modal-footer button.btn.btn-primary-custom.rounded-pill.px-5.shadow {
         background-color: var(--primary);
@@ -3415,7 +3424,7 @@ footer {
         border-color: rgba(255,255,255,0.2);
     }
 
-    /* 2. BOTÓN "VOLVER" (En el Header Admin)
+    /* 2. BOTÃ“N "VOLVER" (En el Header Admin)
        Selector: Padre + Etiqueta con 4 clases encadenadas */
     .admin-header a.btn.btn-outline-light.rounded-pill.px-4 {
         border-width: 2px;
@@ -3431,7 +3440,7 @@ footer {
         transform: scale(1.05);
     }
 
-    /* 3. BOTÓN "NUEVO USUARIO" (Toolbar principal)
+    /* 3. BOTÃ“N "NUEVO USUARIO" (Toolbar principal)
        Selector: Padre + Etiqueta con 6 clases encadenadas */
     .text-md-end button.btn.btn-primary-custom.rounded-pill.px-4.py-2.shadow-sm {
         display: inline-flex;
@@ -3452,12 +3461,12 @@ footer {
         transition: var(--transition);
     }
 
-    /* Ejemplo específico para el filtro "TODOS" cuando es oscuro */
+    /* Ejemplo especÃ­fico para el filtro "TODOS" cuando es oscuro */
     .mb-3.d-flex.gap-2.flex-wrap a.btn.btn-sm.rounded-pill.fw-bold.btn-dark {
         border: 1px solid #000;
     }
 
-    /* 5. BOTÓN LUPA (Buscador)
+    /* 5. BOTÃ“N LUPA (Buscador)
        Selector: Padre (form) + Etiqueta con 3 clases */
     form.d-flex.bg-white.p-1.rounded-pill.border.shadow-sm button.btn.btn-dark.rounded-pill.px-4 {
         background-color: var(--dark-bg);
@@ -3467,6 +3476,8 @@ footer {
 
     form.d-flex.bg-white.p-1.rounded-pill.border.shadow-sm button.btn.btn-dark.rounded-pill.px-4:hover {
         background-color: #000;
-        padding-left: 30px !important; /* Efecto de expansión */
+        padding-left: 30px !important; /* Efecto de expansiÃ³n */
         padding-right: 30px !important;
     }
+
+

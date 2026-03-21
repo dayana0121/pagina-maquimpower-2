@@ -122,18 +122,19 @@
             </div>
         </div>
     </div>
-    <a href="https://wa.me/51902010281" target="_blank" class="btn-whatsapp-pc d-none d-md-flex shadow-lg">
+    <!-- ✅ MOSTRADO: WhatsApp visible en todas las pantallas (móvil, tablet, desktop) -->
+    <a href="https://wa.me/51902010281" target="_blank" class="btn-whatsapp-pc d-flex shadow-lg">
         <i class="bi bi-whatsapp"></i>
     </a>
 </footer>
 
-
 <!-- LIBRERÍAS JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- ✅ jQuery ahora se carga en header.php para evitar el error "$ is not defined" -->
 <!-- Bootstrap JS ya cargado en header.php — NO duplicar aquí -->
 
 <!-- SLICK CAROUSEL -->
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 
 <!-- ALERTAS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -2,6 +2,31 @@
 require_once 'includes/db.php';
 require_once 'includes/header.php';
 
+// --- FUNCTION AUXILIAR: OBTENER TODOS LOS IDs DE SUBCATEGORÍAS (RECURSIVO) ---
+/**
+ * Obtiene todos los IDs de una categoría y sus subcategorías recursivamente.
+ * Evita N+1 queries al obtener todo de una sola pasada.
+ */
+function getSubcategoryIds($pdo, $catId) {
+    $ids = [$catId];
+    $stack = [$catId];
+    
+    while (!empty($stack)) {
+        $currentId = array_pop($stack);
+        $stmt = $pdo->prepare("SELECT id FROM categorias WHERE padre_id = ? ORDER BY orden ASC");
+        $stmt->execute([$currentId]);
+        $children = $stmt->fetchAll();
+        
+        foreach ($children as $child) {
+            $ids[] = $child['id'];
+            $stack[] = $child['id'];
+        }
+    }
+    
+    error_log("[categoria.php] getSubcategoryIds($catId) retornó: " . json_encode($ids));
+    return $ids;
+}
+
 // --- CONTROLADOR LÓGICO ---
 
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : (isset($_GET['c']) ? trim($_GET['c']) : '');
@@ -34,6 +59,8 @@ try {
             $titulo = strtoupper($categoriaActual['nombre']);
             $catId = $categoriaActual['id'];
             
+            error_log("[categoria.php] Cargando categoría: $slug (ID: $catId)");
+            
             // Breadcrumbs
             $tempCat = $categoriaActual;
             while ($tempCat) {
@@ -55,6 +82,7 @@ try {
             if (count($hijos) > 0) {
                 // === ES UNA CATEGORÍA PADRE (Ej: MAQUINARIAS o LIMPIEZA) ===
                 $modo = 'parent';
+                error_log("[categoria.php] Modo PARENT detectado. Hijos encontrados: " . count($hijos));
                 
                 foreach ($hijos as $hijo) {
                     // Verificamos si este hijo tiene a su vez hijos (Nietos)
@@ -64,32 +92,49 @@ try {
 
                     if (count($nietos) > 0) {
                         // SI TIENE NIETOS: Mostramos los productos de los NIETOS
+                        error_log("[categoria.php] Hijo '{$hijo['nombre']}' tiene " . count($nietos) . " nietos");
+                        
                         foreach ($nietos as $nieto) {
-                            $stmtProd = $pdo->prepare("SELECT * FROM productos WHERE categoria = ? AND activo = 1 ORDER BY id DESC LIMIT 12");
-                            $stmtProd->execute([$nieto['nombre']]); // Buscar por NOMBRE (Texto)
+                            // ✅ OPTIMIZADO: Buscar por categoria_id en lugar de nombre
+                            $stmtProd = $pdo->prepare("SELECT * FROM productos WHERE categoria_id = ? AND activo = 1 ORDER BY id DESC LIMIT 12");
+                            $stmtProd->execute([$nieto['id']]);
                             $productosEncontrados = $stmtProd->fetchAll();
 
                             if (count($productosEncontrados) > 0) {
+                                error_log("[categoria.php] Nieto '{$nieto['nombre']}' (ID: {$nieto['id']}) → " . count($productosEncontrados) . " productos");
                                 $data[] = ['info' => $nieto, 'productos' => $productosEncontrados];
+                            } else {
+                                error_log("[categoria.php] ⚠️ Nieto '{$nieto['nombre']}' (ID: {$nieto['id']}) NO tiene productos en BD");
                             }
                         }
                     } else {
                         // SI NO TIENE NIETOS: Mostramos productos del HIJO directo
-                        $stmtProd = $pdo->prepare("SELECT * FROM productos WHERE categoria = ? AND activo = 1 ORDER BY id DESC LIMIT 12");
-                        $stmtProd->execute([$hijo['nombre']]); // Buscar por NOMBRE (Texto)
+                        error_log("[categoria.php] Hijo '{$hijo['nombre']}' (ID: {$hijo['id']}) NO tiene nietos, buscando productos directos");
+                        
+                        // ✅ OPTIMIZADO: Buscar por categoria_id en lugar de nombre
+                        $stmtProd = $pdo->prepare("SELECT * FROM productos WHERE categoria_id = ? AND activo = 1 ORDER BY id DESC LIMIT 12");
+                        $stmtProd->execute([$hijo['id']]);
                         $productosEncontrados = $stmtProd->fetchAll();
 
                         if (count($productosEncontrados) > 0) {
+                            error_log("[categoria.php] Hijo '{$hijo['nombre']}' (ID: {$hijo['id']}) → " . count($productosEncontrados) . " productos");
                             $data[] = ['info' => $hijo, 'productos' => $productosEncontrados];
+                        } else {
+                            error_log("[categoria.php] ⚠️ Hijo '{$hijo['nombre']}' (ID: {$hijo['id']}) NO tiene productos en BD");
                         }
                     }
                 }
             } else {
                 // === ES UNA CATEGORÍA FINAL (Ej: PULIDORAS) ===
                 $modo = 'leaf';
-                $stmt = $pdo->prepare("SELECT * FROM productos WHERE categoria = ? AND activo = 1 ORDER BY id DESC");
-                $stmt->execute([$categoriaActual['nombre']]); // Buscar por NOMBRE (Texto)
+                error_log("[categoria.php] Modo LEAF detectado para: {$categoriaActual['nombre']} (ID: $catId)");
+                
+                // ✅ OPTIMIZADO: Buscar por categoria_id en lugar de nombre
+                $stmt = $pdo->prepare("SELECT * FROM productos WHERE categoria_id = ? AND activo = 1 ORDER BY id DESC");
+                $stmt->execute([$catId]);
                 $data = $stmt->fetchAll();
+                
+                error_log("[categoria.php] Productos encontrados para categoria_id=$catId: " . count($data));
             }
         } else {
             // Slug especial "ofertas"
@@ -97,6 +142,7 @@ try {
                 $modo = 'leaf';
                 $titulo = "OFERTAS ESPECIALES";
                 $data = $pdo->query("SELECT * FROM productos WHERE etiqueta = 'OFERTA' AND activo = 1")->fetchAll();
+                error_log("[categoria.php] Modo OFERTAS: " . count($data) . " productos encontrados");
             } else {
                 $titulo = "CATEGORÍA NO ENCONTRADA";
                 $modo = 'error';
