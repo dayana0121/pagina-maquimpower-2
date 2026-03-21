@@ -8,7 +8,7 @@ $stmt->execute([$slug]);
 $post = $stmt->fetch();
 
 if (!$post) {
-    echo "<div class='container py-5 text-center'><h1>Artículo no encontrado</h1><a href=/blog.php' class='btn btn-dark'>Volver</a></div>";
+    echo "<div class='container py-5 text-center'><h1>Artículo no encontrado</h1><a href='/blog.php' class='btn btn-dark'>Volver</a></div>";
     require_once 'includes/footer.php'; exit;
 }
 

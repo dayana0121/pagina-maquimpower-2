@@ -16,11 +16,14 @@ $productosOferta = $stmtOfertas->fetchAll();
 function renderHomeCard($p, $useReveal = false)
 {
     $agotado = ($p['stock_actual'] <= 0);
-    $img = "https://maquimpower.com/assets/img/productos/aspiradora-de-polvo-y-agua-karcher-wdl1s-1000w-1773337996-0.webp";
+    $img = !empty($p['imagen_url']) ? $p['imagen_url'] : '/assets/img/no-photo.png';
+    $img = str_replace('/var/www/html', '', $img);
     $link = "/producto/" . $p['slug'];
+
     $tieneOferta = ($p['precio_oferta'] > 0);
     $precioShow = $tieneOferta ? $p['precio_oferta'] : $p['precio'];
     $descuento = $tieneOferta ? round((($p['precio'] - $p['precio_oferta']) / $p['precio']) * 100) : 0;
+
 
     ob_start();
 ?>
@@ -132,7 +135,7 @@ function renderHomeCard($p, $useReveal = false)
                         </p>
 
                         <div class="d-flex gap-3">
-                            <a href="/categoria.php/maquinarias" class="btn btn-light rounded-pill px-5 py-3 fw-bold">
+                            <a href="/categoria/maquinarias" class="btn btn-light rounded-pill px-5 py-3 fw-bold">
                                 VER CATÁLOGO
                             </a>
 
@@ -145,7 +148,7 @@ function renderHomeCard($p, $useReveal = false)
                     </div>
 
                     <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
-                        <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png" class="hero-logo-big">
+                        <img src="<?= $baseUrl ?>/assets/img/logo_mp/Logo_2.png" class="hero-logo-big">
                     </div>
 
                 </div>
@@ -290,7 +293,7 @@ function renderHomeCard($p, $useReveal = false)
 
 
 <!-- TIKTOK WALL (OPTIMIZADO + RESPONSIVE PERFECTO) -->
-<section class="py-5 bg-light border-top mt-4">
+<section class="py-4 bg-light border-top">
     <div class="container">
         <!-- TÍTULO -->
         <div class="d-flex align-items-center mb-5 justify-content-center">
@@ -411,7 +414,7 @@ function renderHomeCard($p, $useReveal = false)
 </script>
 
 <!-- MARCAS INFINITE -->
-<div class="py-5 bg-white overflow-hidden border-top mb-5">
+<div class="py-5 bg-white overflow-hidden border-top">
     <div class="container text-center mb-4">
         <span class="text-muted text-uppercase fw-bold ls-2 small opacity-50">Marcas que representamos</span>
     </div>

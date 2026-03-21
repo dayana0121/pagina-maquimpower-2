@@ -100,7 +100,7 @@ if (count($description_parts) < 2) {
 }
 
 $agotado = ($p['stock_actual'] <= 0);
-$img_raw = "https://maquimpower.com/assets/img/gal_1769633279_0.webp";
+$img_raw = !empty($p['imagen_url']) ? $p['imagen_url'] : '/assets/img/no-photo.png';
 $imgPrincipal = str_replace('/var/www/html', '', $img_raw);
 
 // IMPORTANTE: Primero definimos todo, LUEGO el header

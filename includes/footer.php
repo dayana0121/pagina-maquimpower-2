@@ -150,7 +150,7 @@
             console.log('[slider-ofertas]', message, extra || {});
         }
 
-        function applySlickComputedWidths($slider, slick, logFn, label) {
+        function applyOfferSlideWidths($slider, slick) {
             if (!$slider.length || !slick || typeof slick.slideWidth === 'undefined') {
                 return;
             }
@@ -158,14 +158,39 @@
             slick.$slides.each(function() {
                 this.style.setProperty('width', slick.slideWidth + 'px', 'important');
             });
+        }
 
-            if (typeof logFn === 'function') {
-                logFn('widths aplicados', {
-                    slider: label,
-                    slideWidth: slick.slideWidth,
-                    slideCount: slick.$slides.length
-                });
+        function debugOffersState($slider, slick, source) {
+            if (!$slider.length || !slick) {
+                return;
             }
+
+            const slidesDebug = [];
+            const listRect = slick.$list && slick.$list.length ? slick.$list[0].getBoundingClientRect() : null;
+            slick.$slides.each(function(index) {
+                const rect = this.getBoundingClientRect();
+                slidesDebug.push({
+                    index: index,
+                    classes: this.className,
+                    width: Math.round(rect.width),
+                    left: Math.round(rect.left),
+                    visible: listRect ? rect.right > listRect.left && rect.left < listRect.right : null
+                });
+            });
+
+            const visibleSlides = slidesDebug.filter(function(slide) {
+                return slide.visible;
+            });
+
+            logOfertas(source, {
+                currentSlide: slick.currentSlide,
+                slidesToShow: slick.options.slidesToShow,
+                slideWidth: slick.slideWidth,
+                listWidth: slick.$list ? Math.round(slick.$list.width()) : null,
+                trackTransform: slick.$slideTrack ? slick.$slideTrack.css('transform') : null,
+                visibleSlides: visibleSlides,
+                slidesSample: slidesDebug.slice(0, 8)
+            });
         }
 
         // ============================================
@@ -301,6 +326,9 @@
                     arrows: false,
                     swipeToSlide: true,
                     adaptiveHeight: false,
+                    centerMode: false,
+                    variableWidth: false,
+                    initialSlide: 0,
                     asNavFor: '.slider-destacados-bottom',
                     responsive: [{
                         breakpoint: 1200,
@@ -318,6 +346,9 @@
                     arrows: false,
                     swipeToSlide: true,
                     adaptiveHeight: false,
+                    centerMode: false,
+                    variableWidth: false,
+                    initialSlide: 0,
                     asNavFor: '.slider-destacados-top',
                     responsive: [{
                         breakpoint: 1200,
@@ -348,6 +379,9 @@
                     arrows: false,
                     swipeToSlide: true,
                     adaptiveHeight: false,
+                    centerMode: false,
+                    variableWidth: false,
+                    initialSlide: 0,
                     responsive: [{
                         breakpoint: 576,
                         settings: {
@@ -414,27 +448,30 @@
                 });
 
                 $ofertas.on('init', function(event, slick) {
-                    applySlickComputedWidths($ofertas, slick, logOfertas, 'ofertas');
+                    applyOfferSlideWidths($ofertas, slick);
                     logOfertas('init OK', {
                         slideCount: slick.slideCount,
                         slidesToShow: slick.options.slidesToShow,
                         currentSlide: slick.currentSlide
                     });
+                    debugOffersState($ofertas, slick, 'estado init');
                 });
 
                 $ofertas.on('setPosition', function(event, slick) {
-                    applySlickComputedWidths($ofertas, slick, logOfertas, 'ofertas');
+                    applyOfferSlideWidths($ofertas, slick);
                     logOfertas('setPosition', {
                         currentSlide: slick.currentSlide,
                         slideWidth: slick.slideWidth,
                         listWidth: slick.$list.width()
                     });
+                    debugOffersState($ofertas, slick, 'estado setPosition');
                 });
 
                 $ofertas.on('afterChange', function(event, slick, currentSlide) {
                     logOfertas('afterChange', {
                         currentSlide: currentSlide
                     });
+                    debugOffersState($ofertas, slick, 'estado afterChange');
                 });
 
                 $ofertas.on('breakpoint', function(event, slick, breakpoint) {

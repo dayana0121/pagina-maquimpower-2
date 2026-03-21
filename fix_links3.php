@@ -1,6 +1,6 @@
 <?php
 /**
- * Arregla las duplicaciones manuales de /pagina/ 
+ * Arregla las duplicaciones manuales de / 
  * dejándolo solo como /
  */
 

@@ -134,8 +134,9 @@ require_once 'includes/header.php';
                         <div class="tab-pane fade show active" id="pills-card">
                             <div id="payment-form-container"
                                 class="bg-light p-4 rounded-4 text-center border border-dashed">
-                                <img src="/assets/img/niubiz-logo.png" alt="Niubiz" style="max-height: 40px;"
-                                    class="mb-3 opacity-75">
+                                <div class="mb-3 text-primary opacity-75">
+                                    <i class="bi bi-credit-card-2-front-fill fs-1"></i>
+                                </div>
                                 <h6 class="fw-bold">Pasarela Segura Niubiz</h6>
                                 <p class="small text-muted mb-3">Aceptamos todas las tarjetas de crédito y débito.</p>
                                 <div class="alert alert-info py-2 small mb-0">
