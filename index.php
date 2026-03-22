@@ -300,10 +300,12 @@ function renderHomeCard($p, $useReveal = false)
     </div>
 
     <!-- ✅ ENCUADRADO: Carrusel 2 con max-width centrado -->
-    <div class="prod-slider-container" style="max-width: 1400px; margin: 0 auto;">
-        <div class="slider-ofertas">
+    <div class="prod-slider-container slider-ofertas-container">
+        <div class="slider-ofertas slider-destacados-mobile">
             <?php foreach ($productosOferta as $p): ?>
-                <?= renderHomeCard($p) ?>
+                <div>
+                    <?= renderHomeCard($p) ?>
+                </div>
             <?php endforeach; ?>
         </div>
     </div>

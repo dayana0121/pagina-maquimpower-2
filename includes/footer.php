@@ -437,8 +437,8 @@
                 const $ofertas = $('.slider-ofertas');
                 const offersCount = $ofertas.children().length;
                 const desktopSlides = offersCount >= 4 ? 4 : Math.max(1, offersCount);
-                const tabletSlides = offersCount >= 3 ? 3 : Math.max(1, offersCount);
-                const mobileSlides = offersCount >= 2 ? 2 : 1;
+                const tabletSlides = offersCount >= 2 ? 2 : 1;
+                const mobileSlides = 1;
 
                 logOfertas('Intentando inicializar', {
                     items: offersCount,
@@ -502,7 +502,7 @@
                             }
                         },
                         {
-                            breakpoint: 768,
+                            breakpoint: 992,
                             settings: {
                                 slidesToShow: mobileSlides
                             }
