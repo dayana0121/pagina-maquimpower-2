@@ -355,7 +355,7 @@ try {
                     <a href="/" class="mx-auto" style="width: 100%; max-width: 180px;">
                         <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png"
                             alt="Logo"
-                            style="max-height: 140px; width: auto; position:absolute; top:30%; left:50%; transform: translate(-50%, -50%); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                            style="max-height: 60px; width: auto; position:absolute; top:30%; left:50%; transform: translate(-50%, -50%); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
                             <div style="height: 60px;"></div>
                     </a>
                     <div class="d-flex align-items-center gap-2">

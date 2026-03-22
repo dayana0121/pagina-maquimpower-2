@@ -251,7 +251,7 @@ body {
     align-items: center;
     border: 1px solid #e0e0e0; /* Borde sutil */
     box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
-    width: 127%;              /* Que ocupe todo el espacio de su columna */
+    width: 100%;
     max-width: 1400px;         /* Ajusta este nÃºmero segÃºn quÃ© tan largo lo quieras */
     margin: 0 auto;           /* Lo centra en su contenedor */
     transition: all 0.3s ease;
@@ -832,7 +832,7 @@ position: absolute;
     width:100%;
     height: auto; min-height: 100vh;
     overflow:hidden;
-    background:#000;
+    background:#ffffff;
 }
 
 .hero-slide{
@@ -963,7 +963,7 @@ position: absolute;
     /* Laptop Grande */
     @media (max-width: 1440px) {
         .hero-slider {
-            height: 7500px;
+            height: 750px;
         }
 
         .hero-section-dark {
@@ -1047,6 +1047,8 @@ position: absolute;
         /* Ensure active slides show mobile images */
         .hero-slide.active .hero-banner.mobile {
             display: block !important;
+            background-color: white !important;
+            margin-top: -10px !important;
             opacity: 1;
             visibility: visible;
         }
@@ -1064,7 +1066,7 @@ position: absolute;
         .hero-bg.mobile {
             display: block;
             background-size: cover;
-            background-color: #000;
+            background-color: #ffffff;
         }
     }
 
@@ -1441,9 +1443,6 @@ position: absolute;
     padding: 0 10px;           /* separaciÃ³n uniforme entre productos */
     box-sizing: border-box; 
   }
-  .slider-ofertas .slick-slide {
-  width: 280px !important;  /* ajusta segÃºn el ancho real de tu tarjeta */
-}
 
   
   /* Tarjeta de producto dentro del slide */
@@ -2128,6 +2127,96 @@ footer {
 .category-section .gradient-primary { background: #28a745 !important; } /* NUEVO */
 .category-section .gradient-danger { background: #dc3545 !important; } /* OFERTA */
 .category-section .bg-dark { background: #6c757d !important; } /* AGOTADO */
+
+@media (max-width: 991.98px) {
+    .category-section {
+        margin-bottom: 2.5rem;
+        padding: 1.25rem 0;
+    }
+
+    .category-section .slick-prev,
+    .category-section .slick-next {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .category-section .slick-prev {
+        left: -8px !important;
+    }
+
+    .category-section .slick-next {
+        right: -8px !important;
+    }
+
+    .category-grid-mobile-fix > .col,
+    #productsGrid > .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .category-section .prod-card,
+    .category-grid-mobile-fix .prod-card,
+    #productsGrid .prod-card,
+    #productsGrid .reveal-item .prod-card,
+    .category-section .reveal-item .prod-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .category-section .img-wrap,
+    #productsGrid .img-wrap {
+        height: 170px !important;
+    }
+
+    .category-section .img-wrap img,
+    #productsGrid .img-wrap img {
+        width: 100% !important;
+        max-height: 150px !important;
+        object-fit: contain !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .category-section .d-flex.justify-content-between.align-items-center {
+        gap: 0.75rem;
+        align-items: flex-start !important;
+        flex-direction: column;
+    }
+
+    .category-section .btn.btn-link {
+        padding-left: 0;
+    }
+
+    .category-section .slick-slide {
+        padding: 6px !important;
+    }
+
+    .category-section .prod-card,
+    .category-grid-mobile-fix .prod-card,
+    #productsGrid .prod-card,
+    #productsGrid .reveal-item .prod-card,
+    .category-section .reveal-item .prod-card {
+        border-radius: 14px !important;
+    }
+
+    .category-section .img-wrap,
+    #productsGrid .img-wrap {
+        height: 150px !important;
+    }
+
+    .category-section .p-title,
+    #productsGrid .p-title {
+        font-size: 0.95rem !important;
+        line-height: 1.35;
+        min-height: auto !important;
+        white-space: normal !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
 
 
 

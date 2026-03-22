@@ -340,7 +340,7 @@ function renderProductCard($p, $isSlider = false) {
 
                     <?php else: ?>
                         <!-- GRILLA (4 o menos) -->
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 category-grid-mobile-fix">
                             <?php foreach($seccion['productos'] as $prod): ?>
                                 <?= renderProductCard($prod, false) ?>
                             <?php endforeach; ?>
@@ -353,7 +353,7 @@ function renderProductCard($p, $isSlider = false) {
 
     <?php else: ?>
         <!-- MODO HOJA (GRILLA COMPLETA) -->
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3" id="productsGrid">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 category-grid-mobile-fix" id="productsGrid">
             <?php foreach($data as $prod): ?>
                 <?= renderProductCard($prod, false) ?>
             <?php endforeach; ?>
@@ -369,19 +369,11 @@ $(document).ready(function(){
         console.log('[category-slider]', message, extra || {});
     }
 
-    function applyCategoryWidths($slider, slick) {
-        if (!$slider.length || !slick || typeof slick.slideWidth === 'undefined') return;
-        slick.$slides.each(function() {
-            this.style.setProperty('width', slick.slideWidth + 'px', 'important');
-        });
-    }
-
     $('.prod-slider-container').each(function(index){
         const $slider = $(this);
         const itemCount = $slider.children().length;
 
         $slider.on('init', function(event, slick) {
-            applyCategoryWidths($slider, slick);
             logCategorySlider('init OK', {
                 sliderIndex: index,
                 slideCount: slick.slideCount,
@@ -390,7 +382,6 @@ $(document).ready(function(){
         });
 
         $slider.on('setPosition', function(event, slick) {
-            applyCategoryWidths($slider, slick);
             logCategorySlider('setPosition', {
                 sliderIndex: index,
                 currentSlide: slick.currentSlide,
@@ -414,8 +405,8 @@ $(document).ready(function(){
             nextArrow: '<button type="button" class="slick-next"><i class="bi bi-chevron-right text-dark fs-5"></i></button>',
             responsive: [
                 { breakpoint: 1200, settings: { slidesToShow: 3 } },
-                { breakpoint: 768, settings: { slidesToShow: 2 } },
-                { breakpoint: 480, settings: { slidesToShow: 1 } }
+                { breakpoint: 992, settings: { slidesToShow: 2 } },
+                { breakpoint: 576, settings: { slidesToShow: 1 } }
             ]
         });
     });

@@ -98,14 +98,14 @@ function renderHomeCard($p, $useReveal = false)
 <div class="d-md-none bg-white border-bottom py-2 sticky-top shadow-sm" style="top: 0; z-index: 800;">
     <div class="container">
         <div class="d-flex gap-2 overflow-auto" style="scrollbar-width: none;">
-            <a href="categoria.php?c=ofertas"
+            <a href="/categoria/ofertas"
                 class="btn btn-sm btn-danger rounded-pill fw-bold text-nowrap px-3 shadow-sm"><i
                     class="bi bi-lightning-fill"></i> PROMOS</a>
-            <a href="categoria.php?c=maquinarias"
+            <a href="/categoria/maquinarias"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">MAQUINARIAS</a>
-            <a href="categoria.php?c=detailing"
+            <a href="/categoria/detailing"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">DETAILING</a>
-            <a href="categoria.php?c=repuestos"
+            <a href="/categoria/repuestos"
                 class="btn btn-sm btn-light border rounded-pill fw-bold text-nowrap px-3 text-dark">REPUESTOS</a>
         </div>
     </div>
@@ -159,25 +159,25 @@ function renderHomeCard($p, $useReveal = false)
     <!-- SLIDE 2: BANNER 1 - HIDROLAVADORAS -->
     <div class="hero-slide hero-banner-slide">
         <img src="<?= $baseUrl ?>/assets/img/web/banner1.jpg" class="hero-banner desktop" alt="Banner 1 - Hidrolavadoras">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-1-mobile.webp" class="hero-banner mobile" alt="Banner 1 - Hidrolavadoras Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner1.jpg" class="hero-banner mobile" alt="Banner 1 - Hidrolavadoras Móvil">
     </div>
 
     <!-- SLIDE 3: BANNER 2 - ASPIRADORA -->
     <div class="hero-slide hero-banner-slide">
         <img src="<?= $baseUrl ?>/assets/img/web/banner2.jpg" class="hero-banner desktop" alt="Banner 2 - Aspiradora">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-2-mobile.webp" class="hero-banner mobile" alt="Banner 2 - Aspiradora Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner2" class="hero-banner mobile" alt="Banner 2 - Aspiradora Móvil">
     </div>
 
     <!-- SLIDE 4: BANNER 3 - IMPLEMENTA TU CARWASH -->
     <div class="hero-slide hero-banner-slide">
         <img src="<?= $baseUrl ?>/assets/img/web/banner3.jpg" class="hero-banner desktop" alt="Banner 3 - Implementa tu carwash">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-3-mobile.webp" class="hero-banner mobile" alt="Banner 3 - Implementa tu carwash Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner3 class="hero-banner mobile" alt="Banner 3 - Implementa tu carwash Móvil">
     </div>
 
     <!-- SLIDE 5: BANNER 4 - PROYECTO DETAILING -->
     <div class="hero-slide hero-banner-slide">
         <img src="<?= $baseUrl ?>/assets/img/web/banner4.jpg" class="hero-banner desktop" alt="Banner 4 - Proyecto Detailing">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-4-mobile.webp" class="hero-banner mobile" alt="Banner 4 - Proyecto Detailing Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner4" class="hero-banner mobile" alt="Banner 4 - Proyecto Detailing Móvil">
     </div>
 
 </div>
@@ -301,7 +301,7 @@ function renderHomeCard($p, $useReveal = false)
 
     <!-- ✅ ENCUADRADO: Carrusel 2 con max-width centrado -->
     <div class="prod-slider-container slider-ofertas-container">
-        <div class="slider-ofertas slider-destacados-mobile">
+        <div class="slider-ofertas">
             <?php foreach ($productosOferta as $p): ?>
                 <div>
                     <?= renderHomeCard($p) ?>
