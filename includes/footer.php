@@ -151,16 +151,6 @@
             console.log('[slider-ofertas]', message, extra || {});
         }
 
-        function applyOfferSlideWidths($slider, slick) {
-            if (!$slider.length || !slick || typeof slick.slideWidth === 'undefined') {
-                return;
-            }
-
-            slick.$slides.each(function() {
-                this.style.setProperty('width', slick.slideWidth + 'px', 'important');
-            });
-        }
-
         function debugOffersState($slider, slick, source) {
             if (!$slider.length || !slick) {
                 return;
@@ -449,7 +439,6 @@
                 });
 
                 $ofertas.on('init', function(event, slick) {
-                    applyOfferSlideWidths($ofertas, slick);
                     logOfertas('init OK', {
                         slideCount: slick.slideCount,
                         slidesToShow: slick.options.slidesToShow,
@@ -459,7 +448,6 @@
                 });
 
                 $ofertas.on('setPosition', function(event, slick) {
-                    applyOfferSlideWidths($ofertas, slick);
                     logOfertas('setPosition', {
                         currentSlide: slick.currentSlide,
                         slideWidth: slick.slideWidth,

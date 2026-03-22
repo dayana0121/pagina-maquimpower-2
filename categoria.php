@@ -164,8 +164,7 @@ try {
 // --- HELPER RENDER (PREMIUM CARD) ---
 function renderProductCard($p, $isSlider = false) {
     $agotado = ($p['stock_actual'] <= 0);
-    $img = !empty($p['imagen_url']) ? $p['imagen_url'] : '/assets/img/no-photo.png';
-    $img = str_replace('/var/www/html', '', $img);
+    $img = "https://maquimpower.com/assets/img/portada_1769603374.webp";
     $link = "/producto/" . $p['slug']; 
     
     $tieneOferta = ($p['precio_oferta'] > 0);
