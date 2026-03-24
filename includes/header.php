@@ -255,7 +255,7 @@ try {
                         <img src="<?= $baseUrl ?>/assets/img/logo_mp/MaquimPower_Logotipo_Agosto.png"
                             alt="MAQUIMPOWER"
                             class="header-logo-img"
-                            style="max-height: 100px; width: auto; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
+                            style="max-height: 200px; width: auto; position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); transition: transform 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));">
                         <div style="height: 70px;"></div>
                     </a>
                 </div>

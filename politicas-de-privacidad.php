@@ -1,88 +1,5 @@
 <?php require_once 'includes/header.php'; ?>
 
-<style>
-    /* ESTILO LEGAL CORPORATIVO */
-    .legal-header {
-        background: linear-gradient(135deg, #111 0%, #222 100%);
-        color: white;
-        padding: 60px 0;
-        margin-bottom: 40px;
-        border-bottom: 5px solid var(--primary);
-    }
-
-    .legal-sidebar {
-        position: sticky;
-        top: 120px;
-    }
-
-    .legal-nav .nav-link {
-        color: #555;
-        font-weight: 600;
-        padding: 15px 20px;
-        border-left: 4px solid transparent;
-        transition: 0.3s;
-        border-bottom: 1px solid #f0f0f0;
-    }
-
-    .legal-nav .nav-link:hover,
-    .legal-nav .nav-link.active {
-        color: var(--primary);
-        border-left-color: var(--primary);
-        background: white;
-        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
-        padding-left: 25px;
-    }
-
-    .policy-section {
-        background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
-        margin-bottom: 30px;
-        border: 1px solid #eee;
-        scroll-margin-top: 100px;
-        /* Para que el header no tape el título al hacer clic */
-    }
-
-    .policy-title {
-        font-weight: 900;
-        color: #111;
-        text-transform: uppercase;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 15px;
-        margin-bottom: 25px;
-        font-size: 1.5rem;
-        letter-spacing: -0.5px;
-    }
-
-    .policy-content h5 {
-        color: var(--primary);
-        font-weight: 700;
-        margin-top: 30px;
-        margin-bottom: 15px;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    .policy-content p,
-    .policy-content li {
-        color: #444;
-        line-height: 1.8;
-        font-size: 0.95rem;
-        text-align: justify;
-    }
-
-    .policy-content ul {
-        padding-left: 20px;
-        margin-bottom: 20px;
-    }
-
-    .policy-content li {
-        margin-bottom: 8px;
-    }
-</style>
-
 <!-- HEADER HERO -->
 <div class="legal-header text-center">
     <div class="container">
@@ -99,7 +16,7 @@
 
         <!-- SIDEBAR DE NAVEGACIÓN -->
         <div class="col-lg-3 d-none d-lg-block">
-            <div class="legal-nav bg-light rounded-4 overflow-hidden p-3">
+            <div class="legal-nav bg-light rounded-4 p-3">
                 <h5 class="fw-black px-3 mb-3 text-uppercase">Navegación</h5>
                 <nav class="nav flex-column">
                     <a class="nav-link" href="politicas-de-privacidad.php/#privacidad">1. Privacidad de Datos</a>

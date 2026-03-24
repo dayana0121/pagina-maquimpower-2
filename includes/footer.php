@@ -9,15 +9,26 @@
                 <ul class="list-unstyled text-white-50">
                     <li class="mb-3 d-flex align-items-start">
                         <i class="bi bi-geo-alt-fill text-primary fs-5 me-3"></i>
-                        <span>Los Melocotones, Los Olivos 15307 Perú<br><small>(Atención previa cita)</small></span>
+                        <a href="https://www.google.com/maps/place/Maquimpower/@-11.947045,-77.078276,15z/data=!4m6!3m5!1s0x9105d1bacd01ab21:0xb880a7b8074e1d31!8m2!3d-11.9470447!4d-77.0782762!16s%2Fg%2F11wxphcq96?hl=es&entry=ttu&g_ep=EgoyMDI2MDMyMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank"
+                        class="text-white text-decoration-none">
+                            Los Melocotones, Los Olivos 15307 Perú<br><small>(Atención previa cita)</small>
+                        </a>
                     </li>
                     <li class="mb-3 d-flex align-items-center">
                         <i class="bi bi-whatsapp text-success fs-5 me-3"></i>
-                        <span class="fw-bold fs-5 text-white">+51 902 010 281</span>
+                        <a href="https://wa.me/51902010281,"
+                        class="text-white text-decoration-none">
+                            +51 902 010 281
+                        </a>
                     </li>
                     <li class="d-flex align-items-center">
                         <i class="bi bi-envelope-fill text-primary fs-5 me-3"></i>
-                        <span>ventas@maquimpower.com</span>
+                        <a href="mailto:ventas@maquimpower.com?subject=Consulta%20desde%20la%20web&body=Hola%20MaquimPower,"
+                            class="text-white text-decoration-none">
+                            ventas@maquimpower.com
+                        </a>
+
                     </li>
                 </ul>
 
@@ -195,7 +206,9 @@
 
             function destroyDestacadosSlider($slider, name) {
                 if ($slider.length && $slider.hasClass('slick-initialized')) {
-                    logDestacados('Destruyendo slider', { slider: name });
+                    logDestacados('Destruyendo slider', {
+                        slider: name
+                    });
                     $slider.slick('unslick');
                 }
             }
@@ -221,11 +234,15 @@
                 });
 
                 $destacadosTop.on('afterChange.destacadosLog', function(event, slick, currentSlide) {
-                    logDestacados('desktop top afterChange', { currentSlide: currentSlide });
+                    logDestacados('desktop top afterChange', {
+                        currentSlide: currentSlide
+                    });
                 });
 
                 $destacadosBottom.on('afterChange.destacadosLog', function(event, slick, currentSlide) {
-                    logDestacados('desktop bottom afterChange', { currentSlide: currentSlide });
+                    logDestacados('desktop bottom afterChange', {
+                        currentSlide: currentSlide
+                    });
                 });
 
                 $destacadosTop.on('setPosition.destacadosLog', function(event, slick) {
@@ -249,7 +266,9 @@
                 });
 
                 $destacadosMobile.on('afterChange.destacadosLog', function(event, slick, currentSlide) {
-                    logDestacados('mobile afterChange', { currentSlide: currentSlide });
+                    logDestacados('mobile afterChange', {
+                        currentSlide: currentSlide
+                    });
                 });
 
                 $destacadosMobile.on('setPosition.destacadosLog', function(event, slick) {

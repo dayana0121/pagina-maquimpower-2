@@ -75,9 +75,18 @@ function renderHomeCard($p, $useReveal = false)
                                     <?= number_format($precioShow, 2) ?>
                                 </div>
                             <?php endif; ?>
-                        </div>
-                        <?php if (!$agotado): ?>
-                            <div class="btn-add-mini rounded-circle d-flex align-items-center justify-content-center shadow-sm">
+                              </div>
+                              <?php if (!$agotado): ?>
+                            <div
+                                class="btn-add-mini rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                                onclick='event.preventDefault(); prepararCompra(
+                                    <?php echo $p["id"]; ?>, 
+                                    <?php echo htmlspecialchars(json_encode($p["sku"]), ENT_QUOTES, "UTF-8"); ?>, 
+                                    <?php echo htmlspecialchars(json_encode($p["nombre"]), ENT_QUOTES, "UTF-8"); ?>, 
+                                    <?php echo $p["precio_oferta"] > 0 ? $p["precio_oferta"] : $p["precio"]; ?>, 
+                                    <?php echo htmlspecialchars(json_encode($img), ENT_QUOTES, "UTF-8"); ?>, 
+                                    <?php echo $p["stock_actual"]; ?>
+                                    )'>
                                 <i class="bi bi-bag-plus-fill"></i>
                             </div>
                         <?php endif; ?>
@@ -158,26 +167,26 @@ function renderHomeCard($p, $useReveal = false)
 
     <!-- SLIDE 2: BANNER 1 - HIDROLAVADORAS -->
     <div class="hero-slide hero-banner-slide">
-        <img src="<?= $baseUrl ?>/assets/img/web/banner1.jpg" class="hero-banner desktop" alt="Banner 1 - Hidrolavadoras">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner1.jpg" class="hero-banner mobile" alt="Banner 1 - Hidrolavadoras Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner-1-pc.webp" class="hero-banner desktop" alt="Banner 1 - Hidrolavadoras">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-1-mobile.webp" class="hero-banner mobile" alt="Banner 1 - Hidrolavadoras Móvil">
     </div>
 
     <!-- SLIDE 3: BANNER 2 - ASPIRADORA -->
     <div class="hero-slide hero-banner-slide">
-        <img src="<?= $baseUrl ?>/assets/img/web/banner2.jpg" class="hero-banner desktop" alt="Banner 2 - Aspiradora">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner2" class="hero-banner mobile" alt="Banner 2 - Aspiradora Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner-2-pc.webp" class="hero-banner desktop" alt="Banner 2 - Aspiradora">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-2-mobile.webp" class="hero-banner mobile" alt="Banner 2 - Aspiradora Móvil">
     </div>
 
     <!-- SLIDE 4: BANNER 3 - IMPLEMENTA TU CARWASH -->
     <div class="hero-slide hero-banner-slide">
-        <img src="<?= $baseUrl ?>/assets/img/web/banner3.jpg" class="hero-banner desktop" alt="Banner 3 - Implementa tu carwash">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner3 class="hero-banner mobile" alt="Banner 3 - Implementa tu carwash Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner-3-pc.webp" class="hero-banner desktop" alt="Banner 3 - Implementa tu carwash">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-3-mobile.webp" class="hero-banner mobile" alt="Banner 3 - Implementa tu carwash Móvil">
     </div>
 
     <!-- SLIDE 5: BANNER 4 - PROYECTO DETAILING -->
     <div class="hero-slide hero-banner-slide">
-        <img src="<?= $baseUrl ?>/assets/img/web/banner4.jpg" class="hero-banner desktop" alt="Banner 4 - Proyecto Detailing">
-        <img src="<?= $baseUrl ?>/assets/img/mobile/banner4" class="hero-banner mobile" alt="Banner 4 - Proyecto Detailing Móvil">
+        <img src="<?= $baseUrl ?>/assets/img/web/banner-4-pc.webp" class="hero-banner desktop" alt="Banner 4 - Proyecto Detailing">
+        <img src="<?= $baseUrl ?>/assets/img/mobile/banner-4-mobile.webp" class="hero-banner mobile" alt="Banner 4 - Proyecto Detailing Móvil">
     </div>
 
 </div>
@@ -186,7 +195,7 @@ function renderHomeCard($p, $useReveal = false)
 <!-- =========================================
      2. TARJETAS FLOTANTES (Superpuestas)
 ========================================== -->
-<div class="container position-relative" style="margin-top: -60px; z-index: 10;">
+<div class="container position-relative" style="margin-top: 10px; z-index: 10;">
     <div class="row g-4 justify-content-center">
 
         <!-- Card 1 -->
@@ -233,8 +242,8 @@ function renderHomeCard($p, $useReveal = false)
 
 
 <!-- SECTION 3: DESTACADOS -->
-<div class="container py-5 mt-5">
-    <div class="d-flex align-items-end justify-content-between mb-4 border-bottom pb-2">
+<div class="container py-5 mt-1">
+    <div class="d-flex align-items-end justify-content-between mb-3 border-bottom pb-2">
         <div>
             <span class="tendencia text-primary small text-uppercase ls-2"><i class="bi bi-star-fill me-1"></i>
                 TENDENCIA</span>
@@ -508,45 +517,45 @@ function renderHomeCard($p, $useReveal = false)
     document.addEventListener('DOMContentLoaded', function() {
         const slides = document.querySelectorAll('.hero-slider .hero-slide');
         const slider = document.querySelector('.hero-slider');
-        
+
         console.log('🎬 HERO SLIDER INICIANDO...');
         console.log('Total de slides encontrados:', slides.length);
         console.log('Contenedor slider:', slider);
-        
+
         if (slider) {
             console.log('✅ Slider encontrado');
             console.log('Altura del slider:', window.getComputedStyle(slider).height);
         }
-        
+
         if (slides.length > 0) {
             console.log('✅ Slides encontrados:', slides.length);
-            
+
             // Mostrar info de cada slide
             slides.forEach((slide, i) => {
                 console.log(`Slide ${i + 1}:`, slide.className, 'Active:', slide.classList.contains('active'));
             });
-            
+
             let index = 0;
-            
+
             // Mostrar el primer slide inmediatamente
             if (slides[0]) {
                 slides[0].classList.add('active');
                 console.log('✅ Slide 1 activado');
             }
-            
+
             // Rotación cada 6 segundos
             setInterval(() => {
                 // Remover active del slide actual
                 slides[index].classList.remove('active');
                 console.log('❌ Slide', index + 1, 'desactivado');
-                
+
                 // Pasar al siguiente slide
                 index = (index + 1) % slides.length;
-                
+
                 // Agregar active al nuevo slide
                 slides[index].classList.add('active');
                 console.log('✅ Slide', index + 1, 'activado');
-                
+
                 // Verificar clases aplicadas
                 console.log('Clase active en slide', index + 1, ':', slides[index].classList.contains('active'));
             }, 6000);
@@ -555,5 +564,83 @@ function renderHomeCard($p, $useReveal = false)
         }
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // MiniAlerta (SweetAlert2 personalizado)
+    const MiniAlerta = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        background: '#000',
+        color: '#fff',
+    });
+
+    // Función principal
+    function prepararCompra(id, sku, nombre, precio, imagen, stockMax) {
+        let cantidad = 1;
+        const cantInput = document.getElementById('cantidad');
+        if (cantInput) {
+            cantidad = parseInt(cantInput.value) || 1;
+        }
+
+        if (cantidad > stockMax) {
+            MiniAlerta.fire({
+                title: 'Stock insuficiente (Máx: ' + stockMax + ')',
+                icon: 'warning'
+            });
+            return;
+        }
+
+        addToCart(id, sku, nombre, precio, imagen, cantidad, stockMax);
+        MiniAlerta.fire({
+            title: 'PRODUCTO AÑADIDO AL CARRITO',
+            icon: 'success'
+        });
+    }
+
+        // ==========================================
+    // 4. BLOQUE DE DIAGNÓSTICO E INTERCEPCIÓN
+    // ==========================================
+    function debugActualizarMonitor() {
+        const cart = JSON.parse(localStorage.getItem('maquim_cart')) || [];
+        const div = document.getElementById('debug-cart-content');
+
+        // Si el usuario borró el div de debug, no hacemos nada (evita romper JS)
+        if (!div) return;
+
+        if (cart.length === 0) {
+            div.innerHTML = "<em style='color:gray'>El carrito está vacío</em>";
+        } else {
+            let html = "";
+            cart.forEach((item, index) => {
+                let tieneMax = (item.maxStock !== undefined) ?
+                    `<span style='color:lime'>OK (${item.maxStock})</span>` :
+                    `<span style='color:red; font-weight:bold;'>FALTA (ERROR)</span>`;
+
+                html += `Item ${index + 1}: <b>${item.nombre.substring(0, 10)}...</b><br>`;
+                html += `Cant: ${item.cantidad} | MaxStock: ${tieneMax}<br>`;
+                html += `----------------<br>`;
+            });
+            div.innerHTML = html;
+        }
+    }
+
+    // Interceptor de debug
+    const funcionOriginal = prepararCompra;
+    window.prepararCompra = function(id, sku, nombre, precio, imagen, stockMax) {
+        const log = document.getElementById('debug-log');
+        if (log) {
+            log.innerHTML = "⚡ Clic detectado<br>";
+            log.innerHTML += `Stock Recibido: <b style='color:white'>${stockMax}</b><br>`;
+        }
+        funcionOriginal(id, sku, nombre, precio, imagen, stockMax);
+        setTimeout(debugActualizarMonitor, 500);
+    };
+
+    setInterval(debugActualizarMonitor, 1000);
+</script>
+
 
 <?php require_once 'includes/footer.php'; ?>

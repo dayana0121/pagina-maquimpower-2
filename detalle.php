@@ -447,16 +447,6 @@ require_once 'includes/header.php';
         timerProgressBar: true,
         background: '#000',
         color: '#fff',
-        customClass: {
-            container: 'mp-toast-container',
-            popup: 'border-left-orange'
-        },
-        didOpen: (toast) => {
-            const icon = toast.querySelector('.swal2-icon');
-            if (icon) icon.style.display = 'none';
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-        }
     });
 
     const productImages = <?php echo json_encode($galeria ?? []); ?>;

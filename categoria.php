@@ -228,9 +228,18 @@ function renderProductCard($p, $isSlider = false) {
                         </div>
                         
                         <?php if(!$agotado): ?>
-                        <div class="btn-add-mini rounded-circle d-flex align-items-center justify-content-center shadow-sm">
-                            <i class="bi bi-bag-plus-fill"></i>
-                        </div>
+                        <div
+                                class="btn-add-mini rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                                onclick='event.preventDefault(); prepararCompra(
+                                    <?php echo $p["id"]; ?>, 
+                                    <?php echo htmlspecialchars(json_encode($p["sku"]), ENT_QUOTES, "UTF-8"); ?>, 
+                                    <?php echo htmlspecialchars(json_encode($p["nombre"]), ENT_QUOTES, "UTF-8"); ?>, 
+                                    <?php echo $p["precio_oferta"] > 0 ? $p["precio_oferta"] : $p["precio"]; ?>, 
+                                    <?php echo htmlspecialchars(json_encode($img), ENT_QUOTES, "UTF-8"); ?>, 
+                                    <?php echo $p["stock_actual"]; ?>
+                                    )'>
+                                <i class="bi bi-bag-plus-fill"></i>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -450,5 +459,84 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // MiniAlerta (SweetAlert2 personalizado)
+    const MiniAlerta = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        background: '#000',
+        color: '#fff'
+    });
+
+    // Función principal
+    function prepararCompra(id, sku, nombre, precio, imagen, stockMax) {
+        let cantidad = 1;
+        const cantInput = document.getElementById('cantidad');
+        if (cantInput) {
+            cantidad = parseInt(cantInput.value) || 1;
+        }
+
+        if (cantidad > stockMax) {
+            MiniAlerta.fire({
+                title: 'Stock insuficiente (Máx: ' + stockMax + ')',
+                icon: 'warning'
+            });
+            return;
+        }
+
+        addToCart(id, sku, nombre, precio, imagen, cantidad, stockMax);
+        MiniAlerta.fire({
+            title: 'PRODUCTO AÑADIDO AL CARRITO',
+            icon: 'success'
+        });
+    }
+
+        // ==========================================
+    // 4. BLOQUE DE DIAGNÓSTICO E INTERCEPCIÓN
+    // ==========================================
+    function debugActualizarMonitor() {
+        const cart = JSON.parse(localStorage.getItem('maquim_cart')) || [];
+        const div = document.getElementById('debug-cart-content');
+
+        // Si el usuario borró el div de debug, no hacemos nada (evita romper JS)
+        if (!div) return;
+
+        if (cart.length === 0) {
+            div.innerHTML = "<em style='color:gray'>El carrito está vacío</em>";
+        } else {
+            let html = "";
+            cart.forEach((item, index) => {
+                let tieneMax = (item.maxStock !== undefined) ?
+                    `<span style='color:lime'>OK (${item.maxStock})</span>` :
+                    `<span style='color:red; font-weight:bold;'>FALTA (ERROR)</span>`;
+
+                html += `Item ${index + 1}: <b>${item.nombre.substring(0, 10)}...</b><br>`;
+                html += `Cant: ${item.cantidad} | MaxStock: ${tieneMax}<br>`;
+                html += `----------------<br>`;
+            });
+            div.innerHTML = html;
+        }
+    }
+
+    // Interceptor de debug
+    const funcionOriginal = prepararCompra;
+    window.prepararCompra = function(id, sku, nombre, precio, imagen, stockMax) {
+        const log = document.getElementById('debug-log');
+        if (log) {
+            log.innerHTML = "⚡ Clic detectado<br>";
+            log.innerHTML += `Stock Recibido: <b style='color:white'>${stockMax}</b><br>`;
+        }
+        funcionOriginal(id, sku, nombre, precio, imagen, stockMax);
+        setTimeout(debugActualizarMonitor, 500);
+    };
+
+    setInterval(debugActualizarMonitor, 1000);
+</script>
+
 
 <?php require_once 'includes/footer.php'; ?>

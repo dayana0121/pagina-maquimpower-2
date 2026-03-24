@@ -52,7 +52,12 @@
                         </div>
                         <div class="ms-3">
                             <h6 class="fw-bold mb-1">Correo Corporativo</h6>
-                            <p class="text-muted mb-0 hover-orange">ventas@maquimpower.com</p>
+                            <p class="text-muted mb-0 hover-orange">
+                                <a href="mailto:ventas@maquimpower.com?subject=Consulta%20desde%20la%20web&body=Hola%20MaquimPower,"
+                            class="text-black text-decoration-none">
+                            ventas@maquimpower.com
+                        </a>
+                            </p>
                         </div>
                     </div>
                 </div>

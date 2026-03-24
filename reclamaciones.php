@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="button" class="btn btn-dark btn-lg fw-bold" onclick="enviarReclamo()">
+                            <button type="button" id="enviar" class="btn btn-dark btn-lg fw-bold" onclick="enviarReclamo()">
                                 ENVIAR HOJA DE RECLAMACIÓN
                             </button>
                         </div>
